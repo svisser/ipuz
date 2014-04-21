@@ -20,6 +20,11 @@ The string `data` contains the puzzle:
     import ipuz
     puzzle = ipuz.read(data)
 
+This function provides:
+
+* Validation of ipuz puzzle structure in JSON or JSONP format.
+* Validation of mandatory missing ipuz fields.
+
 Writing
 =======
 
