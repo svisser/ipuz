@@ -38,21 +38,26 @@ class IPUZReadTestCase(unittest.TestCase):
 
 class IPUZCrosswordTestCase(unittest.TestCase):
 
+    def _create_crossword_puzzle(self):
+        return {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/crossword#1"],
+            "dimensions": {"width": 3, "height": 3},
+            "puzzle": [],
+        }
+
     def test_validate_crossword_mandatory_dimensions_field(self):
+        json_data = self._create_crossword_puzzle()
+        del json_data["dimensions"]
         with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps({
-                "version": "http://ipuz.org/v1",
-                "kind": ["http://ipuz.org/crossword#1"],
-            }))
+            result = ipuz.read(json.dumps(json_data))
         self.assertEqual(str(cm.exception), "Mandatory field dimensions is missing")
 
     def test_validate_crossword_mandatory_puzzle_field(self):
+        json_data = self._create_crossword_puzzle()
+        del json_data["puzzle"]
         with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps({
-                "version": "http://ipuz.org/v1",
-                "kind": ["http://ipuz.org/crossword#1"],
-                "dimensions": {"width": 3, "height": 3},
-            }))
+            result = ipuz.read(json.dumps(json_data))
         self.assertEqual(str(cm.exception), "Mandatory field puzzle is missing")
 
 
