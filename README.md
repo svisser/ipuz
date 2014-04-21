@@ -22,8 +22,8 @@ The string `data` contains the puzzle:
 
 This function provides:
 
-* Validation of ipuz puzzle structure in JSON or JSONP format.
-* Validation of mandatory missing ipuz fields.
+* Validation of puzzle structure in JSON or JSONP format.
+* Validation of mandatory missing fields.
 
 Writing
 =======
