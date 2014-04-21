@@ -1,0 +1,4 @@
+
+
+class IPUZException(Exception):
+    pass
