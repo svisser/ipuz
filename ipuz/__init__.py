@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 
 from exceptions import IPUZException
@@ -60,8 +61,16 @@ def validate_dimensions(field_data):
             )
 
 
+def validate_date(field_data):
+    try:
+        datetime.strptime(field_data, '%m/%d/%Y')
+    except ValueError:
+        raise IPUZException("Invalid date format: {}".format(field_data))
+
+
 IPUZ_FIELD_VALIDATORS = {
     "dimensions": validate_dimensions,
+    "date": validate_date,
 }
 
 

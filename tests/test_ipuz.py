@@ -117,7 +117,7 @@ class IPUZFieldDimensionsValidatorTestCase(unittest.TestCase):
     def _create_puzzle(self):
         return {
             "version": "http://ipuz.org/v1",
-            "kind": ["http://ipuz.org/wordsearch"],
+            "kind": ["http://ipuz.org/invalid"],
             "dimensions": {"width": 3, "height": 3},
         }
 
@@ -134,6 +134,22 @@ class IPUZFieldDimensionsValidatorTestCase(unittest.TestCase):
         with self.assertRaises(ipuz.IPUZException) as cm:
             result = ipuz.read(json.dumps(json_data))
         self.assertEqual(str(cm.exception), "Field width of dimensions is less than one")
+
+
+class IPUZFieldDateValidatorTestCase(unittest.TestCase):
+
+    def _create_puzzle(self):
+        return {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/invalid"],
+            "date": "14/01/2014",
+        }
+
+    def test_validate_date_invalid_format(self):
+        json_data = self._create_puzzle()
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(str(cm.exception), "Invalid date format: 14/01/2014")
 
 
 class IPUZWriteTestCase(unittest.TestCase):
