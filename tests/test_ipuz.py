@@ -186,6 +186,34 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
             "Style with invalid dotted value found: TRSBL"
         )
 
+    def test_validate_invalid_stylespec_dashed(self):
+        json_data = self._create_puzzle({"dashed": "TRSBL"})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid dashed value found: TRSBL"
+        )
+
+    def test_validate_invalid_stylespec_lessthan(self):
+        json_data = self._create_puzzle({"lessthan": None})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid lessthan value found: None"
+        )
+
+    def test_validate_invalid_stylespec_greaterthan(self):
+        json_data = self._create_puzzle({"greaterthan": "3"})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid greaterthan value found: 3"
+        )
+
+    def test_validate_invalid_stylespec_equal(self):
+        json_data = self._create_puzzle({"equal": "a"})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid equal value found: a"
+        )
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
