@@ -4,23 +4,27 @@ import unittest
 import ipuz
 
 
-class IPUZReadTestCase(unittest.TestCase):
+class IPUZBaseTestCase(unittest.TestCase):
+
+    def validate_puzzle(self, json_data, expected_exception):
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            ipuz.read(json.dumps(json_data))
+        self.assertEqual(str(cm.exception), expected_exception)
+
+
+class IPUZReadTestCase(IPUZBaseTestCase):
 
     def test_read_detects_invalid_ipuz_data(self):
         with self.assertRaises(ipuz.IPUZException):
             ipuz.read("this is wrong")
 
     def test_read_raises_for_missing_version_field(self):
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            ipuz.read(json.dumps({}))
-        self.assertEqual(str(cm.exception), "Mandatory field version is missing")
+        self.validate_puzzle({}, "Mandatory field version is missing")
 
     def test_read_raises_for_missing_kind_field(self):
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            ipuz.read(json.dumps({
-                "version": "http://ipuz.org/v1",
-            }))
-        self.assertEqual(str(cm.exception), "Mandatory field kind is missing")
+        self.validate_puzzle({
+            "version": "http://ipuz.org/v1",
+        }, "Mandatory field kind is missing")
 
     def test_read_allows_jsonp_callback_function(self):
         result = ipuz.read("ipuz(" + json.dumps({
@@ -36,7 +40,7 @@ class IPUZReadTestCase(unittest.TestCase):
         self.assertEqual(result['version'], "http://ipuz.org/v1")
 
 
-class IPUZCrosswordTestCase(unittest.TestCase):
+class IPUZCrosswordTestCase(IPUZBaseTestCase):
 
     def _create_puzzle(self):
         return {
@@ -49,19 +53,15 @@ class IPUZCrosswordTestCase(unittest.TestCase):
     def test_validate_crossword_mandatory_dimensions_field(self):
         json_data = self._create_puzzle()
         del json_data["dimensions"]
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(str(cm.exception), "Mandatory field dimensions is missing")
+        self.validate_puzzle(json_data, "Mandatory field dimensions is missing")
 
     def test_validate_crossword_mandatory_puzzle_field(self):
         json_data = self._create_puzzle()
         del json_data["puzzle"]
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(str(cm.exception), "Mandatory field puzzle is missing")
+        self.validate_puzzle(json_data, "Mandatory field puzzle is missing")
 
 
-class IPUZSudokuTestCase(unittest.TestCase):
+class IPUZSudokuTestCase(IPUZBaseTestCase):
 
     def _create_puzzle(self):
         return {
@@ -73,12 +73,10 @@ class IPUZSudokuTestCase(unittest.TestCase):
     def test_validate_sudoku_mandatory_puzzle_field(self):
         json_data = self._create_puzzle()
         del json_data["puzzle"]
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(str(cm.exception), "Mandatory field puzzle is missing")
+        self.validate_puzzle(json_data, "Mandatory field puzzle is missing")
 
 
-class IPUZBlockTestCase(unittest.TestCase):
+class IPUZBlockTestCase(IPUZBaseTestCase):
 
     def _create_puzzle(self):
         return {
@@ -90,12 +88,10 @@ class IPUZBlockTestCase(unittest.TestCase):
     def test_validate_block_mandatory_dimensions_field(self):
         json_data = self._create_puzzle()
         del json_data["dimensions"]
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(str(cm.exception), "Mandatory field dimensions is missing")
+        self.validate_puzzle(json_data, "Mandatory field dimensions is missing")
 
 
-class IPUZWordSearchTestCase(unittest.TestCase):
+class IPUZWordSearchTestCase(IPUZBaseTestCase):
 
     def _create_puzzle(self):
         return {
@@ -107,12 +103,10 @@ class IPUZWordSearchTestCase(unittest.TestCase):
     def test_validate_wordsearch_mandatory_dimensions_field(self):
         json_data = self._create_puzzle()
         del json_data["dimensions"]
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(str(cm.exception), "Mandatory field dimensions is missing")
+        self.validate_puzzle(json_data, "Mandatory field dimensions is missing")
 
 
-class IPUZFieldDimensionsValidatorTestCase(unittest.TestCase):
+class IPUZFieldDimensionsValidatorTestCase(IPUZBaseTestCase):
 
     def _create_puzzle(self):
         return {
@@ -124,19 +118,15 @@ class IPUZFieldDimensionsValidatorTestCase(unittest.TestCase):
     def test_validate_incomplete_dimensions(self):
         json_data = self._create_puzzle()
         del json_data["dimensions"]["width"]
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(str(cm.exception), "Mandatory field width of dimensions is missing")
+        self.validate_puzzle(json_data, "Mandatory field width of dimensions is missing")
 
     def test_validate_dimensions_negative_or_zero(self):
         json_data = self._create_puzzle()
         json_data["dimensions"]["width"] = 0
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(str(cm.exception), "Field width of dimensions is less than one")
+        self.validate_puzzle(json_data, "Field width of dimensions is less than one")
 
 
-class IPUZFieldDateValidatorTestCase(unittest.TestCase):
+class IPUZFieldDateValidatorTestCase(IPUZBaseTestCase):
 
     def _create_puzzle(self):
         return {
@@ -147,74 +137,57 @@ class IPUZFieldDateValidatorTestCase(unittest.TestCase):
 
     def test_validate_date_invalid_format(self):
         json_data = self._create_puzzle()
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(str(cm.exception), "Invalid date format: 14/01/2014")
+        self.validate_puzzle(json_data, "Invalid date format: 14/01/2014")
 
 
-class IPUZFieldStylesValidatorTestCase(unittest.TestCase):
+class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
 
-    def _create_puzzle(self):
+    def _create_puzzle(self, style=None):
         return {
             "version": "http://ipuz.org/v1",
             "kind": ["http://ipuz.org/invalid"],
             "styles": {
-                "highlight": None,
+                "highlight": style,
             }
         }
 
     def test_validate_style_spec_not_string_or_dict(self):
-        json_data = self._create_puzzle()
-        json_data["styles"]["highlight"] = 3
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(
-            str(cm.exception),
+        json_data = self._create_puzzle(3)
+        self.validate_puzzle(
+            json_data,
             "Style highlight in field styles is not a name, dictionary or None"
         )
 
     def test_validate_invalid_style_specifier(self):
-        json_data = self._create_puzzle()
-        json_data["styles"]["highlight"] = {"invalid_specifier": None}
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(
-            str(cm.exception),
+        json_data = self._create_puzzle({"invalid_specifier": None})
+        self.validate_puzzle(
+            json_data,
             "Style highlight in field styles contains invalid specifier: invalid_specifier"
         )
 
     def test_validate_invalid_stylespec_shapebg(self):
-        json_data = self._create_puzzle()
-        json_data["styles"]["highlight"] = {"shapebg": "not-a-circle"}
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(
-            str(cm.exception),
+        json_data = self._create_puzzle({"shapebg": "not-a-circle"})
+        self.validate_puzzle(
+            json_data,
             "Style with invalid shapebg value found: not-a-circle"
         )
 
     def test_validate_invalid_stylespec_barred(self):
-        json_data = self._create_puzzle()
-        json_data["styles"]["highlight"] = {"barred": "TRSBL"}
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(
-            str(cm.exception),
+        json_data = self._create_puzzle({"barred": "TRSBL"})
+        self.validate_puzzle(
+            json_data,
             "Style with invalid barred value found: TRSBL"
         )
 
     def test_validate_invalid_stylespec_dotted(self):
-        json_data = self._create_puzzle()
-        json_data["styles"]["highlight"] = {"dotted": "TRSBL"}
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            result = ipuz.read(json.dumps(json_data))
-        self.assertEqual(
-            str(cm.exception),
+        json_data = self._create_puzzle({"dotted": "TRSBL"})
+        self.validate_puzzle(
+            json_data,
             "Style with invalid dotted value found: TRSBL"
         )
 
 
-class IPUZWriteTestCase(unittest.TestCase):
+class IPUZWriteTestCase(IPUZBaseTestCase):
 
     def test_write_produces_jsonp_string_by_default(self):
         json_data = {}
