@@ -10,8 +10,8 @@ IPUZ_MANDATORY_FIELDS = (
 
 
 def read(data):
-    if data.startswith('ipuz(') and data.endswith(')'):
-        data = data[5:-1]
+    if data.endswith(')'):
+        data = data[data.index('(') + 1:-1]
     try:
         json_data = json.loads(data)
     except ValueError:

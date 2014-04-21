@@ -22,6 +22,19 @@ class IPUZReadTestCase(unittest.TestCase):
             }))
         self.assertEqual(str(cm.exception), "Mandatory field kind is missing")
 
+    def test_read_allows_jsonp_callback_function(self):
+        result = ipuz.read("ipuz(" + json.dumps({
+            "version": "http://ipuz.org/v1",
+            "kind": "http://ipuz.org/crossword#1",
+        }) + ")")
+        self.assertEqual(result['version'], "http://ipuz.org/v1")
+
+        result = ipuz.read("ipuz_callback_function(" + json.dumps({
+            "version": "http://ipuz.org/v1",
+            "kind": "http://ipuz.org/crossword#1",
+        }) + ")")
+        self.assertEqual(result['version'], "http://ipuz.org/v1")
+
 
 class IPUZWriteTestCase(unittest.TestCase):
 
