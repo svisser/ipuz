@@ -114,7 +114,7 @@ IPUZ_STYLESPEC_VALIDATORS = {
 
 def validate_styles(field_data):
     for name, style_spec in field_data.items():
-        if type(style_spec) not in [basestring, dict, types.NoneType]:
+        if type(style_spec) not in [str, unicode, dict, types.NoneType]:
             raise IPUZException("Style {} in field styles is not a name, dictionary or None".format(name))
         if isinstance(style_spec, dict):
             for key, value in style_spec.items():
