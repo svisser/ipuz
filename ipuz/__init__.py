@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import string
 import types
 
 from exceptions import IPUZException
@@ -101,6 +102,14 @@ def validate_stylespec_side(name, field_data):
         raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
 
 
+def validate_stylespec_color(name, field_data):
+    if type(field_data) not in [int, str, unicode]:
+        raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
+    if type(field_data) in [str, unicode]:
+        if len(field_data) != 6 or not all(c in string.hexdigits for c in field_data):
+            raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
+
+
 IPUZ_STYLESPEC_VALIDATORS = {
     "shapebg": validate_stylespec_shapebg,
     "barred": validate_stylespec_side,
@@ -109,6 +118,10 @@ IPUZ_STYLESPEC_VALIDATORS = {
     "lessthan": validate_stylespec_side,
     "greaterthan": validate_stylespec_side,
     "equal": validate_stylespec_side,
+    "color": validate_stylespec_color,
+    "colortext": validate_stylespec_color,
+    "colorborder": validate_stylespec_color,
+    "colorbar": validate_stylespec_color,
 }
 
 
