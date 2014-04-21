@@ -114,9 +114,19 @@ def validate_stylespec_divided(name, field_data):
         raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
 
 
+def validate_stylespec_mark(name, field_data):
+    if type(field_data) not in [dict]:
+        raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
+    for key, value in field_data.items():
+        if key not in ["TL", "TR", "BL", "BR"]:
+            raise IPUZException("Style with invalid {} corner identifier found: {}".format(name, key))
+
+
+
 IPUZ_STYLESPEC_VALIDATORS = {
     "shapebg": validate_stylespec_shapebg,
     "divided": validate_stylespec_divided,
+    "mark": validate_stylespec_mark,
     "barred": validate_stylespec_side,
     "dotted": validate_stylespec_side,
     "dashed": validate_stylespec_side,

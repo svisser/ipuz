@@ -249,6 +249,18 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
             "Style with invalid divided value found: AA"
         )
 
+    def test_validate_invalid_stylespec_mark(self):
+        json_data = self._create_puzzle({"mark": None})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid mark value found: None"
+        )
+        json_data = self._create_puzzle({"mark": {"key": "text"}})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid mark corner identifier found: key"
+        )
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
