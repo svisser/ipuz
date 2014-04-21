@@ -158,13 +158,14 @@ class IPUZFieldStylesValidatorTestCase(unittest.TestCase):
         return {
             "version": "http://ipuz.org/v1",
             "kind": ["http://ipuz.org/invalid"],
+            "styles": {
+                "highlight": None,
+            }
         }
 
     def test_validate_style_spec_not_string_or_dict(self):
         json_data = self._create_puzzle()
-        json_data["styles"] = {
-            "highlight": 3,
-        }
+        json_data["styles"]["highlight"] = 3
         with self.assertRaises(ipuz.IPUZException) as cm:
             result = ipuz.read(json.dumps(json_data))
         self.assertEqual(
@@ -174,11 +175,7 @@ class IPUZFieldStylesValidatorTestCase(unittest.TestCase):
 
     def test_validate_invalid_style_specifier(self):
         json_data = self._create_puzzle()
-        json_data["styles"] = {
-            "highlight": {
-                "invalid_specifier": None,
-            },
-        }
+        json_data["styles"]["highlight"] = {"invalid_specifier": None}
         with self.assertRaises(ipuz.IPUZException) as cm:
             result = ipuz.read(json.dumps(json_data))
         self.assertEqual(
@@ -188,16 +185,32 @@ class IPUZFieldStylesValidatorTestCase(unittest.TestCase):
 
     def test_validate_invalid_stylespec_shapebg(self):
         json_data = self._create_puzzle()
-        json_data["styles"] = {
-            "highlight": {
-                "shapebg": "not-a-circle",
-            },
-        }
+        json_data["styles"]["highlight"] = {"shapebg": "not-a-circle"}
         with self.assertRaises(ipuz.IPUZException) as cm:
             result = ipuz.read(json.dumps(json_data))
         self.assertEqual(
             str(cm.exception),
-            "Style with invalid shapebg found: not-a-circle"
+            "Style with invalid shapebg value found: not-a-circle"
+        )
+
+    def test_validate_invalid_stylespec_barred(self):
+        json_data = self._create_puzzle()
+        json_data["styles"]["highlight"] = {"barred": "TRSBL"}
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(
+            str(cm.exception),
+            "Style with invalid barred value found: TRSBL"
+        )
+
+    def test_validate_invalid_stylespec_dotted(self):
+        json_data = self._create_puzzle()
+        json_data["styles"]["highlight"] = {"dotted": "TRSBL"}
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(
+            str(cm.exception),
+            "Style with invalid dotted value found: TRSBL"
         )
 
 

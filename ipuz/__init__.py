@@ -93,11 +93,47 @@ def validate_date(field_data):
 
 def validate_stylespec_shapebg(field_data):
     if field_data not in ["circle"]:
-        raise IPUZException("Style with invalid shapebg found: {}".format(field_data))
+        raise IPUZException("Style with invalid shapebg value found: {}".format(field_data))
+
+
+def validate_stylespec_barred(field_data):
+    if not all(c in "TRBL" for c in field_data):
+        raise IPUZException("Style with invalid barred value found: {}".format(field_data))
+
+
+def validate_stylespec_dotted(field_data):
+    if not all(c in "TRBL" for c in field_data):
+        raise IPUZException("Style with invalid dotted value found: {}".format(field_data))
+
+
+def validate_stylespec_dashed(field_data):
+    if not all(c in "TRBL" for c in field_data):
+        raise IPUZException("Style with invalid dashed value found: {}".format(field_data))
+
+
+def validate_stylespec_lessthan(field_data):
+    if not all(c in "TRBL" for c in field_data):
+        raise IPUZException("Style with invalid lessthan value found: {}".format(field_data))
+
+
+def validate_stylespec_greaterthan(field_data):
+    if not all(c in "TRBL" for c in field_data):
+        raise IPUZException("Style with invalid greaterthan value found: {}".format(field_data))
+
+
+def validate_stylespec_equal(field_data):
+    if not all(c in "TRBL" for c in field_data):
+        raise IPUZException("Style with invalid equal value found: {}".format(field_data))
 
 
 IPUZ_STYLESPEC_VALIDATORS = {
     "shapebg": validate_stylespec_shapebg,
+    "barred": validate_stylespec_barred,
+    "dotted": validate_stylespec_dotted,
+    "dashed": validate_stylespec_dashed,
+    "lessthan": validate_stylespec_lessthan,
+    "greaterthan": validate_stylespec_greaterthan,
+    "equal": validate_stylespec_equal,
 }
 
 
