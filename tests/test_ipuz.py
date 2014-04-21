@@ -242,6 +242,13 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
             "Style with invalid colorbar value found: AABBCZ"
         )
 
+    def test_validate_invalid_stylespec_divided(self):
+        json_data = self._create_puzzle({"divided": "AA"})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid divided value found: AA"
+        )
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
