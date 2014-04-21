@@ -7,6 +7,26 @@ IPUZ_MANDATORY_FIELDS = (
     "version",
     "kind",
 )
+IPUZ_OPTIONAL_FIELDS = (
+    "copyright",
+    "publisher",
+    "publication",
+    "url",
+    "uniqueid",
+    "title",
+    "intro",
+    "explanation",
+    "annotation",
+    "author",
+    "editor",
+    "date",
+    "notes",
+    "difficulty",
+    "origin",
+    "block",
+    "empty",
+    "styles",
+)
 IPUZ_CROSSWORD_MANDATORY_FIELDS = (
     "dimensions",
     "puzzle",
