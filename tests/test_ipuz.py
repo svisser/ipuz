@@ -152,6 +152,41 @@ class IPUZFieldDateValidatorTestCase(unittest.TestCase):
         self.assertEqual(str(cm.exception), "Invalid date format: 14/01/2014")
 
 
+class IPUZFieldStylesValidatorTestCase(unittest.TestCase):
+
+    def _create_puzzle(self):
+        return {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/invalid"],
+        }
+
+    def test_validate_style_spec_not_string_or_dict(self):
+        json_data = self._create_puzzle()
+        json_data["styles"] = {
+            "highlight": 3,
+        }
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(
+            str(cm.exception),
+            "Style highlight in field styles is not a name or dictionary"
+        )
+
+    def test_validate_invalid_style_specifier(self):
+        json_data = self._create_puzzle()
+        json_data["styles"] = {
+            "highlight": {
+                "invalid_specifier": None,
+            },
+        }
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(
+            str(cm.exception),
+            "Style highlight in field styles contains invalid specifier: invalid_specifier"
+        )
+
+
 class IPUZWriteTestCase(unittest.TestCase):
 
     def test_write_produces_jsonp_string_by_default(self):

@@ -28,7 +28,7 @@ This function provides:
 
 * Validation of puzzle structure in JSON or JSONP format.
 * Validation of mandatory missing fields.
-* Sanity checks specifically for certain fields.
+* Sanity checks for fields where possible.
 
 Writing
 =======

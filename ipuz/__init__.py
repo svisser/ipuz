@@ -47,6 +47,28 @@ IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
     "http://ipuz.org/block": IPUZ_BLOCK_MANDATORY_FIELDS,
     "http://ipuz.org/wordsearch": IPUZ_WORDSEARCH_MANDATORY_FIELDS,
 }
+IPUZ_STYLESPEC_SPECIFIERS = (
+    "shapebg",
+    "highlight",
+    "named",
+    "border",
+    "divided",
+    "label",
+    "mark",
+    "imagebg",
+    "image",
+    "slice",
+    "barred",
+    "dotted",
+    "dashed",
+    "lessthan",
+    "greaterthan",
+    "equal",
+    "color",
+    "colortext",
+    "colorborder",
+    "colorbar",
+)
 
 
 def validate_dimensions(field_data):
@@ -68,9 +90,20 @@ def validate_date(field_data):
         raise IPUZException("Invalid date format: {}".format(field_data))
 
 
+def validate_styles(field_data):
+    for name, style_spec in field_data.items():
+        if type(style_spec) not in [basestring, dict]:
+            raise IPUZException("Style {} in field styles is not a name or dictionary".format(name))
+        if isinstance(style_spec, dict):
+            for key, value in style_spec.items():
+                if key not in IPUZ_STYLESPEC_SPECIFIERS:
+                    raise IPUZException("Style {} in field styles contains invalid specifier: {}".format(name, key))
+
+
 IPUZ_FIELD_VALIDATORS = {
     "dimensions": validate_dimensions,
     "date": validate_date,
+    "styles": validate_styles,
 }
 
 
