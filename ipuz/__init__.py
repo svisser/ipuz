@@ -11,6 +11,13 @@ IPUZ_CROSSWORD_MANDATORY_FIELDS = (
     "dimensions",
     "puzzle",
 )
+IPUZ_SUDOKU_MANDATORY_FIELDS = (
+    "puzzle",
+)
+IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
+    "http://ipuz.org/crossword": IPUZ_CROSSWORD_MANDATORY_FIELDS,
+    "http://ipuz.org/sudoku": IPUZ_SUDOKU_MANDATORY_FIELDS,
+}
 
 
 def read(data):
@@ -24,8 +31,10 @@ def read(data):
         if field not in json_data:
             raise IPUZException("Mandatory field {} is missing".format(field))
     for kind in json_data["kind"]:
-        if "http://ipuz.org/crossword" in kind:
-            for field in IPUZ_CROSSWORD_MANDATORY_FIELDS:
+        for official_kind, fields in IPUZ_PUZZLEKIND_MANDATORY_FIELDS.items():
+            if official_kind not in kind:
+                continue
+            for field in fields:
                 if field not in json_data:
                     raise IPUZException("Mandatory field {} is missing".format(field))
     return json_data
