@@ -1,7 +1,7 @@
 ipuz
 ====
 
-Python library for reading and writing ipuz puzzle files. The specification
+Python 2 library for reading and writing ipuz puzzle files. The specification
 for the ipuz file format can be found at: http://www.ipuz.org/ . This library
 provides validation and wrapping around the puzzle data.
 
@@ -29,6 +29,8 @@ This function provides:
 * Validation of puzzle structure in JSON or JSONP format.
 * Validation of mandatory missing fields.
 * Sanity checks for fields where possible.
+
+The error messages are not intended as API but only for informative purposes.
 
 Writing
 =======
