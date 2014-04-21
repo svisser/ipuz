@@ -91,48 +91,24 @@ def validate_date(field_data):
         raise IPUZException("Invalid date format: {}".format(field_data))
 
 
-def validate_stylespec_shapebg(field_data):
+def validate_stylespec_shapebg(name, field_data):
     if field_data not in ["circle"]:
-        raise IPUZException("Style with invalid shapebg value found: {}".format(field_data))
+        raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
 
 
-def _validate_stylespec_side(name, field_data):
+def validate_stylespec_side(name, field_data):
     if not field_data or not all(c in "TRBL" for c in field_data):
         raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
 
 
-def validate_stylespec_barred(field_data):
-    _validate_stylespec_side("barred", field_data)
-
-
-def validate_stylespec_dotted(field_data):
-    _validate_stylespec_side("dotted", field_data)
-
-
-def validate_stylespec_dashed(field_data):
-    _validate_stylespec_side("dashed", field_data)
-
-
-def validate_stylespec_lessthan(field_data):
-    _validate_stylespec_side("lessthan", field_data)
-
-
-def validate_stylespec_greaterthan(field_data):
-    _validate_stylespec_side("greaterthan", field_data)
-
-
-def validate_stylespec_equal(field_data):
-    _validate_stylespec_side("equal", field_data)
-
-
 IPUZ_STYLESPEC_VALIDATORS = {
     "shapebg": validate_stylespec_shapebg,
-    "barred": validate_stylespec_barred,
-    "dotted": validate_stylespec_dotted,
-    "dashed": validate_stylespec_dashed,
-    "lessthan": validate_stylespec_lessthan,
-    "greaterthan": validate_stylespec_greaterthan,
-    "equal": validate_stylespec_equal,
+    "barred": validate_stylespec_side,
+    "dotted": validate_stylespec_side,
+    "dashed": validate_stylespec_side,
+    "lessthan": validate_stylespec_side,
+    "greaterthan": validate_stylespec_side,
+    "equal": validate_stylespec_side,
 }
 
 
@@ -145,7 +121,7 @@ def validate_styles(field_data):
                 if key not in IPUZ_STYLESPEC_SPECIFIERS:
                     raise IPUZException("Style {} in field styles contains invalid specifier: {}".format(name, key))
                 if key in IPUZ_STYLESPEC_VALIDATORS:
-                    IPUZ_STYLESPEC_VALIDATORS[key](value)
+                    IPUZ_STYLESPEC_VALIDATORS[key](key, value)
 
 
 IPUZ_FIELD_VALIDATORS = {
