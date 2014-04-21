@@ -18,12 +18,17 @@ Reading
 The string `data` contains the puzzle:
 
     import ipuz
-    puzzle = ipuz.read(data)
+
+    try:
+        puzzle = ipuz.read(data)
+    except ipuz.IPUZException:
+        # invalid puzzle
 
 This function provides:
 
 * Validation of puzzle structure in JSON or JSONP format.
 * Validation of mandatory missing fields.
+* Sanity checks specifically for certain fields.
 
 Writing
 =======
