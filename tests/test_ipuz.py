@@ -169,7 +169,7 @@ class IPUZFieldStylesValidatorTestCase(unittest.TestCase):
             result = ipuz.read(json.dumps(json_data))
         self.assertEqual(
             str(cm.exception),
-            "Style highlight in field styles is not a name or dictionary"
+            "Style highlight in field styles is not a name, dictionary or None"
         )
 
     def test_validate_invalid_style_specifier(self):

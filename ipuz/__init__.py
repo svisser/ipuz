@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import types
 
 from exceptions import IPUZException
 
@@ -92,8 +93,8 @@ def validate_date(field_data):
 
 def validate_styles(field_data):
     for name, style_spec in field_data.items():
-        if type(style_spec) not in [basestring, dict]:
-            raise IPUZException("Style {} in field styles is not a name or dictionary".format(name))
+        if type(style_spec) not in [basestring, dict, types.NoneType]:
+            raise IPUZException("Style {} in field styles is not a name, dictionary or None".format(name))
         if isinstance(style_spec, dict):
             for key, value in style_spec.items():
                 if key not in IPUZ_STYLESPEC_SPECIFIERS:
