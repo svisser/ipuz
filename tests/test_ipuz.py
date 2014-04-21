@@ -112,6 +112,30 @@ class IPUZWordSearchTestCase(unittest.TestCase):
         self.assertEqual(str(cm.exception), "Mandatory field dimensions is missing")
 
 
+class IPUZFieldDimensionsValidatorTestCase(unittest.TestCase):
+
+    def _create_puzzle(self):
+        return {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/wordsearch"],
+            "dimensions": {"width": 3, "height": 3},
+        }
+
+    def test_validate_incomplete_dimensions(self):
+        json_data = self._create_puzzle()
+        del json_data["dimensions"]["width"]
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(str(cm.exception), "Mandatory field width of dimensions is missing")
+
+    def test_validate_dimensions_negative_or_zero(self):
+        json_data = self._create_puzzle()
+        json_data["dimensions"]["width"] = 0
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(str(cm.exception), "Field width of dimensions is less than one")
+
+
 class IPUZWriteTestCase(unittest.TestCase):
 
     def test_write_produces_jsonp_string_by_default(self):

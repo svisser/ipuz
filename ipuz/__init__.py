@@ -28,6 +28,23 @@ IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
 }
 
 
+def validate_dimensions(field_data):
+    for key in ["width", "height"]:
+        if key not in field_data:
+            raise IPUZException(
+                "Mandatory field {} of dimensions is missing".format(key)
+            )
+        if field_data[key] < 1:
+            raise IPUZException(
+                "Field {} of dimensions is less than one".format(key)
+            )
+
+
+IPUZ_FIELD_VALIDATORS = {
+    "dimensions": validate_dimensions,
+}
+
+
 def read(data):
     if data.endswith(')'):
         data = data[data.index('(') + 1:-1]
@@ -45,6 +62,9 @@ def read(data):
             for field in fields:
                 if field not in json_data:
                     raise IPUZException("Mandatory field {} is missing".format(field))
+    for field, value in json_data.items():
+        if field in IPUZ_FIELD_VALIDATORS:
+            IPUZ_FIELD_VALIDATORS[field](value)
     return json_data
 
 
