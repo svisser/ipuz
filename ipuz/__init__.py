@@ -25,4 +25,7 @@ def read(data):
 
 
 def write(data, json_only=False):
-    pass
+    json_string = json.dumps(data)
+    if json_only:
+        return json_string
+    return ''.join(['ipuz(', json_string, ')'])
