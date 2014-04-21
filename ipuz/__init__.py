@@ -22,8 +22,10 @@ def read(data):
     return json_data
 
 
-def write(data, json_only=False):
+def write(data, callback_name=None, json_only=False):
+    if callback_name is None:
+        callback_name = "ipuz"
     json_string = json.dumps(data)
     if json_only:
         return json_string
-    return ''.join(['ipuz(', json_string, ')'])
+    return ''.join([callback_name, '(', json_string, ')'])
