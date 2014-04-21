@@ -16,11 +16,9 @@ def read(data):
         json_data = json.loads(data)
     except ValueError:
         raise IPUZException("No valid JSON could be found")
-
     for field in IPUZ_MANDATORY_FIELDS:
         if field not in json_data:
             raise IPUZException("Mandatory field {} is missing".format(field))
-
     return json_data
 
 
