@@ -186,6 +186,20 @@ class IPUZFieldStylesValidatorTestCase(unittest.TestCase):
             "Style highlight in field styles contains invalid specifier: invalid_specifier"
         )
 
+    def test_validate_invalid_stylespec_shapebg(self):
+        json_data = self._create_puzzle()
+        json_data["styles"] = {
+            "highlight": {
+                "shapebg": "not-a-circle",
+            },
+        }
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(
+            str(cm.exception),
+            "Style with invalid shapebg found: not-a-circle"
+        )
+
 
 class IPUZWriteTestCase(unittest.TestCase):
 

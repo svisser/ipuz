@@ -91,6 +91,16 @@ def validate_date(field_data):
         raise IPUZException("Invalid date format: {}".format(field_data))
 
 
+def validate_stylespec_shapebg(field_data):
+    if field_data not in ["circle"]:
+        raise IPUZException("Style with invalid shapebg found: {}".format(field_data))
+
+
+IPUZ_STYLESPEC_VALIDATORS = {
+    "shapebg": validate_stylespec_shapebg,
+}
+
+
 def validate_styles(field_data):
     for name, style_spec in field_data.items():
         if type(style_spec) not in [basestring, dict, types.NoneType]:
@@ -99,6 +109,8 @@ def validate_styles(field_data):
             for key, value in style_spec.items():
                 if key not in IPUZ_STYLESPEC_SPECIFIERS:
                     raise IPUZException("Style {} in field styles contains invalid specifier: {}".format(name, key))
+                if key in IPUZ_STYLESPEC_VALIDATORS:
+                    IPUZ_STYLESPEC_VALIDATORS[key](value)
 
 
 IPUZ_FIELD_VALIDATORS = {
