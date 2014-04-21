@@ -78,6 +78,40 @@ class IPUZSudokuTestCase(unittest.TestCase):
         self.assertEqual(str(cm.exception), "Mandatory field puzzle is missing")
 
 
+class IPUZBlockTestCase(unittest.TestCase):
+
+    def _create_puzzle(self):
+        return {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/block"],
+            "dimensions": {"width": 3, "height": 3},
+        }
+
+    def test_validate_block_mandatory_dimensions_field(self):
+        json_data = self._create_puzzle()
+        del json_data["dimensions"]
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(str(cm.exception), "Mandatory field dimensions is missing")
+
+
+class IPUZWordSearchTestCase(unittest.TestCase):
+
+    def _create_puzzle(self):
+        return {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/wordsearch"],
+            "dimensions": {"width": 3, "height": 3},
+        }
+
+    def test_validate_wordsearch_mandatory_dimensions_field(self):
+        json_data = self._create_puzzle()
+        del json_data["dimensions"]
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            result = ipuz.read(json.dumps(json_data))
+        self.assertEqual(str(cm.exception), "Mandatory field dimensions is missing")
+
+
 class IPUZWriteTestCase(unittest.TestCase):
 
     def test_write_produces_jsonp_string_by_default(self):

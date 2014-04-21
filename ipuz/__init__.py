@@ -14,9 +14,17 @@ IPUZ_CROSSWORD_MANDATORY_FIELDS = (
 IPUZ_SUDOKU_MANDATORY_FIELDS = (
     "puzzle",
 )
+IPUZ_BLOCK_MANDATORY_FIELDS = (
+    "dimensions",
+)
+IPUZ_WORDSEARCH_MANDATORY_FIELDS = (
+    "dimensions",
+)
 IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
     "http://ipuz.org/crossword": IPUZ_CROSSWORD_MANDATORY_FIELDS,
     "http://ipuz.org/sudoku": IPUZ_SUDOKU_MANDATORY_FIELDS,
+    "http://ipuz.org/block": IPUZ_BLOCK_MANDATORY_FIELDS,
+    "http://ipuz.org/wordsearch": IPUZ_WORDSEARCH_MANDATORY_FIELDS,
 }
 
 
