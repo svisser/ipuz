@@ -228,6 +228,20 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
             "Style with invalid colortext value found: AABBCCDDEEFF"
         )
 
+    def test_validate_invalid_stylespec_colorborder(self):
+        json_data = self._create_puzzle({"colorborder": "ABC"})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid colorborder value found: ABC"
+        )
+
+    def test_validate_invalid_stylespec_colorbar(self):
+        json_data = self._create_puzzle({"colorbar": "AABBCZ"})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid colorbar value found: AABBCZ"
+        )
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
