@@ -452,3 +452,15 @@ class IPUZWriteTestCase(IPUZBaseTestCase):
         )
         expected = json.dumps(json_data)
         self.assertEqual(result, expected)
+
+
+class IPUZRoundTripTestCase(IPUZBaseTestCase):
+
+    def test_first_ipuz_file(self):
+        with open("fixtures/first.ipuz") as f:
+            data = f.read()
+
+        output = ipuz.read(data)
+        output_string = ipuz.write(output, json_only=True)
+        second_output = ipuz.read(output_string)
+        self.assertEqual(output, second_output)
