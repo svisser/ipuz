@@ -308,6 +308,11 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
             json_data,
             "Style with invalid slice value found: None"
         )
+        json_data = self._create_puzzle({"slice": [100, 200, None, 300]})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid slice value found: [100, 200, None, 300]"
+        )
         json_data = self._create_puzzle({"slice": [100, 200, 300]})
         self.validate_puzzle(
             json_data,

@@ -141,7 +141,9 @@ def validate_stylespec_mark(name, field_data):
 
 
 def validate_stylespec_slice(name, field_data):
-    if type(field_data) not in [list] or len(field_data) != 4:
+    if (type(field_data) not in [list] or
+        len(field_data) != 4 or
+        (type(c) is not int for c in field_data)):
         raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
 
 
