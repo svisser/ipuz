@@ -126,6 +126,7 @@ def validate_stylespec_color(name, field_data):
         if len(field_data) != 6 or not all(c in string.hexdigits for c in field_data):
             raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
 
+
 def validate_stylespec_divided(name, field_data):
     if field_data not in ["-", "|", "/", "\\", "+", "x"]:
         raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
