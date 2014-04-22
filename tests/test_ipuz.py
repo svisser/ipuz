@@ -320,6 +320,67 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
         )
 
 
+class IPUZGroupSpecValidatorTestCase(IPUZBaseTestCase):
+
+    def setUp(self):
+        self.puzzle = {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/crossword"],
+            "dimensions": {"width": 3, "height": 3},
+            "puzzle": [],
+            "zones": [],
+        }
+
+    def test_validate_groupspec_is_not_a_list(self):
+        self.puzzle["zones"] = 3
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid zones value found"
+        )
+
+    def test_validate_groupspec_invalid_element(self):
+        self.puzzle["zones"] = [3]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupspec_invalid_empty_groupspec(self):
+        self.puzzle["zones"] = [{}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupspec_invalid_groupspec_key(self):
+        self.puzzle["zones"] = [{"invalid_key": 3}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupspec_empty_groupspec_cells(self):
+        self.puzzle["zones"] = [{"cells": []}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupspec_empty_groupspec_cell_in_cells(self):
+        self.puzzle["zones"] = [{"cells": [ [3] ]}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupspec_empty_groupspec_another_cell_in_cells(self):
+        self.puzzle["zones"] = [{"cells": [[3, 4], [5]]}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
     def test_write_produces_jsonp_string_by_default(self):

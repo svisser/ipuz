@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 
 from ipuz.exceptions import IPUZException
+from ipuz.groupspec import validate_groupspec
 from ipuz.stylespec import validate_stylespec
 
 
@@ -74,10 +75,24 @@ def validate_styles(field_data):
         validate_stylespec(name, stylespec)
 
 
+def validate_zones(field_data):
+    if type(field_data) is not list:
+        raise IPUZException("Invalid zones value found")
+    for element in field_data:
+        if not validate_groupspec(element):
+            raise IPUZException("Invalid GroupSpec in zones element found")
+
+
 IPUZ_FIELD_VALIDATORS = {
     "dimensions": validate_dimensions,
     "date": validate_date,
     "styles": validate_styles,
+}
+IPUZ_CROSSWORD_VALIDATORS = {
+    "zones": validate_zones,
+}
+IPUZ_PUZZLEKIND_VALIDATORS = {
+    "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,
 }
 
 
@@ -101,6 +116,10 @@ def read(data):
     for field, value in json_data.items():
         if field in IPUZ_FIELD_VALIDATORS:
             IPUZ_FIELD_VALIDATORS[field](value)
+        for kind in json_data["kind"]:
+            for official_kind, validators in IPUZ_PUZZLEKIND_VALIDATORS.items():
+                if field in validators:
+                    validators[field](value)
     return json_data
 
 
