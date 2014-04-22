@@ -3,7 +3,7 @@ import json
 import string
 import types
 
-from exceptions import IPUZException
+from ipuz.exceptions import IPUZException
 
 
 IPUZ_MANDATORY_FIELDS = (
