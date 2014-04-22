@@ -184,6 +184,18 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
             "Style with invalid highlight value found: A"
         )
 
+    def test_validate_invalid_stylespec_named(self):
+        json_data = self._create_puzzle({"named": None})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid named value found: None"
+        )
+        json_data = self._create_puzzle({"named": True})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid named value found: True"
+        )
+
     def test_validate_invalid_stylespec_border(self):
         json_data = self._create_puzzle({"border": None})
         self.validate_puzzle(

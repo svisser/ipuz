@@ -102,6 +102,13 @@ def validate_stylespec_highlight(name, field_data):
         raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
 
 
+def validate_stylespec_named(name, field_data):
+    if type(field_data) is bool and field_data:
+        raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
+    if type(field_data) not in [str, unicode]:
+        raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
+
+
 def validate_stylespec_border(name, field_data):
     if type(field_data) not in [int] or field_data < 0:
         raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
@@ -136,6 +143,7 @@ def validate_stylespec_mark(name, field_data):
 IPUZ_STYLESPEC_VALIDATORS = {
     "shapebg": validate_stylespec_shapebg,
     "highlight": validate_stylespec_highlight,
+    "named": validate_stylespec_named,
     "border": validate_stylespec_border,
     "divided": validate_stylespec_divided,
     "mark": validate_stylespec_mark,
