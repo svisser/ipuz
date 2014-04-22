@@ -93,6 +93,9 @@ IPUZ_CROSSWORD_VALIDATORS = {
 }
 IPUZ_PUZZLEKIND_VALIDATORS = {
     "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,
+    "http://ipuz.org/sudoku": {},
+    "http://ipuz.org/block": {},
+    "http://ipuz.org/wordsearch": {},
 }
 
 
@@ -113,13 +116,12 @@ def read(data):
             for field in fields:
                 if field not in json_data:
                     raise IPUZException("Mandatory field {} is missing".format(field))
+            for field, value in json_data.items():
+                if field in IPUZ_PUZZLEKIND_VALIDATORS[official_kind]:
+                    IPUZ_PUZZLEKIND_VALIDATORS[official_kind][field](value)
     for field, value in json_data.items():
         if field in IPUZ_FIELD_VALIDATORS:
             IPUZ_FIELD_VALIDATORS[field](value)
-        for kind in json_data["kind"]:
-            for official_kind, validators in IPUZ_PUZZLEKIND_VALIDATORS.items():
-                if field in validators:
-                    validators[field](value)
     return json_data
 
 
