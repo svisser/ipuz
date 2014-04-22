@@ -97,6 +97,11 @@ def validate_stylespec_shapebg(name, field_data):
         raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
 
 
+def validate_stylespec_border(name, field_data):
+    if type(field_data) not in [int] or field_data < 0:
+        raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
+
+
 def validate_stylespec_side(name, field_data):
     if not field_data or not all(c in "TRBL" for c in field_data):
         raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
@@ -125,6 +130,7 @@ def validate_stylespec_mark(name, field_data):
 
 IPUZ_STYLESPEC_VALIDATORS = {
     "shapebg": validate_stylespec_shapebg,
+    "border": validate_stylespec_border,
     "divided": validate_stylespec_divided,
     "mark": validate_stylespec_mark,
     "barred": validate_stylespec_side,
