@@ -302,6 +302,18 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
             "Style with invalid mark corner identifier found: key"
         )
 
+    def test_validate_invalid_stylespec_slice(self):
+        json_data = self._create_puzzle({"slice": None})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid slice value found: None"
+        )
+        json_data = self._create_puzzle({"slice": [100, 200, 300]})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid slice value found: [100, 200, 300]"
+        )
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 

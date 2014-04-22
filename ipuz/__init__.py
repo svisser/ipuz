@@ -140,6 +140,10 @@ def validate_stylespec_mark(name, field_data):
             raise IPUZException("Style with invalid {} corner identifier found: {}".format(name, key))
 
 
+def validate_stylespec_slice(name, field_data):
+    if type(field_data) not in [list] or len(field_data) != 4:
+        raise IPUZException("Style with invalid {} value found: {}".format(name, field_data))
+
 
 IPUZ_STYLESPEC_VALIDATORS = {
     "shapebg": validate_stylespec_shapebg,
@@ -148,6 +152,7 @@ IPUZ_STYLESPEC_VALIDATORS = {
     "border": validate_stylespec_border,
     "divided": validate_stylespec_divided,
     "mark": validate_stylespec_mark,
+    "slice": validate_stylespec_slice,
     "barred": validate_stylespec_side,
     "dotted": validate_stylespec_side,
     "dashed": validate_stylespec_side,
