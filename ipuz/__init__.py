@@ -48,28 +48,6 @@ IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
     "http://ipuz.org/block": IPUZ_BLOCK_MANDATORY_FIELDS,
     "http://ipuz.org/wordsearch": IPUZ_WORDSEARCH_MANDATORY_FIELDS,
 }
-IPUZ_STYLESPEC_SPECIFIERS = (
-    "shapebg",
-    "highlight",
-    "named",
-    "border",
-    "divided",
-    "label",
-    "mark",
-    "imagebg",
-    "image",
-    "slice",
-    "barred",
-    "dotted",
-    "dashed",
-    "lessthan",
-    "greaterthan",
-    "equal",
-    "color",
-    "colortext",
-    "colorborder",
-    "colorbar",
-)
 
 
 def validate_dimensions(field_data):
