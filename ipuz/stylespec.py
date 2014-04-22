@@ -73,12 +73,12 @@ IPUZ_STYLESPEC_VALIDATORS = {
 }
 
 
-def validate_stylespec(name, style_spec):
+def validate_stylespec(style_spec):
     if type(style_spec) not in [str, unicode, dict, types.NoneType]:
-        raise IPUZException("Style {} in field styles is not a name, dictionary or None".format(name))
+        raise IPUZException("StyleSpec is not a name, dictionary or None")
     if isinstance(style_spec, dict):
         for key, value in style_spec.items():
             if key not in IPUZ_STYLESPEC_VALIDATORS:
-                raise IPUZException("Style {} in field styles contains invalid specifier: {}".format(name, key))
+                raise IPUZException("StyleSpec contains invalid specifier: {}".format(key))
             if not IPUZ_STYLESPEC_VALIDATORS[key](value):
-                raise IPUZException("Style {} has an invalid {} value".format(name, key))
+                raise IPUZException("StyleSpec has an invalid {} value".format(key))

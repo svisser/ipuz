@@ -71,8 +71,8 @@ def validate_date(field_data):
 
 
 def validate_styles(field_data):
-    for name, stylespec in field_data.items():
-        validate_stylespec(name, stylespec)
+    for _, stylespec in field_data.items():
+        validate_stylespec(stylespec)
 
 
 def validate_zones(field_data):

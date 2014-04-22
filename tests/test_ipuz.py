@@ -155,168 +155,168 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
         json_data = self._create_puzzle(3)
         self.validate_puzzle(
             json_data,
-            "Style highlight in field styles is not a name, dictionary or None"
+            "StyleSpec is not a name, dictionary or None"
         )
 
     def test_validate_invalid_style_specifier(self):
         json_data = self._create_puzzle({"invalid_specifier": None})
         self.validate_puzzle(
             json_data,
-            "Style highlight in field styles contains invalid specifier: invalid_specifier"
+            "StyleSpec contains invalid specifier: invalid_specifier"
         )
 
     def test_validate_invalid_stylespec_shapebg(self):
         json_data = self._create_puzzle({"shapebg": "not-a-circle"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid shapebg value"
+            "StyleSpec has an invalid shapebg value"
         )
 
     def test_validate_invalid_stylespec_highlight(self):
         json_data = self._create_puzzle({"highlight": None})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid highlight value"
+            "StyleSpec has an invalid highlight value"
         )
         json_data = self._create_puzzle({"highlight": "A"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid highlight value"
+            "StyleSpec has an invalid highlight value"
         )
 
     def test_validate_invalid_stylespec_named(self):
         json_data = self._create_puzzle({"named": None})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid named value"
+            "StyleSpec has an invalid named value"
         )
         json_data = self._create_puzzle({"named": True})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid named value"
+            "StyleSpec has an invalid named value"
         )
 
     def test_validate_invalid_stylespec_border(self):
         json_data = self._create_puzzle({"border": None})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid border value"
+            "StyleSpec has an invalid border value"
         )
         json_data = self._create_puzzle({"border": "A"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid border value"
+            "StyleSpec has an invalid border value"
         )
         json_data = self._create_puzzle({"border": -20})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid border value"
+            "StyleSpec has an invalid border value"
         )
 
     def test_validate_invalid_stylespec_barred(self):
         json_data = self._create_puzzle({"barred": "TRSBL"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid barred value"
+            "StyleSpec has an invalid barred value"
         )
 
     def test_validate_invalid_stylespec_dotted(self):
         json_data = self._create_puzzle({"dotted": "TRSBL"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid dotted value"
+            "StyleSpec has an invalid dotted value"
         )
 
     def test_validate_invalid_stylespec_dashed(self):
         json_data = self._create_puzzle({"dashed": "TRSBL"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid dashed value"
+            "StyleSpec has an invalid dashed value"
         )
 
     def test_validate_invalid_stylespec_lessthan(self):
         json_data = self._create_puzzle({"lessthan": None})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid lessthan value"
+            "StyleSpec has an invalid lessthan value"
         )
 
     def test_validate_invalid_stylespec_greaterthan(self):
         json_data = self._create_puzzle({"greaterthan": "3"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid greaterthan value"
+            "StyleSpec has an invalid greaterthan value"
         )
 
     def test_validate_invalid_stylespec_equal(self):
         json_data = self._create_puzzle({"equal": "a"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid equal value"
+            "StyleSpec has an invalid equal value"
         )
 
     def test_validate_invalid_stylespec_color(self):
         json_data = self._create_puzzle({"color": None})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid color value"
+            "StyleSpec has an invalid color value"
         )
 
     def test_validate_invalid_stylespec_colortext(self):
         json_data = self._create_puzzle({"colortext": "AABBCCDDEEFF"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid colortext value"
+            "StyleSpec has an invalid colortext value"
         )
 
     def test_validate_invalid_stylespec_colorborder(self):
         json_data = self._create_puzzle({"colorborder": "ABC"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid colorborder value"
+            "StyleSpec has an invalid colorborder value"
         )
 
     def test_validate_invalid_stylespec_colorbar(self):
         json_data = self._create_puzzle({"colorbar": "AABBCZ"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid colorbar value"
+            "StyleSpec has an invalid colorbar value"
         )
 
     def test_validate_invalid_stylespec_divided(self):
         json_data = self._create_puzzle({"divided": "AA"})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid divided value"
+            "StyleSpec has an invalid divided value"
         )
 
     def test_validate_invalid_stylespec_mark(self):
         json_data = self._create_puzzle({"mark": None})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid mark value"
+            "StyleSpec has an invalid mark value"
         )
         json_data = self._create_puzzle({"mark": {"key": "text"}})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid mark value"
+            "StyleSpec has an invalid mark value"
         )
 
     def test_validate_invalid_stylespec_slice(self):
         json_data = self._create_puzzle({"slice": None})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid slice value"
+            "StyleSpec has an invalid slice value"
         )
         json_data = self._create_puzzle({"slice": [100, 200, None, 300]})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid slice value"
+            "StyleSpec has an invalid slice value"
         )
         json_data = self._create_puzzle({"slice": [100, 200, 300]})
         self.validate_puzzle(
             json_data,
-            "Style highlight has an invalid slice value"
+            "StyleSpec has an invalid slice value"
         )
 
 
@@ -375,6 +375,48 @@ class IPUZGroupSpecValidatorTestCase(IPUZBaseTestCase):
 
     def test_validate_groupspec_empty_groupspec_another_cell_in_cells(self):
         self.puzzle["zones"] = [{"cells": [[3, 4], [5]]}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupspec_with_invalid_stylespec(self):
+        self.puzzle["zones"] = [{"style": { "shapebg": "not-a-circle"}}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupsec_with_invalid_rect(self):
+        self.puzzle["zones"] = [{"rect": 3}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupsec_with_invalid_rect(self):
+        self.puzzle["zones"] = [{"rect": [3, 4, 5]}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupsec_with_invalid_rect_element_not_integer(self):
+        self.puzzle["zones"] = [{"rect": [3, 4, 5, None]}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupsec_with_illogical_rect(self):
+        self.puzzle["zones"] = [{"rect": [3, 4, 5, 2]}]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid GroupSpec in zones element found"
+        )
+
+    def test_validate_groupsec_with_illogical_rect_two(self):
+        self.puzzle["zones"] = [{"rect": [3, 4, 1, 6]}]
         self.validate_puzzle(
             self.puzzle,
             "Invalid GroupSpec in zones element found"
