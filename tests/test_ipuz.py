@@ -172,6 +172,18 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
             "Style with invalid shapebg value found: not-a-circle"
         )
 
+    def test_validate_invalid_stylespec_highlight(self):
+        json_data = self._create_puzzle({"highlight": None})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid highlight value found: None"
+        )
+        json_data = self._create_puzzle({"highlight": "A"})
+        self.validate_puzzle(
+            json_data,
+            "Style with invalid highlight value found: A"
+        )
+
     def test_validate_invalid_stylespec_border(self):
         json_data = self._create_puzzle({"border": None})
         self.validate_puzzle(
