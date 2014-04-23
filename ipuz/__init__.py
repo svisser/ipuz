@@ -129,6 +129,26 @@ def validate_charset(field_data):
         raise IPUZException("Invalid charset value found")
 
 
+def validate_displaycharset(field_data):
+    if type(field_data) is not bool:
+        raise IPUZException("Invalid displaycharset value found")
+
+
+def validate_boxes(field_data):
+    if type(field_data) is not bool:
+        raise IPUZException("Invalid boxes value found")
+
+
+def validate_showoperators(field_data):
+    if type(field_data) is not bool:
+        raise IPUZException("Invalid showoperators value found")
+
+
+def validate_cageborder(field_data):
+    if field_data not in ["thick", "dashed"]:
+        raise IPUZException("Invalid cageborder value found")
+
+
 IPUZ_FIELD_VALIDATORS = {
     "dimensions": validate_dimensions,
     "date": validate_date,
@@ -145,6 +165,10 @@ IPUZ_CROSSWORD_VALIDATORS = {
 }
 IPUZ_SUDOKU_VALIDATORS = {
     "charset": validate_charset,
+    "displaycharset": validate_displaycharset,
+    "boxes": validate_boxes,
+    "showoperators": validate_showoperators,
+    "cageborder": validate_cageborder,
 }
 IPUZ_PUZZLEKIND_VALIDATORS = {
     "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,

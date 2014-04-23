@@ -403,6 +403,22 @@ class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
         self.puzzle["charset"] = "12345"
         self.validate("Invalid charset value found")
 
+    def test_displaycharset_is_bool(self):
+        self.puzzle["displaycharset"] = 3
+        self.validate("Invalid displaycharset value found")
+
+    def test_boxes_is_bool(self):
+        self.puzzle["boxes"] = 3
+        self.validate("Invalid boxes value found")
+
+    def test_showoperators_is_bool(self):
+        self.puzzle["showoperators"] = 3
+        self.validate("Invalid showoperators value found")
+
+    def test_cageborder_is_valid_text(self):
+        self.puzzle["cageborder"] = "not-a-border"
+        self.validate("Invalid cageborder value found")
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
