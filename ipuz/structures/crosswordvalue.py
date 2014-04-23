@@ -1,8 +1,8 @@
 import types
 
 from ipuz.exceptions import IPUZException
-from ipuz.direction import validate_direction
-from ipuz.stylespec import validate_stylespec
+from .direction import validate_direction
+from .stylespec import validate_stylespec
 
 
 def validate_crosswordvalue(field_data):

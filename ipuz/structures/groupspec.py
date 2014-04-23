@@ -1,5 +1,5 @@
 from ipuz.exceptions import IPUZException
-from ipuz.stylespec import validate_stylespec
+from .stylespec import validate_stylespec
 
 
 def validate_groupspec(field_data):

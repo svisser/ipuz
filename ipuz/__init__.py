@@ -2,9 +2,11 @@ from datetime import datetime
 import json
 
 from ipuz.exceptions import IPUZException
-from ipuz.crosswordvalue import validate_crosswordvalue
-from ipuz.groupspec import validate_groupspec
-from ipuz.stylespec import validate_stylespec
+from ipuz.structures import (
+    validate_crosswordvalue,
+    validate_groupspec,
+    validate_stylespec,
+)
 
 
 IPUZ_MANDATORY_FIELDS = (
