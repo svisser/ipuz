@@ -59,23 +59,15 @@ class IPUZReadTestCase(IPUZBaseTestCase):
         self.assertEqual(result['version'], "http://ipuz.org/v1")
 
 
-class IPUZCrosswordKindTestCase(IPUZBaseTestCase):
-
-    def setUp(self):
-        self.puzzle = {
-            "version": "http://ipuz.org/v1",
-            "kind": ["http://ipuz.org/crossword#1"],
-            "dimensions": {"width": 3, "height": 3},
-            "puzzle": [],
-        }
+class IPUZCrosswordKindTestCase(IPUZCrosswordTestCase):
 
     def test_validate_crossword_mandatory_dimensions_field(self):
         del self.puzzle["dimensions"]
-        self.validate_puzzle(self.puzzle, "Mandatory field dimensions is missing")
+        self.validate("Mandatory field dimensions is missing")
 
     def test_validate_crossword_mandatory_puzzle_field(self):
         del self.puzzle["puzzle"]
-        self.validate_puzzle(self.puzzle, "Mandatory field puzzle is missing")
+        self.validate("Mandatory field puzzle is missing")
 
 
 class IPUZSudokuKindTestCase(IPUZBaseTestCase):
@@ -151,7 +143,7 @@ class IPUZFieldDateValidatorTestCase(IPUZBaseTestCase):
         self.validate_puzzle(self.puzzle, "Invalid date format: 14/01/2014")
 
 
-class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
+class IPUZFieldStylesValidatorTestCase(IPUZCrosswordTestCase):
 
     def setUp(self):
         self.puzzle = {
@@ -164,7 +156,7 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
 
     def test_validate_style_spec_not_string_or_dict(self):
         self.puzzle["styles"]["highlight"] = 3
-        self.validate_puzzle(self.puzzle, "StyleSpec is not a name, dictionary or None")
+        self.validate("StyleSpec is not a name, dictionary or None")
 
     def test_validate_invalid_style_specifier(self):
         self.puzzle["styles"]["highlight"] = {"invalid_specifier": None}
@@ -175,86 +167,86 @@ class IPUZFieldStylesValidatorTestCase(IPUZBaseTestCase):
 
     def test_validate_invalid_stylespec_shapebg(self):
         self.puzzle["styles"]["highlight"] = {"shapebg": "not-a-circle"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid shapebg value")
+        self.validate("StyleSpec has an invalid shapebg value")
 
     def test_validate_invalid_stylespec_highlight(self):
         self.puzzle["styles"]["highlight"] = {"highlight": None}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid highlight value")
+        self.validate("StyleSpec has an invalid highlight value")
 
         self.puzzle["styles"]["highlight"] = {"highlight": "A"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid highlight value")
+        self.validate("StyleSpec has an invalid highlight value")
 
     def test_validate_invalid_stylespec_named(self):
         self.puzzle["styles"]["highlight"] = {"named": None}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid named value")
+        self.validate("StyleSpec has an invalid named value")
         self.puzzle["styles"]["highlight"] = {"named": True}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid named value")
+        self.validate("StyleSpec has an invalid named value")
 
     def test_validate_invalid_stylespec_border(self):
         self.puzzle["styles"]["highlight"] = {"border": None}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid border value")
+        self.validate("StyleSpec has an invalid border value")
         self.puzzle["styles"]["highlight"] = {"border": "A"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid border value")
+        self.validate("StyleSpec has an invalid border value")
         self.puzzle["styles"]["highlight"] = {"border": -20}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid border value")
+        self.validate("StyleSpec has an invalid border value")
 
     def test_validate_invalid_stylespec_barred(self):
         self.puzzle["styles"]["highlight"] = {"barred": "TRSBL"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid barred value")
+        self.validate("StyleSpec has an invalid barred value")
 
     def test_validate_invalid_stylespec_dotted(self):
         self.puzzle["styles"]["highlight"] = {"dotted": "TRSBL"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid dotted value")
+        self.validate("StyleSpec has an invalid dotted value")
 
     def test_validate_invalid_stylespec_dashed(self):
         self.puzzle["styles"]["highlight"] = {"dashed": "TRSBL"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid dashed value")
+        self.validate("StyleSpec has an invalid dashed value")
 
     def test_validate_invalid_stylespec_lessthan(self):
         self.puzzle["styles"]["highlight"] = {"lessthan": None}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid lessthan value")
+        self.validate("StyleSpec has an invalid lessthan value")
 
     def test_validate_invalid_stylespec_greaterthan(self):
         self.puzzle["styles"]["highlight"] = {"greaterthan": "3"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid greaterthan value")
+        self.validate("StyleSpec has an invalid greaterthan value")
 
     def test_validate_invalid_stylespec_equal(self):
         self.puzzle["styles"]["highlight"] = {"equal": "a"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid equal value")
+        self.validate("StyleSpec has an invalid equal value")
 
     def test_validate_invalid_stylespec_color(self):
         self.puzzle["styles"]["highlight"] = {"color": None}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid color value")
+        self.validate("StyleSpec has an invalid color value")
 
     def test_validate_invalid_stylespec_colortext(self):
         self.puzzle["styles"]["highlight"] = {"colortext": "AABBCCDDEEFF"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid colortext value")
+        self.validate("StyleSpec has an invalid colortext value")
 
     def test_validate_invalid_stylespec_colorborder(self):
         self.puzzle["styles"]["highlight"] = {"colorborder": "ABC"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid colorborder value")
+        self.validate("StyleSpec has an invalid colorborder value")
 
     def test_validate_invalid_stylespec_colorbar(self):
         self.puzzle["styles"]["highlight"] = {"colorbar": "AABBCZ"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid colorbar value")
+        self.validate("StyleSpec has an invalid colorbar value")
 
     def test_validate_invalid_stylespec_divided(self):
         self.puzzle["styles"]["highlight"] = {"divided": "AA"}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid divided value")
+        self.validate("StyleSpec has an invalid divided value")
 
     def test_validate_invalid_stylespec_mark(self):
         self.puzzle["styles"]["highlight"] = {"mark": None}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid mark value")
+        self.validate("StyleSpec has an invalid mark value")
         self.puzzle["styles"]["highlight"] = {"mark": {"key": "text"}}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid mark value")
+        self.validate("StyleSpec has an invalid mark value")
 
     def test_validate_invalid_stylespec_slice(self):
         self.puzzle["styles"]["highlight"] = {"slice": None}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid slice value")
+        self.validate("StyleSpec has an invalid slice value")
         self.puzzle["styles"]["highlight"] = {"slice": [100, 200, None, 300]}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid slice value")
+        self.validate("StyleSpec has an invalid slice value")
         self.puzzle["styles"]["highlight"] = {"slice": [100, 200, 300]}
-        self.validate_puzzle(self.puzzle, "StyleSpec has an invalid slice value")
+        self.validate("StyleSpec has an invalid slice value")
 
 
 class IPUZGroupSpecValidatorTestCase(IPUZCrosswordTestCase):
