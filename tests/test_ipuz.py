@@ -32,6 +32,19 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
         self.validate_puzzle(self.puzzle, expected_exception)
 
 
+class IPUZSampleSudokuTestCase(IPUZBaseTestCase):
+
+    def setUp(self):
+        self.puzzle = {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/sudoku"],
+            "puzzle": [],
+        }
+
+    def validate(self, expected_exception):
+        self.validate_puzzle(self.puzzle, expected_exception)
+
+
 class IPUZReadTestCase(IPUZBaseTestCase):
 
     def test_read_detects_invalid_ipuz_data(self):
@@ -378,6 +391,17 @@ class IPUZCrosswordValueTestCase(IPUZSampleCrosswordTestCase):
     def test_validate_crosswordvalue_with_invalid_direction(self):
         self.puzzle["saved"] = [[{"Across:Horizontal:and_something": "A"}]]
         self.validate("Invalid CrosswordValue in saved element found")
+
+
+class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
+
+    def test_charset_must_be_text(self):
+        self.puzzle["charset"] = 3
+        self.validate("Invalid charset value found")
+
+    def test_charset_must_have_length_nine(self):
+        self.puzzle["charset"] = "12345"
+        self.validate("Invalid charset value found")
 
 
 class IPUZWriteTestCase(IPUZBaseTestCase):

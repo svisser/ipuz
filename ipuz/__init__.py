@@ -124,6 +124,11 @@ def validate_answers(field_data):
             raise IPUZException("Invalid answers value found")
 
 
+def validate_charset(field_data):
+    if type(field_data) not in [str, unicode] or (len(field_data) != 9):
+        raise IPUZException("Invalid charset value found")
+
+
 IPUZ_FIELD_VALIDATORS = {
     "dimensions": validate_dimensions,
     "date": validate_date,
@@ -138,9 +143,12 @@ IPUZ_CROSSWORD_VALIDATORS = {
     "answer": validate_answer,
     "answers": validate_answers,
 }
+IPUZ_SUDOKU_VALIDATORS = {
+    "charset": validate_charset,
+}
 IPUZ_PUZZLEKIND_VALIDATORS = {
     "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,
-    "http://ipuz.org/sudoku": {},
+    "http://ipuz.org/sudoku": IPUZ_SUDOKU_VALIDATORS,
     "http://ipuz.org/block": {},
     "http://ipuz.org/wordsearch": {},
 }
