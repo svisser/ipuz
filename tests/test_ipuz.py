@@ -45,6 +45,19 @@ class IPUZSampleSudokuTestCase(IPUZBaseTestCase):
         self.validate_puzzle(self.puzzle, expected_exception)
 
 
+class IPUZSampleBlockTestCase(IPUZBaseTestCase):
+
+    def setUp(self):
+        self.puzzle = {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/block"],
+            "dimensions": {"width": 3, "height": 3},
+        }
+
+    def validate(self, expected_exception):
+        self.validate_puzzle(self.puzzle, expected_exception)
+
+
 class IPUZSampleWordSearchTestCase(IPUZBaseTestCase):
 
     def setUp(self):
@@ -490,6 +503,25 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
     def test_dictionary_is_not_true(self):
         self.puzzle["dictionary"] = True
         self.validate("Invalid dictionary value found")
+
+
+class IPUZBlockValueTestCase(IPUZSampleBlockTestCase):
+
+    def test_slide_is_bool(self):
+        self.puzzle["slide"] = 3
+        self.validate("Invalid slide value found")
+
+    def test_move_is_bool(self):
+        self.puzzle["move"] = 3
+        self.validate("Invalid move value found")
+
+    def test_rotatable_is_bool(self):
+        self.puzzle["rotatable"] = 3
+        self.validate("Invalid rotatable value found")
+
+    def test_flippable_is_bool(self):
+        self.puzzle["flippable"] = 3
+        self.validate("Invalid flippable value found")
 
 
 class IPUZWriteTestCase(IPUZBaseTestCase):

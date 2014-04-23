@@ -183,6 +183,12 @@ IPUZ_SUDOKU_VALIDATORS = {
     "showoperators": validate_bool,
     "cageborder": validate_cageborder,
 }
+IPUZ_BLOCK_VALIDATORS = {
+    "slide": validate_bool,
+    "move": validate_bool,
+    "rotatable": validate_bool,
+    "flippable": validate_bool,
+}
 IPUZ_WORDSEARCH_VALIDATORS = {
     "dictionary": validate_dictionary,
     "showanswers": validate_showanswers,
@@ -196,7 +202,7 @@ IPUZ_WORDSEARCH_VALIDATORS = {
 IPUZ_PUZZLEKIND_VALIDATORS = {
     "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,
     "http://ipuz.org/sudoku": IPUZ_SUDOKU_VALIDATORS,
-    "http://ipuz.org/block": {},
+    "http://ipuz.org/block": IPUZ_BLOCK_VALIDATORS,
     "http://ipuz.org/wordsearch": IPUZ_WORDSEARCH_VALIDATORS,
 }
 
