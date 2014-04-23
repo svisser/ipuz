@@ -510,6 +510,13 @@ class IPUZCrosswordValueTestCase(IPUZBaseTestCase):
             "Invalid CrosswordValue in saved element found"
         )
 
+    def test_validate_crosswordvalue_with_invalid_direction(self):
+        self.puzzle["saved"] = [[{"Across:Horizontal:and_something": "A"}]]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid CrosswordValue in saved element found"
+        )
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
