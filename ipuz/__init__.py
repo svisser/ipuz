@@ -83,14 +83,6 @@ def validate_crosswordvalues(field_name, field_data):
                 raise IPUZException("Invalid CrosswordValue in {} element found".format(field_name))
 
 
-def validate_saved(field_name, field_data):
-    validate_crosswordvalues("saved", field_data)
-
-
-def validate_solution(field_name, field_data):
-    validate_crosswordvalues("solution", field_data)
-
-
 def validate_zones(field_name, field_data):
     if type(field_data) is not list:
         raise IPUZException("Invalid zones value found")
@@ -168,8 +160,8 @@ IPUZ_FIELD_VALIDATORS = {
     "styles": validate_styles,
 }
 IPUZ_CROSSWORD_VALIDATORS = {
-    "saved": validate_saved,
-    "solution": validate_solution,
+    "saved": validate_crosswordvalues,
+    "solution": validate_crosswordvalues,
     "zones": validate_zones,
     "showenumerations": validate_bool,
     "clueplacement": validate_clueplacement,
