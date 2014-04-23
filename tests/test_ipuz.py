@@ -447,6 +447,34 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
         self.puzzle["zigzag"] = 3
         self.validate("Invalid zigzag value found")
 
+    def test_misses_is_dict(self):
+        self.puzzle["misses"] = []
+        self.validate("Invalid misses value found")
+
+    def test_misses_is_dict_with_non_text_key(self):
+        self.puzzle["misses"] = {3: "A"}
+        self.validate("Invalid misses value found")
+
+    def test_misses_is_dict_with_non_text_key(self):
+        self.puzzle["misses"] = {"A": 3}
+        self.validate("Invalid misses value found")
+
+    def test_points_is_text(self):
+        self.puzzle["points"] = 3
+        self.validate("Invalid points value found")
+
+    def test_time_is_integer(self):
+        self.puzzle["time"] = "time"
+        self.validate("Invalid time value found")
+
+    def test_time_is_non_negative_integer(self):
+        self.puzzle["time"] = -1
+        self.validate("Invalid time value found")
+
+    def test_showanswers_is_text(self):
+        self.puzzle["showanswers"] = 3
+        self.validate("Invalid showanswers value found")
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
