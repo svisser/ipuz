@@ -439,6 +439,14 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
         self.puzzle["useall"] = 3
         self.validate("Invalid useall value found")
 
+    def test_retrace_is_bool(self):
+        self.puzzle["retrace"] = 3
+        self.validate("Invalid retrace value found")
+
+    def test_zigzag_is_bool(self):
+        self.puzzle["zigzag"] = 3
+        self.validate("Invalid zigzag value found")
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 

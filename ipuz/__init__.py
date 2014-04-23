@@ -161,6 +161,8 @@ IPUZ_SUDOKU_VALIDATORS = {
     "cageborder": validate_cageborder,
 }
 IPUZ_WORDSEARCH_VALIDATORS = {
+    "zigzag": validate_bool,
+    "retrace": validate_bool,
     "useall": validate_bool,
 }
 IPUZ_PUZZLEKIND_VALIDATORS = {
