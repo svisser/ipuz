@@ -2,6 +2,7 @@ from datetime import datetime
 import json
 
 from ipuz.exceptions import IPUZException
+from ipuz.crosswordvalue import validate_crosswordvalue
 from ipuz.groupspec import validate_groupspec
 from ipuz.stylespec import validate_stylespec
 
@@ -71,6 +72,23 @@ def validate_styles(field_data):
         validate_stylespec(stylespec)
 
 
+def validate_crosswordvalues(field_data, name):
+    if type(field_data) is not list or any(type(e) is not list for e in field_data):
+        raise IPUZException("Invalid {} value found".format(name))
+    for line in field_data:
+        for element in line:
+            if not validate_crosswordvalue(element):
+                raise IPUZException("Invalid CrosswordValue in {} element found".format(name))
+
+
+def validate_saved(field_data):
+    validate_crosswordvalues(field_data, "saved")
+
+
+def validate_solution(field_data):
+    validate_crosswordvalues(field_data, "solution")
+
+
 def validate_zones(field_data):
     if type(field_data) is not list:
         raise IPUZException("Invalid zones value found")
@@ -85,6 +103,8 @@ IPUZ_FIELD_VALIDATORS = {
     "styles": validate_styles,
 }
 IPUZ_CROSSWORD_VALIDATORS = {
+    "saved": validate_saved,
+    "solution": validate_solution,
     "zones": validate_zones,
 }
 IPUZ_PUZZLEKIND_VALIDATORS = {

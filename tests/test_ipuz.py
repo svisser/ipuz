@@ -423,6 +423,94 @@ class IPUZGroupSpecValidatorTestCase(IPUZBaseTestCase):
         )
 
 
+class IPUZCrosswordValueTestCase(IPUZBaseTestCase):
+
+    def setUp(self):
+        self.puzzle = {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/crossword"],
+            "dimensions": {"width": 3, "height": 3},
+            "puzzle": [],
+            "saved": [],
+        }
+
+    def test_saved_value_is_not_a_list(self):
+        self.puzzle["saved"] = 3
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid saved value found"
+        )
+
+    def test_solution_value_is_not_a_list(self):
+        self.puzzle["solution"] = 3
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid solution value found"
+        )
+
+    def test_saved_value_is_list(self):
+        self.puzzle["saved"] = [[], [], 3]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid saved value found"
+        )
+
+    def test_validate_crosswordvalue_with_number(self):
+        self.puzzle["saved"] = [[3]]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid CrosswordValue in saved element found"
+        )
+
+    def test_validate_crosswordvalue_with_invalid_nested_crosswordvalue(self):
+        self.puzzle["saved"] = [[[3]]]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid CrosswordValue in saved element found"
+        )
+
+    def test_validate_crosswordvalue_with_double_nested_crosswordvalue(self):
+        self.puzzle["saved"] = [[[[3]]]]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid CrosswordValue in saved element found"
+        )
+
+    def test_validate_crosswordvalue_with_empty_dict(self):
+        self.puzzle["saved"] = [[{}]]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid CrosswordValue in saved element found"
+        )
+
+    def test_validate_crosswordvalue_with_dict_and_invalid_value(self):
+        self.puzzle["saved"] = [[{"value": 3}]]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid CrosswordValue in saved element found"
+        )
+    def test_validate_crosswordvalue_with_dict_and_invalid_style(self):
+        self.puzzle["saved"] = [[{"style": {"shapebg": "not-a-circle"}}]]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid CrosswordValue in saved element found"
+        )
+
+    def test_validate_crosswordvalue_with_dict_and_invalid_key(self):
+        self.puzzle["saved"] = [[{"invalid_key": "A"}]]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid CrosswordValue in saved element found"
+        )
+
+    def test_validate_crosswordvalue_with_direction_and_invalid_crosswordvalue(self):
+        self.puzzle["saved"] = [[{"Across": 3}]]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid CrosswordValue in saved element found"
+        )
+
+
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
     def test_write_produces_jsonp_string_by_default(self):
