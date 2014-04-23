@@ -12,7 +12,7 @@ class IPUZBaseTestCase(unittest.TestCase):
         self.assertEqual(str(cm.exception), expected_exception)
 
 
-class IPUZCrosswordTestCase(IPUZBaseTestCase):
+class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
 
     def setUp(self):
         self.puzzle = {
@@ -23,12 +23,13 @@ class IPUZCrosswordTestCase(IPUZBaseTestCase):
             "saved": [],
             "solution": [],
             "zones": [],
+            "styles": {
+                "highlight": True,
+            }
         }
 
     def validate(self, expected_exception):
-        with self.assertRaises(ipuz.IPUZException) as cm:
-            ipuz.read(json.dumps(self.puzzle))
-        self.assertEqual(str(cm.exception), expected_exception)
+        self.validate_puzzle(self.puzzle, expected_exception)
 
 
 class IPUZReadTestCase(IPUZBaseTestCase):
@@ -59,7 +60,7 @@ class IPUZReadTestCase(IPUZBaseTestCase):
         self.assertEqual(result['version'], "http://ipuz.org/v1")
 
 
-class IPUZCrosswordKindTestCase(IPUZCrosswordTestCase):
+class IPUZCrosswordKindTestCase(IPUZSampleCrosswordTestCase):
 
     def test_validate_crossword_mandatory_dimensions_field(self):
         del self.puzzle["dimensions"]
@@ -143,16 +144,7 @@ class IPUZFieldDateValidatorTestCase(IPUZBaseTestCase):
         self.validate_puzzle(self.puzzle, "Invalid date format: 14/01/2014")
 
 
-class IPUZFieldStylesValidatorTestCase(IPUZCrosswordTestCase):
-
-    def setUp(self):
-        self.puzzle = {
-            "version": "http://ipuz.org/v1",
-            "kind": ["http://ipuz.org/invalid"],
-            "styles": {
-                "highlight": None,
-            }
-        }
+class IPUZFieldStylesValidatorTestCase(IPUZSampleCrosswordTestCase):
 
     def test_validate_style_spec_not_string_or_dict(self):
         self.puzzle["styles"]["highlight"] = 3
@@ -249,7 +241,7 @@ class IPUZFieldStylesValidatorTestCase(IPUZCrosswordTestCase):
         self.validate("StyleSpec has an invalid slice value")
 
 
-class IPUZGroupSpecValidatorTestCase(IPUZCrosswordTestCase):
+class IPUZGroupSpecValidatorTestCase(IPUZSampleCrosswordTestCase):
 
     def test_validate_groupspec_is_not_a_list(self):
         self.puzzle["zones"] = 3
@@ -304,21 +296,21 @@ class IPUZGroupSpecValidatorTestCase(IPUZCrosswordTestCase):
         self.validate("Invalid GroupSpec in zones element found")
 
 
-class IPUZShowEnumerationsTestCase(IPUZCrosswordTestCase):
+class IPUZShowEnumerationsTestCase(IPUZSampleCrosswordTestCase):
 
     def test_showenumerations(self):
         self.puzzle["showenumerations"] = 3
         self.validate("Invalid showenumerations value found")
 
 
-class IPUZCluePlacementTestCase(IPUZCrosswordTestCase):
+class IPUZCluePlacementTestCase(IPUZSampleCrosswordTestCase):
 
     def test_clueplacement(self):
         self.puzzle["clueplacement"] = 3
         self.validate("Invalid clueplacement value found")
 
 
-class IPUZAnswerTestCase(IPUZCrosswordTestCase):
+class IPUZAnswerTestCase(IPUZSampleCrosswordTestCase):
 
     def test_answer(self):
         self.puzzle["answer"] = 3
@@ -337,7 +329,7 @@ class IPUZAnswerTestCase(IPUZCrosswordTestCase):
         self.validate("Invalid answers value found")
 
 
-class IPUZCrosswordValueTestCase(IPUZCrosswordTestCase):
+class IPUZCrosswordValueTestCase(IPUZSampleCrosswordTestCase):
 
     def test_saved_value_is_not_a_list(self):
         self.puzzle["saved"] = 3
