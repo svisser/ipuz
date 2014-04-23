@@ -45,6 +45,19 @@ class IPUZSampleSudokuTestCase(IPUZBaseTestCase):
         self.validate_puzzle(self.puzzle, expected_exception)
 
 
+class IPUZSampleWordSearchTestCase(IPUZBaseTestCase):
+
+    def setUp(self):
+        self.puzzle = {
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/wordsearch"],
+            "dimensions": {"width": 3, "height": 3},
+        }
+
+    def validate(self, expected_exception):
+        self.validate_puzzle(self.puzzle, expected_exception)
+
+
 class IPUZReadTestCase(IPUZBaseTestCase):
 
     def test_read_detects_invalid_ipuz_data(self):
@@ -418,6 +431,13 @@ class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
     def test_cageborder_is_valid_text(self):
         self.puzzle["cageborder"] = "not-a-border"
         self.validate("Invalid cageborder value found")
+
+
+class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
+
+    def test_useall_is_bool(self):
+        self.puzzle["useall"] = 3
+        self.validate("Invalid useall value found")
 
 
 class IPUZWriteTestCase(IPUZBaseTestCase):

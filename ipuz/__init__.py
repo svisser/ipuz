@@ -149,6 +149,11 @@ def validate_cageborder(field_data):
         raise IPUZException("Invalid cageborder value found")
 
 
+def validate_useall(field_data):
+    if type(field_data) is not bool:
+        raise IPUZException("Invalid useall value found")
+
+
 IPUZ_FIELD_VALIDATORS = {
     "dimensions": validate_dimensions,
     "date": validate_date,
@@ -170,11 +175,14 @@ IPUZ_SUDOKU_VALIDATORS = {
     "showoperators": validate_showoperators,
     "cageborder": validate_cageborder,
 }
+IPUZ_WORDSEARCH_VALIDATORS = {
+    "useall": validate_useall,
+}
 IPUZ_PUZZLEKIND_VALIDATORS = {
     "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,
     "http://ipuz.org/sudoku": IPUZ_SUDOKU_VALIDATORS,
     "http://ipuz.org/block": {},
-    "http://ipuz.org/wordsearch": {},
+    "http://ipuz.org/wordsearch": IPUZ_WORDSEARCH_VALIDATORS,
 }
 
 
