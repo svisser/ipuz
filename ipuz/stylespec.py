@@ -13,7 +13,7 @@ def validate_stylespec_highlight(field_data):
 
 
 def validate_stylespec_named(field_data):
-    return (type(field_data) is bool and not field_data) or type(field_data) in [str, unicode]
+    return field_data is False or type(field_data) in [str, unicode]
 
 
 def validate_stylespec_border(field_data):
