@@ -475,6 +475,18 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
         self.puzzle["showanswers"] = 3
         self.validate("Invalid showanswers value found")
 
+    def test_dictionary_is_text_or_false(self):
+        self.puzzle["dictionary"] = 3
+        self.validate("Invalid dictionary value found")
+
+    def test_dictionary_is_non_empty_string(self):
+        self.puzzle["dictionary"] = ""
+        self.validate("Invalid dictionary value found")
+
+    def test_dictionary_is_not_true(self):
+        self.puzzle["dictionary"] = True
+        self.validate("Invalid dictionary value found")
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 

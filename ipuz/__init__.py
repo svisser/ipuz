@@ -162,6 +162,11 @@ def validate_showanswers(field_name, field_data):
         raise IPUZException("Invalid showanswers value found")
 
 
+def validate_dictionary(field_name, field_data):
+    if field_data in [True, ""] or type(field_data) not in [str, unicode]:
+        raise IPUZException("Invalid dictionary value found")
+
+
 IPUZ_FIELD_VALIDATORS = {
     "dimensions": validate_dimensions,
     "date": validate_date,
@@ -184,6 +189,7 @@ IPUZ_SUDOKU_VALIDATORS = {
     "cageborder": validate_cageborder,
 }
 IPUZ_WORDSEARCH_VALIDATORS = {
+    "dictionary": validate_dictionary,
     "showanswers": validate_showanswers,
     "time": validate_time,
     "points": validate_points,
