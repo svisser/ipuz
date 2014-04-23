@@ -60,4 +60,4 @@ You can run this library's tests by doing:
     python -m unittest discover
 
 Note that all tests run the public interface (`read` and `write`) to ensure
-we test both the validation and whether an exception is raised properly.
+we test each validation function and whether an exception is raised properly.
