@@ -97,6 +97,31 @@ def validate_zones(field_data):
             raise IPUZException("Invalid GroupSpec in zones element found")
 
 
+def validate_showenumerations(field_data):
+    if type(field_data) is not bool:
+        raise IPUZException("Invalid showenumerations value found")
+
+
+def validate_clueplacement(field_data):
+    if field_data not in [None, "before", "after", "blocks"]:
+        raise IPUZException("Invalid clueplacement value found")
+
+
+def validate_answer(field_data):
+    if type(field_data) not in [str, unicode]:
+        raise IPUZException("Invalid answer value found")
+
+
+def validate_answers(field_data):
+    if type(field_data) is not list or not field_data:
+        raise IPUZException("Invalid answers value found")
+    for element in field_data:
+        try:
+            validate_answer(element)
+        except IPUZException:
+            raise IPUZException("Invalid answers value found")
+
+
 IPUZ_FIELD_VALIDATORS = {
     "dimensions": validate_dimensions,
     "date": validate_date,
@@ -106,6 +131,10 @@ IPUZ_CROSSWORD_VALIDATORS = {
     "saved": validate_saved,
     "solution": validate_solution,
     "zones": validate_zones,
+    "showenumerations": validate_showenumerations,
+    "clueplacement": validate_clueplacement,
+    "answer": validate_answer,
+    "answers": validate_answers,
 }
 IPUZ_PUZZLEKIND_VALIDATORS = {
     "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,

@@ -304,6 +304,39 @@ class IPUZGroupSpecValidatorTestCase(IPUZCrosswordTestCase):
         self.validate("Invalid GroupSpec in zones element found")
 
 
+class IPUZShowEnumerationsTestCase(IPUZCrosswordTestCase):
+
+    def test_showenumerations(self):
+        self.puzzle["showenumerations"] = 3
+        self.validate("Invalid showenumerations value found")
+
+
+class IPUZCluePlacementTestCase(IPUZCrosswordTestCase):
+
+    def test_clueplacement(self):
+        self.puzzle["clueplacement"] = 3
+        self.validate("Invalid clueplacement value found")
+
+
+class IPUZAnswerTestCase(IPUZCrosswordTestCase):
+
+    def test_answer(self):
+        self.puzzle["answer"] = 3
+        self.validate("Invalid answer value found")
+
+    def test_answers_not_a_list(self):
+        self.puzzle["answers"] = 3
+        self.validate("Invalid answers value found")
+
+    def test_answers_empty_list(self):
+        self.puzzle["answers"] = []
+        self.validate("Invalid answers value found")
+
+    def test_answers_list_with_invalid_content(self):
+        self.puzzle["answers"] = [3]
+        self.validate("Invalid answers value found")
+
+
 class IPUZCrosswordValueTestCase(IPUZCrosswordTestCase):
 
     def test_saved_value_is_not_a_list(self):
