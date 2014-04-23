@@ -48,7 +48,6 @@ def validate_stylespec_noop(field_data):
     return True
 
 
-
 IPUZ_STYLESPEC_VALIDATORS = {
     "shapebg": validate_stylespec_shapebg,
     "highlight": validate_stylespec_highlight,
