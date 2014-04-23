@@ -110,7 +110,7 @@ def validate_clueplacement(field_name, field_data):
 
 
 def validate_answer(field_name, field_data):
-    if type(field_data) not in [str, unicode]:
+    if type(field_data) not in [str, unicode] or field_data == "":
         raise IPUZException("Invalid answer value found")
 
 

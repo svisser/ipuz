@@ -342,6 +342,10 @@ class IPUZAnswerTestCase(IPUZSampleCrosswordTestCase):
         self.puzzle["answer"] = 3
         self.validate("Invalid answer value found")
 
+    def test_answer_is_non_empty_string(self):
+        self.puzzle["answer"] = ""
+        self.validate("Invalid answer value found")
+
     def test_answers_not_a_list(self):
         self.puzzle["answers"] = 3
         self.validate("Invalid answers value found")
