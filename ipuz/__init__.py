@@ -50,7 +50,7 @@ IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
 }
 
 
-def validate_dimensions(field_data):
+def validate_dimensions(field_name, field_data):
     for key in ["width", "height"]:
         if key not in field_data:
             raise IPUZException(
@@ -62,36 +62,36 @@ def validate_dimensions(field_data):
             )
 
 
-def validate_date(field_data):
+def validate_date(field_name, field_data):
     try:
         datetime.strptime(field_data, '%m/%d/%Y')
     except ValueError:
         raise IPUZException("Invalid date format: {}".format(field_data))
 
 
-def validate_styles(field_data):
+def validate_styles(field_name, field_data):
     for _, stylespec in field_data.items():
         validate_stylespec(stylespec)
 
 
-def validate_crosswordvalues(field_data, name):
+def validate_crosswordvalues(field_name, field_data):
     if type(field_data) is not list or any(type(e) is not list for e in field_data):
-        raise IPUZException("Invalid {} value found".format(name))
+        raise IPUZException("Invalid {} value found".format(field_name))
     for line in field_data:
         for element in line:
             if not validate_crosswordvalue(element):
-                raise IPUZException("Invalid CrosswordValue in {} element found".format(name))
+                raise IPUZException("Invalid CrosswordValue in {} element found".format(field_name))
 
 
-def validate_saved(field_data):
-    validate_crosswordvalues(field_data, "saved")
+def validate_saved(field_name, field_data):
+    validate_crosswordvalues("saved", field_data)
 
 
-def validate_solution(field_data):
-    validate_crosswordvalues(field_data, "solution")
+def validate_solution(field_name, field_data):
+    validate_crosswordvalues("solution", field_data)
 
 
-def validate_zones(field_data):
+def validate_zones(field_name, field_data):
     if type(field_data) is not list:
         raise IPUZException("Invalid zones value found")
     for element in field_data:
@@ -99,57 +99,57 @@ def validate_zones(field_data):
             raise IPUZException("Invalid GroupSpec in zones element found")
 
 
-def validate_showenumerations(field_data):
+def validate_showenumerations(field_name, field_data):
     if type(field_data) is not bool:
         raise IPUZException("Invalid showenumerations value found")
 
 
-def validate_clueplacement(field_data):
+def validate_clueplacement(field_name, field_data):
     if field_data not in [None, "before", "after", "blocks"]:
         raise IPUZException("Invalid clueplacement value found")
 
 
-def validate_answer(field_data):
+def validate_answer(field_name, field_data):
     if type(field_data) not in [str, unicode]:
         raise IPUZException("Invalid answer value found")
 
 
-def validate_answers(field_data):
+def validate_answers(field_name, field_data):
     if type(field_data) is not list or not field_data:
         raise IPUZException("Invalid answers value found")
     for element in field_data:
         try:
-            validate_answer(element)
+            validate_answer(field_name, element)
         except IPUZException:
             raise IPUZException("Invalid answers value found")
 
 
-def validate_charset(field_data):
+def validate_charset(field_name, field_data):
     if type(field_data) not in [str, unicode] or (len(field_data) != 9):
         raise IPUZException("Invalid charset value found")
 
 
-def validate_displaycharset(field_data):
+def validate_displaycharset(field_name, field_data):
     if type(field_data) is not bool:
         raise IPUZException("Invalid displaycharset value found")
 
 
-def validate_boxes(field_data):
+def validate_boxes(field_name, field_data):
     if type(field_data) is not bool:
         raise IPUZException("Invalid boxes value found")
 
 
-def validate_showoperators(field_data):
+def validate_showoperators(field_name, field_data):
     if type(field_data) is not bool:
         raise IPUZException("Invalid showoperators value found")
 
 
-def validate_cageborder(field_data):
+def validate_cageborder(field_name, field_data):
     if field_data not in ["thick", "dashed"]:
         raise IPUZException("Invalid cageborder value found")
 
 
-def validate_useall(field_data):
+def validate_useall(field_name, field_data):
     if type(field_data) is not bool:
         raise IPUZException("Invalid useall value found")
 
@@ -205,10 +205,10 @@ def read(data):
                     raise IPUZException("Mandatory field {} is missing".format(field))
             for field, value in json_data.items():
                 if field in IPUZ_PUZZLEKIND_VALIDATORS[official_kind]:
-                    IPUZ_PUZZLEKIND_VALIDATORS[official_kind][field](value)
+                    IPUZ_PUZZLEKIND_VALIDATORS[official_kind][field](field, value)
     for field, value in json_data.items():
         if field in IPUZ_FIELD_VALIDATORS:
-            IPUZ_FIELD_VALIDATORS[field](value)
+            IPUZ_FIELD_VALIDATORS[field](field, value)
     return json_data
 
 
