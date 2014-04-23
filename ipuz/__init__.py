@@ -129,29 +129,14 @@ def validate_charset(field_name, field_data):
         raise IPUZException("Invalid charset value found")
 
 
-def validate_displaycharset(field_name, field_data):
-    if type(field_data) is not bool:
-        raise IPUZException("Invalid displaycharset value found")
-
-
-def validate_boxes(field_name, field_data):
-    if type(field_data) is not bool:
-        raise IPUZException("Invalid boxes value found")
-
-
-def validate_showoperators(field_name, field_data):
-    if type(field_data) is not bool:
-        raise IPUZException("Invalid showoperators value found")
-
-
 def validate_cageborder(field_name, field_data):
     if field_data not in ["thick", "dashed"]:
         raise IPUZException("Invalid cageborder value found")
 
 
-def validate_useall(field_name, field_data):
+def validate_bool(field_name, field_data):
     if type(field_data) is not bool:
-        raise IPUZException("Invalid useall value found")
+        raise IPUZException("Invalid {} value found".format(field_name))
 
 
 IPUZ_FIELD_VALIDATORS = {
@@ -170,13 +155,13 @@ IPUZ_CROSSWORD_VALIDATORS = {
 }
 IPUZ_SUDOKU_VALIDATORS = {
     "charset": validate_charset,
-    "displaycharset": validate_displaycharset,
-    "boxes": validate_boxes,
-    "showoperators": validate_showoperators,
+    "displaycharset": validate_bool,
+    "boxes": validate_bool,
+    "showoperators": validate_bool,
     "cageborder": validate_cageborder,
 }
 IPUZ_WORDSEARCH_VALIDATORS = {
-    "useall": validate_useall,
+    "useall": validate_bool,
 }
 IPUZ_PUZZLEKIND_VALIDATORS = {
     "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,
