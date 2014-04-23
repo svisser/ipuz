@@ -99,11 +99,6 @@ def validate_zones(field_name, field_data):
             raise IPUZException("Invalid GroupSpec in zones element found")
 
 
-def validate_showenumerations(field_name, field_data):
-    if type(field_data) is not bool:
-        raise IPUZException("Invalid showenumerations value found")
-
-
 def validate_clueplacement(field_name, field_data):
     if field_data not in [None, "before", "after", "blocks"]:
         raise IPUZException("Invalid clueplacement value found")
@@ -176,7 +171,7 @@ IPUZ_CROSSWORD_VALIDATORS = {
     "saved": validate_saved,
     "solution": validate_solution,
     "zones": validate_zones,
-    "showenumerations": validate_showenumerations,
+    "showenumerations": validate_bool,
     "clueplacement": validate_clueplacement,
     "answer": validate_answer,
     "answers": validate_answers,
