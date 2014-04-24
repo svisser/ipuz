@@ -46,4 +46,9 @@ def validate_clue(field_data):
                 return False
             elif key == "highlight" and type(value) is not bool:
                 return False
+            elif key == "location":
+                if (type(value) is not list or
+                    len(value) != 2 or
+                    any(type(e) is not int for e in value)):
+                    return False
     return True
