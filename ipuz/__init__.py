@@ -47,6 +47,7 @@ IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
     "http://ipuz.org/wordsearch": (
         "dimensions",
     ),
+    "http://ipuz.org/answer": ()
 }
 
 
@@ -193,6 +194,9 @@ IPUZ_BLOCK_VALIDATORS = {
     "rotatable": validate_bool,
     "flippable": validate_bool,
 }
+IPUZ_ANSWER_VALIDATORS = {
+    "randomize": validate_bool,
+}
 IPUZ_WORDSEARCH_VALIDATORS = {
     "dictionary": validate_dictionary,
     "showanswers": validate_showanswers,
@@ -207,6 +211,7 @@ IPUZ_PUZZLEKIND_VALIDATORS = {
     "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,
     "http://ipuz.org/sudoku": IPUZ_SUDOKU_VALIDATORS,
     "http://ipuz.org/block": IPUZ_BLOCK_VALIDATORS,
+    "http://ipuz.org/answer": IPUZ_ANSWER_VALIDATORS,
     "http://ipuz.org/wordsearch": IPUZ_WORDSEARCH_VALIDATORS,
 }
 
