@@ -352,3 +352,43 @@ class IPUZCrosswordCluesTestCase(IPUZSampleCrosswordTestCase):
     def test_clues_element_not_a_valid_cluenum(self):
         self.puzzle["clues"] = {"Across": [[None, "The clue"]]}
         self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_key(self):
+        self.puzzle["clues"] = {"Across": [{"invalid_key": None}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_number(self):
+        self.puzzle["clues"] = {"Across": [{"number": None}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_numbers(self):
+        self.puzzle["clues"] = {"Across": [{"numbers": 3}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_clue(self):
+        self.puzzle["clues"] = {"Across": [{"clue": None}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_hints(self):
+        self.puzzle["clues"] = {"Across": [{"hints": None}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_hints_element(self):
+        self.puzzle["clues"] = {"Across": [{"hints": [3]}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_image(self):
+        self.puzzle["clues"] = {"Across": [{"image": 3}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_answer(self):
+        self.puzzle["clues"] = {"Across": [{"answer": 3}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_see(self):
+        self.puzzle["clues"] = {"Across": [{"see": None}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_highlight(self):
+        self.puzzle["clues"] = {"Across": [{"highlight": 3}]}
+        self.validate("Invalid Clue in clues element found")
