@@ -27,6 +27,11 @@ class IPUZReadTestCase(IPUZBaseTestCase):
             ipuz.read("")
         self.assertEqual(str(cm.exception), "No input found")
 
+    def test_read_detects_non_string_input(self):
+        with self.assertRaises(ipuz.IPUZException) as cm:
+            ipuz.read(3)
+        self.assertEqual(str(cm.exception), "No valid JSON could be found")
+
     def test_read_raises_for_missing_version_field(self):
         self.validate_puzzle({}, "Mandatory field version is missing")
 

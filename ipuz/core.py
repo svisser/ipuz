@@ -74,11 +74,11 @@ IPUZ_PUZZLEKINDS = {
 def read(data):
     if not data:
         raise IPUZException("No input found")
-    if data.endswith(')'):
-        data = data[data.index('(') + 1:-1]
     try:
+        if data.endswith(')'):
+            data = data[data.index('(') + 1:-1]
         json_data = json.loads(data)
-    except ValueError:
+    except (AttributeError, ValueError):
         raise IPUZException("No valid JSON could be found")
     for field in IPUZ_MANDATORY_FIELDS:
         if field not in json_data:
