@@ -2,6 +2,7 @@ from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_crosswordvalue,
     validate_groupspec,
+    validate_labeledcell,
 )
 from ipuz.validators import validate_bool
 
@@ -17,6 +18,15 @@ def validate_dimensions(field_name, field_data):
             raise IPUZException(
                 "Field {} of dimensions is less than one".format(key)
             )
+
+
+def validate_puzzle(field_name, field_data):
+    if type(field_data) is not list or any(type(e) is not list for e in field_data):
+        raise IPUZException("Invalid {} value found".format(field_name))
+    for line in field_data:
+        for element in line:
+            if not validate_labeledcell(element):
+                raise IPUZException("Invalid LabeledCell in {} element found".format(field_name))
 
 
 def validate_crosswordvalues(field_name, field_data):
@@ -58,6 +68,7 @@ def validate_answers(field_name, field_data):
 
 IPUZ_CROSSWORD_VALIDATORS = {
     "dimensions": validate_dimensions,
+    "puzzle": validate_puzzle,
     "saved": validate_crosswordvalues,
     "solution": validate_crosswordvalues,
     "zones": validate_zones,

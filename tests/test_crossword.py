@@ -239,7 +239,7 @@ class IPUZCrosswordValueTestCase(IPUZSampleCrosswordTestCase):
         self.puzzle["solution"] = 3
         self.validate("Invalid solution value found")
 
-    def test_saved_value_is_list(self):
+    def test_saved_value_contains_only_lists(self):
         self.puzzle["saved"] = [[], [], 3]
         self.validate("Invalid saved value found")
 
@@ -278,3 +278,42 @@ class IPUZCrosswordValueTestCase(IPUZSampleCrosswordTestCase):
     def test_validate_crosswordvalue_with_invalid_direction(self):
         self.puzzle["saved"] = [[{"Across:Horizontal:and_something": "A"}]]
         self.validate("Invalid CrosswordValue in saved element found")
+
+
+class IPUZCrosswordPuzzleTestCase(IPUZSampleCrosswordTestCase):
+
+    def test_puzzle_is_not_a_list(self):
+        self.puzzle["puzzle"] = 3
+        self.validate("Invalid puzzle value found")
+
+    def test_puzzle_element_is_not_a_list(self):
+        self.puzzle["puzzle"] = [3]
+        self.validate("Invalid puzzle value found")
+
+    def test_puzzle_contains_only_lists(self):
+        self.puzzle["puzzle"] = [[], [], 3]
+        self.validate("Invalid puzzle value found")
+
+    def test_puzzle_with_invalid_nested_labeledcell(self):
+        self.puzzle["puzzle"] = [[[3]]]
+        self.validate("Invalid LabeledCell in puzzle element found")
+
+    def test_puzzle_with_empty_labeledcell(self):
+        self.puzzle["puzzle"] = [[{}]]
+        self.validate("Invalid LabeledCell in puzzle element found")
+
+    def test_puzzle_with_labeledcell_with_invalid_key(self):
+        self.puzzle["puzzle"] = [[{"invalid_key": 3}]]
+        self.validate("Invalid LabeledCell in puzzle element found")
+
+    def test_puzzle_with_labeledcell_with_invalid_cell(self):
+        self.puzzle["puzzle"] = [[{"cell": {}}]]
+        self.validate("Invalid LabeledCell in puzzle element found")
+
+    def test_puzzle_with_labeledcell_with_invalid_value(self):
+        self.puzzle["puzzle"] = [[{"value": 3}]]
+        self.validate("Invalid LabeledCell in puzzle element found")
+
+    def test_puzzle_with_labeledcell_with_invalid_style(self):
+        self.puzzle["puzzle"] = [[{"style": {"shapebg": "not-a-circle"}}]]
+        self.validate("Invalid LabeledCell in puzzle element found")
