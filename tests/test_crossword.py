@@ -361,8 +361,12 @@ class IPUZCrosswordCluesTestCase(IPUZSampleCrosswordTestCase):
         self.puzzle["clues"] = {"Across": [{"number": None}]}
         self.validate("Invalid Clue in clues element found")
 
-    def test_clues_element_not_a_valid_clue_dict_invalid_numbers(self):
+    def test_clues_element_not_a_valid_clue_dict_invalid_not_a_list(self):
         self.puzzle["clues"] = {"Across": [{"numbers": 3}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_numbers(self):
+        self.puzzle["clues"] = {"Across": [{"numbers": [None]}]}
         self.validate("Invalid Clue in clues element found")
 
     def test_clues_element_not_a_valid_clue_dict_invalid_clue(self):

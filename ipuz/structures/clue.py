@@ -1,3 +1,4 @@
+from .cluenum import validate_cluenum
 
 
 def validate_clue(field_data):
@@ -6,7 +7,7 @@ def validate_clue(field_data):
     if type(field_data) is list:
         if len(field_data) != 2:
             return False
-        if type(field_data[0]) not in [int, str, unicode]:
+        if not validate_cluenum(field_data[0]):
             return False
         if type(field_data[1]) not in [str, unicode]:
             return False
@@ -26,10 +27,14 @@ def validate_clue(field_data):
                 "location",
             ):
                 return False
-            if key == "number" and type(value) not in [int, str, unicode]:
+            if key == "number" and not validate_cluenum(value):
                 return False
-            elif key == "numbers" and type(value) is not list:
-                return False
+            elif key == "numbers":
+                if type(value) is not list:
+                    return False
+                for element in value:
+                    if not validate_cluenum(element):
+                        return False
             elif key == "clue" and type(value) not in [str, unicode]:
                 return False
             elif key == "hints":
@@ -42,7 +47,7 @@ def validate_clue(field_data):
                 return False
             elif key == "answer" and type(value) not in [str, unicode]:
                 return False
-            elif key == "see" and type(value) not in [int, str, unicode]:
+            elif key == "see" and not validate_cluenum(value):
                 return False
             elif key == "highlight" and type(value) is not bool:
                 return False
