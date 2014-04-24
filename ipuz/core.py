@@ -86,10 +86,9 @@ def read(data):
             IPUZ_FIELD_VALIDATORS[field](field, value)
     for kind in json_data["kind"]:
         for official_kind, kind_details in IPUZ_PUZZLEKINDS.items():
-            fields = kind_details["mandatory"]
             if not kind.startswith(official_kind):
                 continue
-            for field in fields:
+            for field in kind_details["mandatory"]:
                 if field not in json_data:
                     raise IPUZException("Mandatory field {} is missing".format(field))
             for field, value in json_data.items():
