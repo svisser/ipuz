@@ -40,6 +40,18 @@ class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
         self.puzzle["cageborder"] = "not-a-border"
         self.validate("Invalid cageborder value found")
 
+    def test_cages_is_list(self):
+        self.puzzle["cages"] = 3
+        self.validate("Invalid cages value found")
+
+    def test_cages_has_invalid_calcspec(self):
+        self.puzzle["cages"] = [3]
+        self.validate("Invalid CalcSpec in cages element found")
+
+    def test_cages_has_calcspec_with_invalid_key(self):
+        self.puzzle["cages"] = [{"invalid_key": 3}]
+        self.validate("Invalid CalcSpec in cages element found")
+
 
 class IPUZSudokuKindTestCase(IPUZBaseTestCase):
 
