@@ -44,4 +44,7 @@ class IPUZBlockKindTestCase(IPUZBaseTestCase):
 
     def test_validate_block_mandatory_dimensions_field(self):
         del self.puzzle["dimensions"]
-        self.validate_puzzle(self.puzzle, "Mandatory field dimensions is missing")
+        self.validate_puzzle(
+            self.puzzle,
+            "Mandatory field dimensions is missing"
+        )

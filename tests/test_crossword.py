@@ -25,11 +25,17 @@ class IPUZCrosswordKindTestCase(IPUZSampleCrosswordTestCase):
 
     def test_validate_incomplete_dimensions(self):
         del self.puzzle["dimensions"]["width"]
-        self.validate_puzzle(self.puzzle, "Mandatory field width of dimensions is missing")
+        self.validate_puzzle(
+            self.puzzle,
+            "Mandatory field width of dimensions is missing"
+        )
 
     def test_validate_dimensions_negative_or_zero(self):
         self.puzzle["dimensions"]["width"] = 0
-        self.validate_puzzle(self.puzzle, "Field width of dimensions is less than one")
+        self.validate_puzzle(
+            self.puzzle,
+            "Field width of dimensions is less than one"
+        )
 
     def test_validate_crossword_mandatory_dimensions_field(self):
         del self.puzzle["dimensions"]
@@ -160,7 +166,7 @@ class IPUZGroupSpecValidatorTestCase(IPUZSampleCrosswordTestCase):
         self.validate("Invalid GroupSpec in zones element found")
 
     def test_validate_groupspec_empty_groupspec_cell_in_cells(self):
-        self.puzzle["zones"] = [{"cells": [ [3] ]}]
+        self.puzzle["zones"] = [{"cells": [[3]]}]
         self.validate("Invalid GroupSpec in zones element found")
 
     def test_validate_groupspec_empty_groupspec_another_cell_in_cells(self):
@@ -168,14 +174,14 @@ class IPUZGroupSpecValidatorTestCase(IPUZSampleCrosswordTestCase):
         self.validate("Invalid GroupSpec in zones element found")
 
     def test_validate_groupspec_with_invalid_stylespec(self):
-        self.puzzle["zones"] = [{"style": { "shapebg": "not-a-circle"}}]
+        self.puzzle["zones"] = [{"style": {"shapebg": "not-a-circle"}}]
         self.validate("Invalid GroupSpec in zones element found")
 
     def test_validate_groupsec_with_invalid_rect(self):
         self.puzzle["zones"] = [{"rect": 3}]
         self.validate("Invalid GroupSpec in zones element found")
 
-    def test_validate_groupsec_with_invalid_rect(self):
+    def test_validate_groupsec_with_invalid_rect_length(self):
         self.puzzle["zones"] = [{"rect": [3, 4, 5]}]
         self.validate("Invalid GroupSpec in zones element found")
 
@@ -271,7 +277,7 @@ class IPUZCrosswordValueTestCase(IPUZSampleCrosswordTestCase):
         self.puzzle["saved"] = [[{"invalid_key": "A"}]]
         self.validate("Invalid CrosswordValue in saved element found")
 
-    def test_validate_crosswordvalue_with_direction_and_invalid_crosswordvalue(self):
+    def test_validate_crosswordvalue_direction_invalid_crosswordvalue(self):
         self.puzzle["saved"] = [[{"Across": 3}]]
         self.validate("Invalid CrosswordValue in saved element found")
 
@@ -345,7 +351,7 @@ class IPUZCrosswordCluesTestCase(IPUZSampleCrosswordTestCase):
         self.puzzle["clues"] = {"Across": [[1, "The clue", "something else"]]}
         self.validate("Invalid Clue in clues element found")
 
-    def test_clues_element_not_a_valid_list_clue(self):
+    def test_clues_element_not_a_valid_list_clue_text(self):
         self.puzzle["clues"] = {"Across": [["1", 3]]}
         self.validate("Invalid Clue in clues element found")
 

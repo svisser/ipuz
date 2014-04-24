@@ -32,11 +32,7 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
         self.puzzle["misses"] = []
         self.validate("Invalid misses value found")
 
-    def test_misses_is_dict_with_non_text_key(self):
-        self.puzzle["misses"] = {3: "A"}
-        self.validate("Invalid misses value found")
-
-    def test_misses_is_dict_with_non_text_key(self):
+    def test_misses_is_dict_with_non_text_value(self):
         self.puzzle["misses"] = {"A": 3}
         self.validate("Invalid misses value found")
 
@@ -80,4 +76,7 @@ class IPUZWordSearchKindTestCase(IPUZBaseTestCase):
 
     def test_validate_wordsearch_mandatory_dimensions_field(self):
         del self.puzzle["dimensions"]
-        self.validate_puzzle(self.puzzle, "Mandatory field dimensions is missing")
+        self.validate_puzzle(
+            self.puzzle,
+            "Mandatory field dimensions is missing"
+        )

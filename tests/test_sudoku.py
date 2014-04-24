@@ -64,7 +64,7 @@ class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
         self.puzzle["cages"] = [{"operator": "|"}]
         self.validate("Invalid CalcSpec in cages element found")
 
-    def test_cages_has_calcspec_with_invalid_operator(self):
+    def test_cages_has_calcspec_with_invalid_style(self):
         self.puzzle["cages"] = [{"style": {"shapebg": "not-a-circle"}}]
         self.validate("Invalid CalcSpec in cages element found")
 
