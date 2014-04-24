@@ -64,24 +64,6 @@ class IPUZReadTestCase(IPUZBaseTestCase):
         }, "Invalid kind value found")
 
 
-class IPUZFieldDimensionsValidatorTestCase(IPUZBaseTestCase):
-
-    def setUp(self):
-        self.puzzle = {
-            "version": "http://ipuz.org/v1",
-            "kind": ["http://ipuz.org/invalid"],
-            "dimensions": {"width": 3, "height": 3},
-        }
-
-    def test_validate_incomplete_dimensions(self):
-        del self.puzzle["dimensions"]["width"]
-        self.validate_puzzle(self.puzzle, "Mandatory field width of dimensions is missing")
-
-    def test_validate_dimensions_negative_or_zero(self):
-        self.puzzle["dimensions"]["width"] = 0
-        self.validate_puzzle(self.puzzle, "Field width of dimensions is less than one")
-
-
 class IPUZFieldDateValidatorTestCase(IPUZBaseTestCase):
 
     def setUp(self):

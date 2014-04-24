@@ -23,6 +23,14 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
 
 class IPUZCrosswordKindTestCase(IPUZSampleCrosswordTestCase):
 
+    def test_validate_incomplete_dimensions(self):
+        del self.puzzle["dimensions"]["width"]
+        self.validate_puzzle(self.puzzle, "Mandatory field width of dimensions is missing")
+
+    def test_validate_dimensions_negative_or_zero(self):
+        self.puzzle["dimensions"]["width"] = 0
+        self.validate_puzzle(self.puzzle, "Field width of dimensions is less than one")
+
     def test_validate_crossword_mandatory_dimensions_field(self):
         del self.puzzle["dimensions"]
         self.validate("Mandatory field dimensions is missing")

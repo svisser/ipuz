@@ -6,6 +6,19 @@ from ipuz.structures import (
 from ipuz.validators import validate_bool
 
 
+
+def validate_dimensions(field_name, field_data):
+    for key in ["width", "height"]:
+        if key not in field_data:
+            raise IPUZException(
+                "Mandatory field {} of dimensions is missing".format(key)
+            )
+        if field_data[key] < 1:
+            raise IPUZException(
+                "Field {} of dimensions is less than one".format(key)
+            )
+
+
 def validate_crosswordvalues(field_name, field_data):
     if type(field_data) is not list or any(type(e) is not list for e in field_data):
         raise IPUZException("Invalid {} value found".format(field_name))
@@ -44,6 +57,7 @@ def validate_answers(field_name, field_data):
 
 
 IPUZ_CROSSWORD_VALIDATORS = {
+    "dimensions": validate_dimensions,
     "saved": validate_crosswordvalues,
     "solution": validate_crosswordvalues,
     "zones": validate_zones,

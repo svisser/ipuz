@@ -51,18 +51,6 @@ def validate_kind(field_name, field_data):
         raise IPUZException("Invalid kind value found")
 
 
-def validate_dimensions(field_name, field_data):
-    for key in ["width", "height"]:
-        if key not in field_data:
-            raise IPUZException(
-                "Mandatory field {} of dimensions is missing".format(key)
-            )
-        if field_data[key] < 1:
-            raise IPUZException(
-                "Field {} of dimensions is less than one".format(key)
-            )
-
-
 def validate_date(field_name, field_data):
     try:
         datetime.strptime(field_data, '%m/%d/%Y')
@@ -78,7 +66,6 @@ def validate_styles(field_name, field_data):
 IPUZ_FIELD_VALIDATORS = {
     "version": validate_version,
     "kind": validate_kind,
-    "dimensions": validate_dimensions,
     "date": validate_date,
     "styles": validate_styles,
 }
