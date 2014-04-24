@@ -52,6 +52,22 @@ class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
         self.puzzle["cages"] = [{"invalid_key": 3}]
         self.validate("Invalid CalcSpec in cages element found")
 
+    def test_cages_has_empty_calcspec(self):
+        self.puzzle["cages"] = [{}]
+        self.validate("Invalid CalcSpec in cages element found")
+
+    def test_cages_has_calcspec_with_invalid_value(self):
+        self.puzzle["cages"] = [{"value": "NaN"}]
+        self.validate("Invalid CalcSpec in cages element found")
+
+    def test_cages_has_calcspec_with_invalid_operator(self):
+        self.puzzle["cages"] = [{"operator": "|"}]
+        self.validate("Invalid CalcSpec in cages element found")
+
+    def test_cages_has_calcspec_with_invalid_operator(self):
+        self.puzzle["cages"] = [{"style": {"shapebg": "not-a-circle"}}]
+        self.validate("Invalid CalcSpec in cages element found")
+
 
 class IPUZSudokuKindTestCase(IPUZBaseTestCase):
 
