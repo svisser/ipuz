@@ -226,9 +226,9 @@ def read(data):
 
 
 def write(data, callback_name=None, json_only=False):
-    if callback_name is None:
-        callback_name = "ipuz"
     json_string = json.dumps(data)
     if json_only:
         return json_string
+    if callback_name is None:
+        callback_name = "ipuz"
     return ''.join([callback_name, '(', json_string, ')'])
