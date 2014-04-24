@@ -317,3 +317,38 @@ class IPUZCrosswordPuzzleTestCase(IPUZSampleCrosswordTestCase):
     def test_puzzle_with_labeledcell_with_invalid_style(self):
         self.puzzle["puzzle"] = [[{"style": {"shapebg": "not-a-circle"}}]]
         self.validate("Invalid LabeledCell in puzzle element found")
+
+
+class IPUZCrosswordCluesTestCase(IPUZSampleCrosswordTestCase):
+
+    def test_clues_not_a_dict(self):
+        self.puzzle["clues"] = 3
+        self.validate("Invalid clues value found")
+
+    def test_clues_key_not_a_direction(self):
+        self.puzzle["clues"] = {"Across:Horizontal:Fail": ["clue"]}
+        self.validate("Invalid clues value found")
+
+    def test_clues_value_not_a_list(self):
+        self.puzzle["clues"] = {"Across": 3}
+        self.validate("Invalid clues value found")
+
+    def test_clues_value_not_an_empty_list(self):
+        self.puzzle["clues"] = {"Across": []}
+        self.validate("Invalid clues value found")
+
+    def test_clues_element_not_a_valid_clue(self):
+        self.puzzle["clues"] = {"Across": [3]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_list_clue(self):
+        self.puzzle["clues"] = {"Across": [[1, "The clue", "something else"]]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_list_clue(self):
+        self.puzzle["clues"] = {"Across": [["1", 3]]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_cluenum(self):
+        self.puzzle["clues"] = {"Across": [[None, "The clue"]]}
+        self.validate("Invalid Clue in clues element found")

@@ -1,6 +1,8 @@
 from ipuz.exceptions import IPUZException
 from ipuz.structures import (
+    validate_clue,
     validate_crosswordvalue,
+    validate_direction,
     validate_groupspec,
     validate_labeledcell,
 )
@@ -66,12 +68,25 @@ def validate_answers(field_name, field_data):
             raise IPUZException("Invalid answers value found")
 
 
+def validate_clues(field_name, field_data):
+    if type(field_data) is not dict:
+        raise IPUZException("Invalid {} value found".format(field_name))
+    for direction, clues in field_data.items():
+        if not validate_direction(direction) or type(clues) is not list or not clues:
+            raise IPUZException("Invalid {} value found".format(field_name))
+        for clue in clues:
+            if not validate_clue(clue):
+                raise IPUZException("Invalid Clue in {} element found".format(field_name))
+
+
+
 IPUZ_CROSSWORD_VALIDATORS = {
     "dimensions": validate_dimensions,
     "puzzle": validate_puzzle,
     "saved": validate_crosswordvalues,
     "solution": validate_crosswordvalues,
     "zones": validate_zones,
+    "clues": validate_clues,
     "showenumerations": validate_bool,
     "clueplacement": validate_clueplacement,
     "answer": validate_answer,
