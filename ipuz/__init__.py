@@ -33,22 +33,6 @@ IPUZ_OPTIONAL_FIELDS = (
     "empty",
     "styles",
 )
-IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
-    "http://ipuz.org/crossword": (
-        "dimensions",
-        "puzzle",
-    ),
-    "http://ipuz.org/sudoku": (
-        "puzzle",
-    ),
-    "http://ipuz.org/block": (
-        "dimensions",
-    ),
-    "http://ipuz.org/wordsearch": (
-        "dimensions",
-    ),
-    "http://ipuz.org/answer": ()
-}
 
 
 def validate_version(field_name, field_data):
@@ -207,12 +191,36 @@ IPUZ_WORDSEARCH_VALIDATORS = {
     "useall": validate_bool,
     "misses": validate_misses,
 }
-IPUZ_PUZZLEKIND_VALIDATORS = {
-    "http://ipuz.org/crossword": IPUZ_CROSSWORD_VALIDATORS,
-    "http://ipuz.org/sudoku": IPUZ_SUDOKU_VALIDATORS,
-    "http://ipuz.org/block": IPUZ_BLOCK_VALIDATORS,
-    "http://ipuz.org/answer": IPUZ_ANSWER_VALIDATORS,
-    "http://ipuz.org/wordsearch": IPUZ_WORDSEARCH_VALIDATORS,
+IPUZ_PUZZLEKINDS = {
+    "http://ipuz.org/crossword": {
+        "mandatory": (
+            "dimensions",
+            "puzzle",
+        ),
+        "validators": IPUZ_CROSSWORD_VALIDATORS,
+    },
+    "http://ipuz.org/sudoku": {
+        "mandatory": (
+            "puzzle",
+        ),
+        "validators": IPUZ_SUDOKU_VALIDATORS,
+    },
+    "http://ipuz.org/block": {
+        "mandatory": (
+            "dimensions",
+        ),
+        "validators": IPUZ_BLOCK_VALIDATORS,
+    },
+    "http://ipuz.org/answer": {
+        "mandatory": (),
+        "validators": IPUZ_ANSWER_VALIDATORS,
+    },
+    "http://ipuz.org/wordsearch": {
+        "mandatory": (
+            "dimensions",
+        ),
+        "validators": IPUZ_WORDSEARCH_VALIDATORS,
+    },
 }
 
 
@@ -230,15 +238,16 @@ def read(data):
         if field in IPUZ_FIELD_VALIDATORS:
             IPUZ_FIELD_VALIDATORS[field](field, value)
     for kind in json_data["kind"]:
-        for official_kind, fields in IPUZ_PUZZLEKIND_MANDATORY_FIELDS.items():
+        for official_kind, kind_details in IPUZ_PUZZLEKINDS.items():
+            fields = kind_details["mandatory"]
             if not kind.startswith(official_kind):
                 continue
             for field in fields:
                 if field not in json_data:
                     raise IPUZException("Mandatory field {} is missing".format(field))
             for field, value in json_data.items():
-                if field in IPUZ_PUZZLEKIND_VALIDATORS[official_kind]:
-                    IPUZ_PUZZLEKIND_VALIDATORS[official_kind][field](field, value)
+                if field in kind_details["validators"]:
+                    kind_details["validators"][field](field, value)
     return json_data
 
 
