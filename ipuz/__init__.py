@@ -50,6 +50,11 @@ IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
 }
 
 
+def validate_kind(field_name, field_data):
+    if type(field_data) is not list or not field_data:
+        raise IPUZException("Invalid kind value found")
+
+
 def validate_dimensions(field_name, field_data):
     for key in ["width", "height"]:
         if key not in field_data:
@@ -155,6 +160,7 @@ def validate_dictionary(field_name, field_data):
 
 
 IPUZ_FIELD_VALIDATORS = {
+    "kind": validate_kind,
     "dimensions": validate_dimensions,
     "date": validate_date,
     "styles": validate_styles,
@@ -209,6 +215,9 @@ def read(data):
     for field in IPUZ_MANDATORY_FIELDS:
         if field not in json_data:
             raise IPUZException("Mandatory field {} is missing".format(field))
+    for field, value in json_data.items():
+        if field in IPUZ_FIELD_VALIDATORS:
+            IPUZ_FIELD_VALIDATORS[field](field, value)
     for kind in json_data["kind"]:
         for official_kind, fields in IPUZ_PUZZLEKIND_MANDATORY_FIELDS.items():
             if official_kind not in kind:
@@ -219,9 +228,6 @@ def read(data):
             for field, value in json_data.items():
                 if field in IPUZ_PUZZLEKIND_VALIDATORS[official_kind]:
                     IPUZ_PUZZLEKIND_VALIDATORS[official_kind][field](field, value)
-    for field, value in json_data.items():
-        if field in IPUZ_FIELD_VALIDATORS:
-            IPUZ_FIELD_VALIDATORS[field](field, value)
     return json_data
 
 

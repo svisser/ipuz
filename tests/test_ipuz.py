@@ -24,7 +24,7 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
             "solution": [],
             "zones": [],
             "styles": {
-                "highlight": True,
+                "highlight": None,
             }
         }
 
@@ -97,6 +97,18 @@ class IPUZReadTestCase(IPUZBaseTestCase):
             "kind": ["http://ipuz.org/invalid",]
         }) + ")")
         self.assertEqual(result['version'], "http://ipuz.org/v1")
+
+    def test_invalid_kind_type(self):
+        self.validate_puzzle({
+            "version": "http://ipuz.org/v1",
+            "kind": 3,
+        }, "Invalid kind value found")
+
+    def test_invalid_empty_kind(self):
+        self.validate_puzzle({
+            "version": "http://ipuz.org/v1",
+            "kind": [],
+        }, "Invalid kind value found")
 
 
 class IPUZCrosswordKindTestCase(IPUZSampleCrosswordTestCase):
