@@ -220,7 +220,7 @@ def read(data):
             IPUZ_FIELD_VALIDATORS[field](field, value)
     for kind in json_data["kind"]:
         for official_kind, fields in IPUZ_PUZZLEKIND_MANDATORY_FIELDS.items():
-            if official_kind not in kind:
+            if not kind.startswith(official_kind):
                 continue
             for field in fields:
                 if field not in json_data:
