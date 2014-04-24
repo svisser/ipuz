@@ -72,6 +72,8 @@ IPUZ_PUZZLEKINDS = {
 
 
 def read(data):
+    if not data:
+        raise IPUZException("No input found")
     if data.endswith(')'):
         data = data[data.index('(') + 1:-1]
     try:
