@@ -85,6 +85,18 @@ class IPUZReadTestCase(IPUZBaseTestCase):
             "version": "http://ipuz.org/v1",
         }, "Mandatory field kind is missing")
 
+    def test_read_raises_for_invalid_version_field(self):
+        self.validate_puzzle({
+            "version": "invalid_version",
+            "kind": ["http://ipuz.org/invalid",]
+        }, "Invalid or unsupported version value found")
+
+    def test_read_raises_for_unsupported_version_field(self):
+        self.validate_puzzle({
+            "version": "http://ipuz.org/v2",
+            "kind": ["http://ipuz.org/invalid",]
+        }, "Invalid or unsupported version value found")
+
     def test_read_allows_jsonp_callback_function(self):
         result = ipuz.read("ipuz(" + json.dumps({
             "version": "http://ipuz.org/v1",

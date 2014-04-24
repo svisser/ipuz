@@ -50,6 +50,11 @@ IPUZ_PUZZLEKIND_MANDATORY_FIELDS = {
 }
 
 
+def validate_version(field_name, field_data):
+    if field_data != "http://ipuz.org/v1":
+        raise IPUZException("Invalid or unsupported version value found")
+
+
 def validate_kind(field_name, field_data):
     if type(field_data) is not list or not field_data:
         raise IPUZException("Invalid kind value found")
@@ -160,6 +165,7 @@ def validate_dictionary(field_name, field_data):
 
 
 IPUZ_FIELD_VALIDATORS = {
+    "version": validate_version,
     "kind": validate_kind,
     "dimensions": validate_dimensions,
     "date": validate_date,
