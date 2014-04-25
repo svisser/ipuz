@@ -84,17 +84,85 @@ class IPUZReadTestCase(IPUZBaseTestCase):
         }, "Invalid kind value found")
 
 
-class IPUZFieldDateValidatorTestCase(IPUZBaseTestCase):
+class IPUZFieldValidatorTestCase(IPUZBaseTestCase):
 
     def setUp(self):
         self.puzzle = {
             "version": "http://ipuz.org/v1",
             "kind": ["http://ipuz.org/invalid"],
-            "date": "14/01/2014",
+
         }
 
+    def validate(self, expected_exception):
+        self.validate_puzzle(self.puzzle, expected_exception)
+
     def test_validate_date_invalid_format(self):
-        self.validate_puzzle(self.puzzle, "Invalid date format: 14/01/2014")
+        self.puzzle["date"] = "14/01/2014"
+        self.validate("Invalid date format: 14/01/2014")
+
+    def test_copyright_is_string(self):
+        self.puzzle["copyright"] = 3
+        self.validate("Invalid copyright value found")
+
+    def test_publisher_is_string(self):
+        self.puzzle["publisher"] = 3
+        self.validate("Invalid publisher value found")
+
+    def test_publication_is_string(self):
+        self.puzzle["publication"] = 3
+        self.validate("Invalid publication value found")
+
+    def test_url_is_string(self):
+        self.puzzle["url"] = 3
+        self.validate("Invalid url value found")
+
+    def test_uniqueid_is_string(self):
+        self.puzzle["uniqueid"] = 3
+        self.validate("Invalid uniqueid value found")
+
+    def test_title_is_string(self):
+        self.puzzle["title"] = 3
+        self.validate("Invalid title value found")
+
+    def test_intro_is_string(self):
+        self.puzzle["intro"] = 3
+        self.validate("Invalid intro value found")
+
+    def test_explanation_is_string(self):
+        self.puzzle["explanation"] = 3
+        self.validate("Invalid explanation value found")
+
+    def test_annotation_is_string(self):
+        self.puzzle["annotation"] = 3
+        self.validate("Invalid annotation value found")
+
+    def test_author_is_string(self):
+        self.puzzle["author"] = 3
+        self.validate("Invalid author value found")
+
+    def test_editor_is_string(self):
+        self.puzzle["editor"] = 3
+        self.validate("Invalid editor value found")
+
+    def test_notes_is_string(self):
+        self.puzzle["notes"] = 3
+        self.validate("Invalid notes value found")
+
+    def test_difficulty_is_string(self):
+        self.puzzle["difficulty"] = 3
+        self.validate("Invalid difficulty value found")
+
+    def test_origin_is_string(self):
+        self.puzzle["origin"] = 3
+        self.validate("Invalid origin value found")
+
+    def test_block_is_string(self):
+        self.puzzle["block"] = 3
+        self.validate("Invalid block value found")
+
+    def test_empty_is_string_or_int(self):
+        self.puzzle["empty"] = True
+        self.validate("Invalid empty value found")
 
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
