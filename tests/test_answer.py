@@ -58,3 +58,7 @@ class IPUZAnswerValueTestCase(IPUZSampleAnswerTestCase):
     def test_misses_is_dict_with_non_text_value(self):
         self.puzzle["misses"] = {"A": 3}
         self.validate("Invalid misses value found")
+
+    def test_enumeration_is_string(self):
+        self.puzzle["enumeration"] = 3
+        self.validate("Invalid enumeration value found")
