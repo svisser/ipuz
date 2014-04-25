@@ -86,6 +86,8 @@ def read(data):
         if data.endswith(')'):
             data = data[data.index('(') + 1:-1]
         json_data = json.loads(data)
+        if type(json_data) is not dict:
+            raise ValueError
     except (AttributeError, ValueError):
         raise IPUZException("No valid JSON could be found")
     for field in IPUZ_MANDATORY_FIELDS:
