@@ -1,6 +1,7 @@
 from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_calcspec,
+    validate_groupspec,
     validate_sudokugiven,
     validate_sudokuguess,
     validate_sudokuvalue,
@@ -62,6 +63,14 @@ def validate_solution(field_name, field_data):
     return True
 
 
+def validate_zones(field_name, field_data):
+    if type(field_data) is not list:
+        raise IPUZException("Invalid {} value found".format(field_name))
+    for element in field_data:
+        if not validate_groupspec(element):
+            raise IPUZException("Invalid GroupSpec in {} element found".format(field_name))
+
+
 IPUZ_SUDOKU_VALIDATORS = {
     "charset": validate_charset,
     "displaycharset": validate_bool,
@@ -71,5 +80,6 @@ IPUZ_SUDOKU_VALIDATORS = {
     "puzzle": validate_puzzle,
     "saved": validate_saved,
     "solution": validate_solution,
+    "zones": validate_zones,
     "cages": validate_cages,
 }

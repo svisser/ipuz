@@ -140,6 +140,14 @@ class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
         self.puzzle["saved"] = [[True]]
         self.validate("Invalid SudokuGuess in saved element found")
 
+    def test_zones_is_not_int(self):
+        self.puzzle["zones"] = 3
+        self.validate("Invalid zones value found")
+
+    def test_validate_groupsec_with_invalid_rect(self):
+        self.puzzle["zones"] = [{"rect": 3}]
+        self.validate("Invalid GroupSpec in zones element found")
+
 
 class IPUZSudokuKindTestCase(IPUZBaseTestCase):
 
