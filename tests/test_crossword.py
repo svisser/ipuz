@@ -285,6 +285,18 @@ class IPUZCrosswordValueTestCase(IPUZSampleCrosswordTestCase):
         self.puzzle["saved"] = [[{"Across:Horizontal:and_something": "A"}]]
         self.validate("Invalid CrosswordValue in saved element found")
 
+    def test_enumeration_is_string(self):
+        self.puzzle["enumeration"] = 3
+        self.validate("Invalid enumeration value found")
+
+    def test_enumerations_is_list(self):
+        self.puzzle["enumerations"] = 3
+        self.validate("Invalid enumerations value found")
+
+    def test_enumerations_is_list_with_strings(self):
+        self.puzzle["enumerations"] = [3]
+        self.validate("Invalid Enumerations in enumerations element found")
+
 
 class IPUZCrosswordPuzzleTestCase(IPUZSampleCrosswordTestCase):
 
@@ -393,6 +405,10 @@ class IPUZCrosswordCluesTestCase(IPUZSampleCrosswordTestCase):
 
     def test_clues_element_not_a_valid_clue_dict_invalid_answer(self):
         self.puzzle["clues"] = {"Across": [{"answer": 3}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_enumeration(self):
+        self.puzzle["clues"] = {"Across": [{"enumeration": 3}]}
         self.validate("Invalid Clue in clues element found")
 
     def test_clues_element_not_a_valid_clue_dict_invalid_see(self):

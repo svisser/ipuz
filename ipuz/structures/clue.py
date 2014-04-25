@@ -1,4 +1,5 @@
 from .cluenum import validate_cluenum
+from .enumeration import validate_enumeration
 
 
 def validate_clue(field_data):
@@ -46,6 +47,8 @@ def validate_clue(field_data):
             elif key == "image" and type(value) not in [str, unicode]:
                 return False
             elif key == "answer" and type(value) not in [str, unicode]:
+                return False
+            elif key == "enumeration" and not validate_enumeration(value):
                 return False
             elif key == "see" and not validate_cluenum(value):
                 return False

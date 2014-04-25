@@ -3,6 +3,7 @@ from ipuz.structures import (
     validate_clue,
     validate_crosswordvalue,
     validate_direction,
+    validate_enumeration,
     validate_groupspec,
     validate_labeledcell,
 )
@@ -79,6 +80,18 @@ def validate_clues(field_name, field_data):
                 raise IPUZException("Invalid Clue in {} element found".format(field_name))
 
 
+def validate_enumeration_field(field_name, field_data):
+    if not validate_enumeration(field_data):
+        raise IPUZException("Invalid {} value found".format(field_name))
+
+
+def validate_enumerations(field_name, field_data):
+    if type(field_data) is not list:
+        raise IPUZException("Invalid {} value found".format(field_name))
+    for element in field_data:
+        if not validate_enumeration(element):
+            raise IPUZException("Invalid Enumerations in {} element found".format(field_name))
+
 
 IPUZ_CROSSWORD_VALIDATORS = {
     "dimensions": validate_dimensions,
@@ -91,4 +104,6 @@ IPUZ_CROSSWORD_VALIDATORS = {
     "clueplacement": validate_clueplacement,
     "answer": validate_answer,
     "answers": validate_answers,
+    "enumeration": validate_enumeration_field,
+    "enumerations": validate_enumerations,
 }
