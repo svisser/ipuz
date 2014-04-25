@@ -14,6 +14,11 @@ def validate_int(field_name, field_data):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
+def validate_non_negative_int(field_name, field_data):
+    if type(field_data) is not int or field_data < 0:
+        raise IPUZException("Invalid {} value found".format(field_name))
+
+
 def validate_dict_of_strings(field_name, field_data):
     if type(field_data) is not dict:
         raise IPUZException("Invalid {} value found".format(field_name))
