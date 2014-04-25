@@ -235,6 +235,17 @@ class IPUZAnswerTestCase(IPUZSampleCrosswordTestCase):
         self.validate("Invalid answers value found")
 
 
+class IPUZMissesValueTestCase(IPUZSampleCrosswordTestCase):
+
+    def test_misses_is_dict(self):
+        self.puzzle["misses"] = []
+        self.validate("Invalid misses value found")
+
+    def test_misses_is_dict_with_non_text_value(self):
+        self.puzzle["misses"] = {"A": 3}
+        self.validate("Invalid misses value found")
+
+
 class IPUZCrosswordValueTestCase(IPUZSampleCrosswordTestCase):
 
     def test_saved_value_is_not_a_list(self):

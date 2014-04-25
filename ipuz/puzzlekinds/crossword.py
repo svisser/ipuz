@@ -7,8 +7,10 @@ from ipuz.structures import (
     validate_groupspec,
     validate_labeledcell,
 )
-from ipuz.validators import validate_bool
-
+from ipuz.validators import (
+    validate_bool,
+    validate_dict_of_strings,
+)
 
 
 def validate_dimensions(field_name, field_data):
@@ -106,4 +108,5 @@ IPUZ_CROSSWORD_VALIDATORS = {
     "answers": validate_answers,
     "enumeration": validate_enumeration_field,
     "enumerations": validate_enumerations,
+    "misses": validate_dict_of_strings,
 }
