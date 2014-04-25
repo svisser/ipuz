@@ -1,5 +1,5 @@
 from ipuz.exceptions import IPUZException
-from ipuz.validators import validate_bool
+from ipuz.validators import validate_bool, validate_dict_of_strings
 
 
 def validate_dictionary(field_name, field_data):
@@ -22,14 +22,6 @@ def validate_points(field_name, field_data):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
-def validate_misses(field_name, field_data):
-    if type(field_data) is not dict:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for key, value in field_data.items():
-        if type(key) not in [str, unicode] or type(value) not in [str, unicode]:
-            raise IPUZException("Invalid {} value found".format(field_name))
-
-
 IPUZ_WORDSEARCH_VALIDATORS = {
     "dictionary": validate_dictionary,
     "showanswers": validate_showanswers,
@@ -38,5 +30,5 @@ IPUZ_WORDSEARCH_VALIDATORS = {
     "zigzag": validate_bool,
     "retrace": validate_bool,
     "useall": validate_bool,
-    "misses": validate_misses,
+    "misses": validate_dict_of_strings,
 }

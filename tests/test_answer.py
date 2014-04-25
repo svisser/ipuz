@@ -18,3 +18,43 @@ class IPUZAnswerValueTestCase(IPUZSampleAnswerTestCase):
     def test_randomize_is_bool(self):
         self.puzzle["randomize"] = 3
         self.validate("Invalid randomize value found")
+
+    def test_choices_is_list(self):
+        self.puzzle["choices"] = 3
+        self.validate("Invalid choices value found")
+
+    def test_choices_contains_strings(self):
+        self.puzzle["choices"] = [3]
+        self.validate("Invalid choices value found")
+
+    def test_answer_is_a_string(self):
+        self.puzzle["answer"] = 3
+        self.validate("Invalid answer value found")
+
+    def test_answers_is_a_list(self):
+        self.puzzle["answers"] = 3
+        self.validate("Invalid answers value found")
+
+    def test_answers_contains_strings(self):
+        self.puzzle["answers"] = [3]
+        self.validate("Invalid answers value found")
+
+    def test_requiredanswers_contains_strings(self):
+        self.puzzle["requiredanswers"] = "circle"
+        self.validate("Invalid requiredanswers value found")
+
+    def test_guesses_is_a_list(self):
+        self.puzzle["guesses"] = 3
+        self.validate("Invalid guesses value found")
+
+    def test_guesses_contains_strings(self):
+        self.puzzle["guesses"] = [3]
+        self.validate("Invalid guesses value found")
+
+    def test_misses_is_dict(self):
+        self.puzzle["misses"] = []
+        self.validate("Invalid misses value found")
+
+    def test_misses_is_dict_with_non_text_value(self):
+        self.puzzle["misses"] = {"A": 3}
+        self.validate("Invalid misses value found")
