@@ -32,6 +32,66 @@ class IPUZBlockValueTestCase(IPUZSampleBlockTestCase):
         self.puzzle["flippable"] = 3
         self.validate("Invalid flippable value found")
 
+    def test_enter_is_dict(self):
+        self.puzzle["enter"] = 3
+        self.validate("Invalid enter value found")
+
+    def test_enter_has_non_empty_keys(self):
+        self.puzzle["enter"] = { "": {"cells": [[1, 1]]}}
+        self.validate("Invalid enter value found")
+
+    def test_enter_has_invalid_groupspec(self):
+        self.puzzle["enter"] = { "name": {"invalid_key": 3}}
+        self.validate("Invalid enter value found")
+
+    def test_start_is_dict(self):
+        self.puzzle["start"] = 3
+        self.validate("Invalid start value found")
+
+    def test_start_has_non_empty_keys(self):
+        self.puzzle["start"] = { "": {"cells": [[1, 1]]}}
+        self.validate("Invalid start value found")
+
+    def test_start_has_invalid_groupspec(self):
+        self.puzzle["start"] = { "name": {"invalid_key": 3}}
+        self.validate("Invalid start value found")
+
+    def test_saved_is_dict(self):
+        self.puzzle["saved"] = 3
+        self.validate("Invalid saved value found")
+
+    def test_saved_has_non_empty_keys(self):
+        self.puzzle["saved"] = { "": {"cells": [[1, 1]]}}
+        self.validate("Invalid saved value found")
+
+    def test_saved_has_invalid_groupspec(self):
+        self.puzzle["saved"] = { "name": {"invalid_key": 3}}
+        self.validate("Invalid saved value found")
+
+    def test_end_is_dict(self):
+        self.puzzle["end"] = 3
+        self.validate("Invalid end value found")
+
+    def test_end_has_non_empty_keys(self):
+        self.puzzle["end"] = { "": {"cells": [[1, 1]]}}
+        self.validate("Invalid end value found")
+
+    def test_end_has_invalid_groupspec(self):
+        self.puzzle["end"] = { "name": {"invalid_key": 3}}
+        self.validate("Invalid end value found")
+
+    def test_exit_is_dict(self):
+        self.puzzle["exit"] = 3
+        self.validate("Invalid exit value found")
+
+    def test_exit_has_non_empty_keys(self):
+        self.puzzle["exit"] = { "": {"cells": [[1, 1]]}}
+        self.validate("Invalid exit value found")
+
+    def test_exit_has_invalid_groupspec(self):
+        self.puzzle["exit"] = { "name": {"invalid_key": 3}}
+        self.validate("Invalid exit value found")
+
 
 class IPUZBlockKindTestCase(IPUZBaseTestCase):
 
