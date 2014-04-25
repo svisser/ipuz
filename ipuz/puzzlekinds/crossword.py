@@ -42,30 +42,30 @@ def validate_crosswordvalues(field_name, field_data):
 
 def validate_zones(field_name, field_data):
     if type(field_data) is not list:
-        raise IPUZException("Invalid zones value found")
+        raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
         if not validate_groupspec(element):
-            raise IPUZException("Invalid GroupSpec in zones element found")
+            raise IPUZException("Invalid GroupSpec in {} element found".format(field_name))
 
 
 def validate_clueplacement(field_name, field_data):
     if field_data not in [None, "before", "after", "blocks"]:
-        raise IPUZException("Invalid clueplacement value found")
+        raise IPUZException("Invalid {} value found".format(field_name))
 
 
 def validate_answer(field_name, field_data):
     if type(field_data) not in [str, unicode] or field_data == "":
-        raise IPUZException("Invalid answer value found")
+        raise IPUZException("Invalid {} value found".format(field_name))
 
 
 def validate_answers(field_name, field_data):
     if type(field_data) is not list or not field_data:
-        raise IPUZException("Invalid answers value found")
+        raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
         try:
             validate_answer(field_name, element)
         except IPUZException:
-            raise IPUZException("Invalid answers value found")
+            raise IPUZException("Invalid {} value found".format(field_name))
 
 
 def validate_clues(field_name, field_data):

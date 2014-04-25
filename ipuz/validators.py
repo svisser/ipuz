@@ -16,10 +16,10 @@ def validate_version(field_name, field_data):
 
 def validate_kind(field_name, field_data):
     if type(field_data) is not list or not field_data:
-        raise IPUZException("Invalid kind value found")
+        raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
         if type(element) not in [str, unicode]:
-            raise IPUZException("Invalid kind value found")
+            raise IPUZException("Invalid {} value found".format(field_name))
 
 
 def validate_date(field_name, field_data):
