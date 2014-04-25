@@ -1,5 +1,8 @@
 from ipuz.exceptions import IPUZException
-from ipuz.structures import validate_groupspec
+from ipuz.structures import (
+    validate_dimensions,
+    validate_groupspec,
+)
 from ipuz.validators import validate_bool
 
 
@@ -14,6 +17,7 @@ def validate_groupspec_dict(field_name, field_data):
 
 
 IPUZ_BLOCK_VALIDATORS = {
+    "dimensions": validate_dimensions,
     "slide": validate_bool,
     "move": validate_bool,
     "rotatable": validate_bool,

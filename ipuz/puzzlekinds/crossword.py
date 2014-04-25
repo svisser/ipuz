@@ -2,6 +2,7 @@ from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_clue,
     validate_crosswordvalue,
+    validate_dimensions,
     validate_direction,
     validate_enumeration,
     validate_groupspec,
@@ -11,18 +12,6 @@ from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
 )
-
-
-def validate_dimensions(field_name, field_data):
-    for key in ["width", "height"]:
-        if key not in field_data:
-            raise IPUZException(
-                "Mandatory field {} of dimensions is missing".format(key)
-            )
-        if field_data[key] < 1:
-            raise IPUZException(
-                "Field {} of dimensions is less than one".format(key)
-            )
 
 
 def validate_puzzle(field_name, field_data):

@@ -1,3 +1,16 @@
+from ipuz.exceptions import IPUZException
+
+
+def validate_dimensions(field_name, field_data):
+    for key in ["width", "height"]:
+        if key not in field_data:
+            raise IPUZException(
+                "Mandatory field {} of dimensions is missing".format(key)
+            )
+        if field_data[key] < 1:
+            raise IPUZException(
+                "Field {} of dimensions is less than one".format(key)
+            )
 
 
 def validate_cells(field_data):
