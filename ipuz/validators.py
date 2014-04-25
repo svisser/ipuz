@@ -28,8 +28,8 @@ def validate_dict_of_strings(field_name, field_data):
     if type(field_data) is not dict:
         raise IPUZException("Invalid {} value found".format(field_name))
     for key, value in field_data.items():
-        if type(key) not in [str, unicode] or type(value) not in [str, unicode]:
-            raise IPUZException("Invalid {} value found".format(field_name))
+        validate_string(field_name, key)
+        validate_string(field_name, value)
 
 
 def validate_list_of_strings(field_name, field_data):
