@@ -12,6 +12,8 @@ functionality that you might want to use.
 
 ipuz is a trademark of Puzzazz, Inc., used with permission.
 
+Full documentation can be found at http://ipuz.readthedocs.org/en/latest/ .
+
 Reading
 =======
 
