@@ -128,6 +128,18 @@ class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
         self.puzzle["solution"] = [[{"style": {"shapebg": "not-a-circle"}}]]
         self.validate("Invalid SudokuValue in solution element found")
 
+    def test_saved_is_list(self):
+        self.puzzle["saved"] = 3
+        self.validate("Invalid saved value found")
+
+    def test_saved_contains_lists(self):
+        self.puzzle["saved"] = [3]
+        self.validate("Invalid saved value found")
+
+    def test_saved_contains_invalid_sudokuguess(self):
+        self.puzzle["saved"] = [[True]]
+        self.validate("Invalid SudokuGuess in saved element found")
+
 
 class IPUZSudokuKindTestCase(IPUZBaseTestCase):
 

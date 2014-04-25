@@ -6,4 +6,5 @@ from .groupspec import validate_groupspec
 from .labeledcell import validate_labeledcell
 from .stylespec import validate_stylespec
 from .sudokugiven import validate_sudokugiven
+from .sudokuguess import validate_sudokuguess
 from .sudokuvalue import validate_sudokuvalue
