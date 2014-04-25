@@ -5,12 +5,8 @@ from ipuz.validators import (
     validate_dict_of_strings,
     validate_int,
     validate_list_of_strings,
+    validate_string,
 )
-
-
-def validate_answer(field_name, field_data):
-    if type(field_data) not in [str, unicode]:
-        raise IPUZException("Invalid {} value found".format(field_name))
 
 
 def validate_enumeration_field(field_name, field_data):
@@ -21,7 +17,7 @@ def validate_enumeration_field(field_name, field_data):
 IPUZ_ANSWER_VALIDATORS = {
     "choices": validate_list_of_strings,
     "randomize": validate_bool,
-    "answer": validate_answer,
+    "answer": validate_string,
     "answers": validate_list_of_strings,
     "enumeration": validate_enumeration_field,
     "requiredanswers": validate_int,
