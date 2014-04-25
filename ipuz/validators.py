@@ -36,8 +36,7 @@ def validate_list_of_strings(field_name, field_data):
     if type(field_data) is not list:
         raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
-        if type(element) not in [str, unicode]:
-            raise IPUZException("Invalid {} value found".format(field_name))
+        validate_string(field_name, field_data)
 
 
 def validate_version(field_name, field_data):
@@ -92,4 +91,5 @@ IPUZ_FIELD_VALIDATORS = {
     "empty": validate_empty,
     "date": validate_date,
     "styles": validate_styles,
+    "checksum": validate_list_of_strings,
 }

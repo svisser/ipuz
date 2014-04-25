@@ -164,6 +164,14 @@ class IPUZFieldValidatorTestCase(IPUZBaseTestCase):
         self.puzzle["empty"] = True
         self.validate("Invalid empty value found")
 
+    def test_checksum_is_list_(self):
+        self.puzzle["checksum"] = 3
+        self.validate("Invalid checksum value found")
+
+    def test_checksum_is_list_of_strings(self):
+        self.puzzle["checksum"] = [3]
+        self.validate("Invalid checksum value found")
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
