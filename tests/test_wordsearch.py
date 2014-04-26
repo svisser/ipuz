@@ -80,3 +80,10 @@ class IPUZWordSearchKindTestCase(IPUZBaseTestCase):
             self.puzzle,
             "Mandatory field dimensions is missing"
         )
+
+    def test_validate_wordsearch_dimensions_invalid_height(self):
+        self.puzzle["dimensions"]["height"] = -3
+        self.validate_puzzle(
+            self.puzzle,
+            "Field height of dimensions is less than one"
+        )
