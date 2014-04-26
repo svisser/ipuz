@@ -22,6 +22,22 @@ You can install the necessary dependencies by running:
 
     pip install -r dev-requirements.txt
 
+Contributing documentation
+--------------------------
+
+You can update the documentation by making changes to the ``.rst`` files in
+the ``docs`` directory and running:
+
+::
+
+    make html
+
+After that you can view the HTML documentation by running:
+
+::
+
+    open _build/html/index.html
+
 
 Testing
 -------
