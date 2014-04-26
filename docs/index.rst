@@ -26,3 +26,4 @@ Contents
    reading
    writing
    contributing
+   changelog
