@@ -24,13 +24,11 @@ should not need to perform validation to see whether the puzzle is well-formed.
 This library will check types of values and perform various sanity checks to
 see whether the JSON conforms to the ipuz specification.
 
-Validation
-==========
-
-Note that ``null`` in JSON / JSONP becomes ``None`` in Python.
-
 Validation for all puzzles
 --------------------------
+
+Note that ``true``, ``false`` and ``null`` in JSON / JSONP respectively
+become ``True``, ``False`` and ``None`` in Python.
 
 The follows checks are performed for fields that apply to all PuzzleKinds:
 
@@ -147,11 +145,11 @@ Validation for WordSearch puzzles
 
 The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/wordsearch``:
 
-===============  =========  =========================================================================================
+===============  =========  ==============================================================================================
 Field            Mandatory  Validation
-===============  =========  =========================================================================================
-dimensions  Yes        Must be a dictionary containing "width" and "height" keys with integer values of at least one.
-dictionary       No         Must be a non-empty string or the boolean value false.
+===============  =========  ==============================================================================================
+dimensions       Yes        Must be a dictionary containing "width" and "height" keys with integer values of at least one.
+dictionary       No         Must be a non-empty string or the boolean value ``false``.
 showanswers      No         Must be an element from ``["during", "after", null]``.
 time             No         Must be an integer of at least zero.
 points           No         Must be an element from ``["linear", "log", null]``.
@@ -159,4 +157,4 @@ zigzag           No         Must be a boolean.
 retrace          No         Must be a boolean.
 useall           No         Must be a boolean.
 misses           No         Must be a dictionary with string keys and string values.
-===============  =========  =========================================================================================
+===============  =========  ==============================================================================================
