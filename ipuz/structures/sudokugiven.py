@@ -9,7 +9,6 @@ def validate_sudokugiven(field_data):
         if type(given) not in [types.NoneType, int, str, unicode]:
             return False
         return True
-    
     if type(field_data) not in [types.NoneType, int, str, unicode, dict]:
         return False
     if type(field_data) is dict:
