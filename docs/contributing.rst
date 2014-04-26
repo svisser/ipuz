@@ -41,7 +41,7 @@ After that you can view the HTML documentation by running:
 Testing
 -------
 
-You can run this library's tests by doing:
+You can run this library's tests by running:
 
 ::
 
