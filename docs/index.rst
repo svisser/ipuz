@@ -17,9 +17,15 @@ functionality that you might want to use.
 
 ipuz is a trademark of Puzzazz, Inc., used with permission.
 
+Contents
+========
+
 .. toctree::
    :maxdepth: 2
 
+   reading
+   writing
+   contributing
 
 
 Indices and tables
