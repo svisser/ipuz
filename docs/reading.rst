@@ -122,3 +122,23 @@ saved       No         Must be a dictionary with string keys and GroupSpec value
 end         No         Must be a dictionary with string keys and GroupSpec values.
 exit        No         Must be a dictionary with string keys and GroupSpec values.
 ==========  =========  ==============================================================================================
+
+
+Validation for Answer puzzles
+-----------------------------
+
+The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/answer``:
+
+===============  =========  ========================================================
+Field            Mandatory  Validation
+===============  =========  ========================================================
+choices          No         Must be a list of strings.
+randomize        No         Must be a boolean.
+answer           No         Must be a string.
+answers          No         Must be a list of strings.
+enumeration      No         Must be a string.
+enumerations     No         Must be a list of strings.
+requiredanswers  No         Must be an integer of at least zero.
+misses           No         Must be a dictionary with string keys and string values.
+guesses          No         Must be a list of strings.
+===============  =========  ========================================================
