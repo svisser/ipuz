@@ -6,8 +6,8 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
-    validate_int,
     validate_list_of_strings,
+    validate_non_negative_int,
     validate_string,
 )
 
@@ -27,7 +27,7 @@ IPUZ_ANSWER_VALIDATORS = {
     "answers": validate_list_of_strings,
     "enumeration": validate_enumeration_field,
     "enumerations": validate_enumerations,
-    "requiredanswers": validate_int,
+    "requiredanswers": validate_non_negative_int,
     "misses": validate_dict_of_strings,
     "guesses": validate_list_of_strings,
 }

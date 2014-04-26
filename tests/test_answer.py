@@ -43,6 +43,10 @@ class IPUZAnswerValueTestCase(IPUZSampleAnswerTestCase):
         self.puzzle["requiredanswers"] = "circle"
         self.validate("Invalid requiredanswers value found")
 
+    def test_requiredanswers_must_be_positive(self):
+        self.puzzle["requiredanswers"] = -3
+        self.validate("Invalid requiredanswers value found")
+
     def test_guesses_is_a_list(self):
         self.puzzle["guesses"] = 3
         self.validate("Invalid guesses value found")
