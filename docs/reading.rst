@@ -81,3 +81,44 @@ enumeration       No         Must be a string.
 enumerations      No         Must be a list of strings.
 misses            No         Must be a dictionary with string keys and string values.
 ================  =========  ==============================================================================================
+
+Validation for Sudoku puzzles
+-----------------------------
+
+The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/sudoku``:
+
+==============   =========  ======================================================
+Field            Mandatory  Validation
+==============   =========  ======================================================
+charset          No         Must be a string with 9 characters.
+displaycharset   No         Must be a boolean.
+boxes            No         Must be a boolean.
+showoperators    No         Must be a boolean.
+cageborder       No         Must be an element from ``["thick", "dashed"]``.
+puzzle           Yes        Must be a list of lists containing SudokuGiven values.
+saved            No         Must be a list of lists containing SudokuGuess values.
+solution         No         Must be a list of lists containing SudokuValue values.
+zones            No         Must be a list of GroupSpec values.
+cages            No         Must be a list of CalcSpec values.
+==============   =========  ======================================================
+
+Validation for Block puzzles
+----------------------------
+
+The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/block``:
+
+==========  =========  ==============================================================================================
+Field       Mandatory  Validation
+==========  =========  ==============================================================================================
+dimensions  Yes        Must be a dictionary containing "width" and "height" keys with integer values of at least one.
+slide       No         Must be a boolean.
+move        No         Must be a boolean.
+rotatable   No         Must be a boolean.
+flippable   No         Must be a boolean.
+field       No         Must be a list of lists containing StyledCell values.
+enter       No         Must be a dictionary with string keys and GroupSpec values.
+start       No         Must be a dictionary with string keys and GroupSpec values.
+saved       No         Must be a dictionary with string keys and GroupSpec values.
+end         No         Must be a dictionary with string keys and GroupSpec values.
+exit        No         Must be a dictionary with string keys and GroupSpec values.
+==========  =========  ==============================================================================================
