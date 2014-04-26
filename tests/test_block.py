@@ -102,6 +102,13 @@ class IPUZBlockKindTestCase(IPUZBaseTestCase):
             "dimensions": {"width": 3, "height": 3},
         }
 
+    def test_invalid_dimensions_field_type(self):
+        self.puzzle["dimensions"] = ["width", "height"]
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid dimensions value found"
+        )
+
     def test_validate_block_mandatory_dimensions_field(self):
         del self.puzzle["dimensions"]
         self.validate_puzzle(
@@ -114,6 +121,13 @@ class IPUZBlockKindTestCase(IPUZBaseTestCase):
         self.validate_puzzle(
             self.puzzle,
             "Mandatory field width of dimensions is missing"
+        )
+
+    def test_validate_dimensions_not_an_int(self):
+        self.puzzle["dimensions"]["width"] = "not an integer"
+        self.validate_puzzle(
+            self.puzzle,
+            "Invalid width value in dimensions field found"
         )
 
     def test_validate_dimensions_negative_or_zero(self):

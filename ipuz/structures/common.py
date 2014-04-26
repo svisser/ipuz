@@ -2,11 +2,15 @@ from ipuz.exceptions import IPUZException
 
 
 def validate_dimensions(field_name, field_data):
+    if type(field_data) is not dict:
+        raise IPUZException("Invalid {} value found".format(field_name))
     for key in ["width", "height"]:
         if key not in field_data:
             raise IPUZException(
                 "Mandatory field {} of dimensions is missing".format(key)
             )
+        if type(field_data[key]) is not int:
+            raise IPUZException("Invalid {} value in dimensions field found".format(key))
         if field_data[key] < 1:
             raise IPUZException(
                 "Field {} of dimensions is less than one".format(key)
