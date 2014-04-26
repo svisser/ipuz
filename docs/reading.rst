@@ -123,7 +123,6 @@ end         No         Must be a dictionary with string keys and GroupSpec value
 exit        No         Must be a dictionary with string keys and GroupSpec values.
 ==========  =========  ==============================================================================================
 
-
 Validation for Answer puzzles
 -----------------------------
 
@@ -141,4 +140,22 @@ enumerations     No         Must be a list of strings.
 requiredanswers  No         Must be an integer of at least zero.
 misses           No         Must be a dictionary with string keys and string values.
 guesses          No         Must be a list of strings.
+===============  =========  ========================================================
+
+Validation for WordSearch puzzles
+---------------------------------
+
+The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/wordsearch``:
+
+===============  =========  ========================================================
+Field            Mandatory  Validation
+===============  =========  ========================================================
+dictionary       No         Must be a non-empty string or the boolean value false.
+showanswers      No         Must be an element from ``["during", "after", null]``.
+time             No         Must be an integer of at least zero.
+points           No         Must be an element from ``["linear", "log", null]``.
+zigzag           No         Must be a boolean.
+retrace          No         Must be a boolean.
+useall           No         Must be a boolean.
+misses           No         Must be a dictionary with string keys and string values.
 ===============  =========  ========================================================
