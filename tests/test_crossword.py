@@ -48,6 +48,10 @@ class IPUZCrosswordKindTestCase(IPUZSampleCrosswordTestCase):
 
 class IPUZFieldStylesValidatorTestCase(IPUZSampleCrosswordTestCase):
 
+    def test_validate_styles_is_not_a_dict(self):
+        self.puzzle["styles"] = 3
+        self.validate("Invalid styles value found")
+
     def test_validate_style_spec_not_string_or_dict(self):
         self.puzzle["styles"]["highlight"] = 3
         self.validate("StyleSpec is not a name, dictionary or None")

@@ -65,6 +65,8 @@ def validate_empty(field_name, field_data):
 
 
 def validate_styles(field_name, field_data):
+    if type(field_data) is not dict:
+        raise IPUZException("Invalid {} value found".format(field_name))
     for _, stylespec in field_data.items():
         validate_stylespec(stylespec)
 
