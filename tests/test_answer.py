@@ -62,3 +62,11 @@ class IPUZAnswerValueTestCase(IPUZSampleAnswerTestCase):
     def test_enumeration_is_string(self):
         self.puzzle["enumeration"] = 3
         self.validate("Invalid enumeration value found")
+
+    def test_enumerations_is_list(self):
+        self.puzzle["enumerations"] = 3
+        self.validate("Invalid enumerations value found")
+
+    def test_enumerations_is_list_with_strings(self):
+        self.puzzle["enumerations"] = [3]
+        self.validate("Invalid Enumeration in enumerations element found")
