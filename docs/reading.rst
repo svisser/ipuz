@@ -27,6 +27,8 @@ see whether the JSON conforms to the ipuz specification.
 Validation
 ==========
 
+Note that ``null`` in JSON / JSONP becomes ``None`` in Python.
+
 Validation for all puzzles
 --------------------------
 
@@ -56,3 +58,26 @@ block        No         Must be a string.
 empty        No         Must be a string or integer.
 styles       No         Must be a dictionary with StyleSpec values.
 ===========  =========  ===============================================
+
+Validation for Crossword puzzles
+--------------------------------
+
+The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/crossword``:
+
+================  =========  ==============================================================================================
+Field             Mandatory  Validation
+================  =========  ==============================================================================================
+dimensions        Yes        Must be a dictionary containing "width" and "height" keys with integer values of at least one.
+puzzle            Yes        Must be a list of lists containing LabeledCell values.
+saved             No         Must be a list of lists containing CrosswordValue values.
+solution          No         Must be a list of lists containing CrosswordValue values.
+zones             No         Must be a list of GroupSpec values.
+clues             No         Must be a dictionary with Direction keys and non-empty lists of Clue values.
+showenumerations  No         Must be a boolean.
+clueplacement     No         Must be an element from ``["before", "after", "blocks", null]``.
+answer            No         Must be a non-empty string.
+answers           No         Must be a non-empty list of non-empty strings.
+enumeration       No         Must be a string.
+enumerations      No         Must be a list of strings.
+misses            No         Must be a dictionary with string keys and string values.
+================  =========  ==============================================================================================
