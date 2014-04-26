@@ -16,6 +16,13 @@ Contributing code
 Code contributions should follow the `PEP 8`_ style guide, include unit tests
 and update the documentation where needed.
 
+You can install the necessary dependencies by running:
+
+::
+
+    pip install -r dev-requirements.txt
+
+
 Testing
 -------
 
