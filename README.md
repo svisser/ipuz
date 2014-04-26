@@ -12,5 +12,8 @@ functionality that you might want to use.
 
 ipuz is a trademark of Puzzazz, Inc., used with permission.
 
-Full documentation can be found at http://ipuz.readthedocs.org/en/latest/ or
+Documentation
+=============
+
+Documentation can be found at http://ipuz.readthedocs.org/en/latest/ or
 by installing Sphinx and running `make html` in the docs directory.

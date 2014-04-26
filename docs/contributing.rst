@@ -6,9 +6,8 @@ Contributions to the ipuz library are very welcome.
 Issues
 ------
 
-If you find an issue or have a suggestion for a new feature then you can
-create a new ticket in the `issue tracker`_ or you can comment on an existing
-ticket if a similar ticket already exists.
+Please create a new ticket in the `issue tracker`_ if you find an issue
+or if you have a suggestion for a new feature.
 
 Contributing code
 -----------------
