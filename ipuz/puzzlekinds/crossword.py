@@ -77,7 +77,7 @@ def validate_enumerations(field_name, field_data):
         raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
         if not validate_enumeration(element):
-            raise IPUZException("Invalid Enumerations in {} element found".format(field_name))
+            raise IPUZException("Invalid Enumeration in {} element found".format(field_name))
 
 
 IPUZ_CROSSWORD_VALIDATORS = {

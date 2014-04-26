@@ -310,7 +310,7 @@ class IPUZCrosswordValueTestCase(IPUZSampleCrosswordTestCase):
 
     def test_enumerations_is_list_with_strings(self):
         self.puzzle["enumerations"] = [3]
-        self.validate("Invalid Enumerations in enumerations element found")
+        self.validate("Invalid Enumeration in enumerations element found")
 
 
 class IPUZCrosswordPuzzleTestCase(IPUZSampleCrosswordTestCase):
