@@ -35,7 +35,7 @@ The follows checks are performed for fields that apply to all PuzzleKinds:
 ===========  =========  ===============================================
 Field        Mandatory  Validation
 ===========  =========  ===============================================
-version      Yes        Must be "http://ipuz.org/v1".
+version      Yes        Must be the string ``"http://ipuz.org/v1"``.
 kind         Yes        Must be a non-empty list of strings.
 copyright    No         Must be a string.
 publisher    No         Must be a string.
@@ -62,10 +62,10 @@ Validation for Crossword puzzles
 
 The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/crossword``:
 
-================  =========  ==============================================================================================
+================  =========  ======================================================================================================
 Field             Mandatory  Validation
-================  =========  ==============================================================================================
-dimensions        Yes        Must be a dictionary containing "width" and "height" keys with integer values of at least one.
+================  =========  ======================================================================================================
+dimensions        Yes        Must be a dictionary containing ``"width"`` and ``"height"`` keys with integer values of at least one.
 puzzle            Yes        Must be a list of lists containing LabeledCell values.
 saved             No         Must be a list of lists containing CrosswordValue values.
 solution          No         Must be a list of lists containing CrosswordValue values.
@@ -78,7 +78,7 @@ answers           No         Must be a non-empty list of non-empty strings.
 enumeration       No         Must be a string.
 enumerations      No         Must be a list of strings.
 misses            No         Must be a dictionary with string keys and string values.
-================  =========  ==============================================================================================
+================  =========  ======================================================================================================
 
 Validation for Sudoku puzzles
 -----------------------------
@@ -105,10 +105,10 @@ Validation for Block puzzles
 
 The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/block``:
 
-==========  =========  ==============================================================================================
+==========  =========  ======================================================================================================
 Field       Mandatory  Validation
-==========  =========  ==============================================================================================
-dimensions  Yes        Must be a dictionary containing "width" and "height" keys with integer values of at least one.
+==========  =========  ======================================================================================================
+dimensions  Yes        Must be a dictionary containing ``"width"`` and ``"height"`` keys with integer values of at least one.
 slide       No         Must be a boolean.
 move        No         Must be a boolean.
 rotatable   No         Must be a boolean.
@@ -119,7 +119,7 @@ start       No         Must be a dictionary with string keys and GroupSpec value
 saved       No         Must be a dictionary with string keys and GroupSpec values.
 end         No         Must be a dictionary with string keys and GroupSpec values.
 exit        No         Must be a dictionary with string keys and GroupSpec values.
-==========  =========  ==============================================================================================
+==========  =========  ======================================================================================================
 
 Validation for Answer puzzles
 -----------------------------
@@ -145,10 +145,10 @@ Validation for WordSearch puzzles
 
 The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/wordsearch``:
 
-===============  =========  ==============================================================================================
+===============  =========  ======================================================================================================
 Field            Mandatory  Validation
-===============  =========  ==============================================================================================
-dimensions       Yes        Must be a dictionary containing "width" and "height" keys with integer values of at least one.
+===============  =========  ======================================================================================================
+dimensions       Yes        Must be a dictionary containing ``"width"`` and ``"height"`` keys with integer values of at least one.
 dictionary       No         Must be a non-empty string or the boolean value ``false``.
 showanswers      No         Must be an element from ``["during", "after", null]``.
 time             No         Must be an integer of at least zero.
@@ -157,4 +157,4 @@ zigzag           No         Must be a boolean.
 retrace          No         Must be a boolean.
 useall           No         Must be a boolean.
 misses           No         Must be a dictionary with string keys and string values.
-===============  =========  ==============================================================================================
+===============  =========  ======================================================================================================
