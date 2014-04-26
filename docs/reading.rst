@@ -27,6 +27,11 @@ see whether the JSON conforms to the ipuz specification.
 Validation for all puzzles
 --------------------------
 
+The ``ipuz.read`` function performs validation for fields that are common to
+all PuzzleKinds and validation for fields that are specific to a PuzzleKind.
+The function expects a puzzle in JSON or JSONP with either the default
+``ipuz`` callback function or a differently named callback function.
+
 Note that ``true``, ``false`` and ``null`` in JSON / JSONP respectively
 become ``True``, ``False`` and ``None`` in Python.
 
