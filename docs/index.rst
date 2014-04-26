@@ -26,11 +26,3 @@ Contents
    reading
    writing
    contributing
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
