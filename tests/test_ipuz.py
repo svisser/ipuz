@@ -88,6 +88,12 @@ class IPUZReadTestCase(IPUZBaseTestCase):
             "kind": [3],
         }, "Invalid kind value found")
 
+    def test_invalid_kind_contains_empty_string(self):
+        self.validate_puzzle({
+            "version": "http://ipuz.org/v1",
+            "kind": [""],
+        }, "Invalid kind value found")
+
 
 class IPUZFieldValidatorTestCase(IPUZBaseTestCase):
 

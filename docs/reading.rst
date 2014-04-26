@@ -41,7 +41,7 @@ The follows checks are performed for fields that apply to all PuzzleKinds:
 Field        Mandatory  Validation
 ===========  =========  ===============================================
 version      Yes        Must be the string ``"http://ipuz.org/v1"``.
-kind         Yes        Must be a non-empty list of strings.
+kind         Yes        Must be a non-empty list of non-empty strings.
 copyright    No         Must be a string.
 publisher    No         Must be a string.
 publication  No         Must be a string.
