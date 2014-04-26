@@ -48,7 +48,7 @@ explanation  No         Must be a string.
 annotation   No         Must be a string.
 author       No         Must be a string.
 editor       No         Must be a string.
-date         No         Must be a string with a date "mm/dd/yyyy".
+date         No         Must be a string with a date ``"mm/dd/yyyy"``.
 notes        No         Must be a string.
 difficulty   No         Must be a string.
 origin       No         Must be a string.
