@@ -92,6 +92,34 @@ class IPUZBlockValueTestCase(IPUZSampleBlockTestCase):
         self.puzzle["exit"] = { "name": {"invalid_key": 3}}
         self.validate("Invalid exit value found")
 
+    def test_field_is_not_a_list(self):
+        self.puzzle["field"] = 3
+        self.validate("Invalid field value found")
+
+    def test_field_contains_not_a_list(self):
+        self.puzzle["field"] = [[], [], 3]
+        self.validate("Invalid field value found")
+
+    def test_field_contains_invalid_styledcell(self):
+        self.puzzle["field"] = [[[]]]
+        self.validate("Invalid StyledCell in field element found")
+
+    def test_field_contains_invalid_styledcell_empty_dict(self):
+        self.puzzle["field"] = [[{}]]
+        self.validate("Invalid StyledCell in field element found")
+
+    def test_field_contains_invalid_styledcell_invalid_dict_key(self):
+        self.puzzle["field"] = [[{"invalid_key": 3}]]
+        self.validate("Invalid StyledCell in field element found")
+
+    def test_field_contains_invalid_styledcell_invalid_cell(self):
+        self.puzzle["field"] = [[{"cell": []}]]
+        self.validate("Invalid StyledCell in field element found")
+
+    def test_field_contains_invalid_styledcell_invalid_style(self):
+        self.puzzle["field"] = [[{"style": {"shapebg": "not-a-circle"}}]]
+        self.validate("Invalid StyledCell in field element found")
+
 
 class IPUZBlockKindTestCase(IPUZBaseTestCase):
 

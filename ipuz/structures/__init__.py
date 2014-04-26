@@ -9,6 +9,7 @@ from .enumeration import (
 )
 from .groupspec import validate_groupspec
 from .labeledcell import validate_labeledcell
+from .styledcell import validate_styledcell
 from .stylespec import validate_stylespec
 from .sudokugiven import validate_sudokugiven
 from .sudokuguess import validate_sudokuguess
