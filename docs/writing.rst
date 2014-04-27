@@ -1,13 +1,13 @@
 Writing ipuz puzzles
 ====================
 
-The function ``ipuz.write`` can be used to convert a puzzle as a Python
-dictionary object to a JSON / JSONP string. This function performs no validation
-on the provided puzzle and as such it is the application's responsibility
+The function ``ipuz.write`` converts a puzzle as a Python dictionary object
+to a JSON / JSONP string. This function performs no validation
+on the provided puzzle and it is the application's responsibility
 to construct a valid puzzle that can be read by ``ipuz.read`` or other
 applications.
 
-The following writes a Python dictionary ``puzzle`` to a string called ``data``:
+The following writes a Python dictionary ``puzzle`` to a string ``data``:
 
 ::
 
