@@ -6,9 +6,9 @@ import ipuz
 
 class IPUZBaseTestCase(unittest.TestCase):
 
-    def validate_puzzle(self, json_data, expected_exception):
+    def validate_puzzle(self, json_data, expected_exception, **kwargs):
         with self.assertRaises(ipuz.IPUZException) as cm:
-            ipuz.read(json.dumps(json_data))
+            ipuz.read(json.dumps(json_data), **kwargs)
         self.assertEqual(str(cm.exception), expected_exception)
 
 
@@ -99,6 +99,30 @@ class IPUZReadTestCase(IPUZBaseTestCase):
             "version": "http://ipuz.org/v1",
             "kind": [""],
         }, "Invalid kind value found")
+
+    def test_unsupported_kind_value_found(self):
+        self.validate_puzzle({
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/crossword"]
+        }, "Unsupported kind value found",
+            puzzlekinds=["http://ipuz.org/sudoku"]
+        )
+
+    def test_unsupported_kind_value_found_based_on_version(self):
+        self.validate_puzzle({
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/crossword#2"]
+        }, "Unsupported kind value found",
+            puzzlekinds=["http://ipuz.org/crossword#1"]
+        )
+
+    def test_unsupported_kind_value_with_multiple_kinds(self):
+        self.validate_puzzle({
+            "version": "http://ipuz.org/v1",
+            "kind": ["http://ipuz.org/crossword#1", "http://ipuz.org/invalid"]
+        }, "Unsupported kind value found",
+            puzzlekinds=["http://ipuz.org/crossword#1"]
+        )
 
 
 class IPUZFieldValidatorTestCase(IPUZBaseTestCase):

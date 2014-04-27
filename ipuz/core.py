@@ -81,7 +81,7 @@ IPUZ_PUZZLEKINDS = {
 }
 
 
-def read(data):
+def read(data, puzzlekinds=None):
     try:
         if data.endswith(')'):
             data = data[data.index('(') + 1:-1]
@@ -96,6 +96,9 @@ def read(data):
     for field, value in json_data.items():
         if field in IPUZ_FIELD_VALIDATORS:
             IPUZ_FIELD_VALIDATORS[field](field, value)
+    for kind in json_data["kind"]:
+        if puzzlekinds is not None and kind not in puzzlekinds:
+            raise IPUZException("Unsupported kind value found")
     for kind in json_data["kind"]:
         for official_kind, kind_details in IPUZ_PUZZLEKINDS.items():
             if not kind.startswith(official_kind):
