@@ -47,8 +47,8 @@ You can run this library's tests by running:
 
     python -m unittest discover
 
-Note that all tests run the public interface (``read`` and ``write``) to ensure
-we test both of the following:
+Note that all tests run the public interface (``ipuz.read`` and ``ipuz.write``) to
+ensure we test both of the following:
 
 - The functionality of any particular validation function.
 - Whether the exception is raised properly at the top-level.
