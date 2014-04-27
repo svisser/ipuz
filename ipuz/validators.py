@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 
 from ipuz.exceptions import IPUZException
 from ipuz.structures import validate_stylespec
@@ -40,8 +41,12 @@ def validate_list_of_strings(field_name, field_data):
 
 
 def validate_version(field_name, field_data):
-    if field_data != "http://ipuz.org/v1":
-        raise IPUZException("Invalid or unsupported version value found")
+    groups = re.match("http://ipuz.org/v([1-9]\d*)", field_data)
+    if not groups:
+        raise IPUZException("Invalid version value found")
+    version_number = int(groups.group(1))
+    if version_number > 1:
+        raise IPUZException("Unsupported version value found")
 
 
 def validate_kind(field_name, field_data):

@@ -49,13 +49,19 @@ class IPUZReadTestCase(IPUZBaseTestCase):
         self.validate_puzzle({
             "version": "invalid_version",
             "kind": ["http://ipuz.org/invalid", ]
-        }, "Invalid or unsupported version value found")
+        }, "Invalid version value found")
+
+    def test_read_raises_for_invalid_zero_version_number(self):
+        self.validate_puzzle({
+            "version": "http://ipuz.org/v0",
+            "kind": ["http://ipuz.org/invalid", ]
+        }, "Invalid version value found")
 
     def test_read_raises_for_unsupported_version_field(self):
         self.validate_puzzle({
-            "version": "http://ipuz.org/v2",
+            "version": "http://ipuz.org/v5",
             "kind": ["http://ipuz.org/invalid", ]
-        }, "Invalid or unsupported version value found")
+        }, "Unsupported version value found")
 
     def test_read_allows_jsonp_callback_function(self):
         result = ipuz.read("ipuz(" + json.dumps({
