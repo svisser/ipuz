@@ -6,6 +6,7 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
+    validate_list_of_strings,
     validate_non_negative_int,
 )
 
@@ -35,6 +36,7 @@ IPUZ_WORDSEARCH_VALIDATORS = {
     "puzzle": validate_crosswordvalues,
     "solution": validate_solution,
     "dictionary": validate_dictionary,
+    "saved": validate_list_of_strings,
     "showanswers": validate_showanswers,
     "time": validate_non_negative_int,
     "points": validate_points,

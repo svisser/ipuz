@@ -72,6 +72,10 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
         self.puzzle["solution"] = 3
         self.validate("Invalid solution value found")
 
+    def test_saved_is_list_of_strings(self):
+        self.puzzle["saved"] = 3
+        self.validate("Invalid saved value found")
+
 
 class IPUZWordSearchKindTestCase(IPUZBaseTestCase):
 

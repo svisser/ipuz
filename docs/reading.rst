@@ -166,6 +166,7 @@ Field            Mandatory  Validation
 dimensions       Yes        Must be a dictionary containing ``"width"`` and ``"height"`` keys with integer values of at least one.
 puzzle           No         Must be a list of lists containing CrosswordValue values.
 dictionary       No         Must be a non-empty string or the boolean value ``false``.
+saved            No         Must be a list of strings.
 showanswers      No         Must be an element from ``["during", "after", null]``.
 time             No         Must be an integer of at least zero.
 points           No         Must be an element from ``["linear", "log", null]``.
