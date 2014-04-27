@@ -183,5 +183,7 @@ configure what puzzles can be loaded:
 - ``puzzlekinds``
       Specifies the ``"kind"`` values that your application supports. For example, if your application only loads crossword puzzles
       you can use ``puzzlekinds=["http://ipuz.org/crossword#1"]`` to only accept puzzles where all ``"kind"`` values are in
-      your list. Note that this is a list of exact strings so if your application supports both version one and two
+      your list.
+
+      Note that this is a list of exact strings so if your application supports both version one and two
       of the Crossword PuzzleKind then you must specify ``puzzlekinds=["http://ipuz.org/crossword#1", "http://ipuz.org/crossword#2"]``
