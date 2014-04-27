@@ -62,6 +62,51 @@ empty        No         Must be a string or integer.
 styles       No         Must be a dictionary with StyleSpec values.
 ===========  =========  ===============================================
 
+Validation for Acrostic puzzles
+-------------------------------
+
+None yet.
+
+Validation for Answer puzzles
+-----------------------------
+
+The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/answer``:
+
+===============  =========  ========================================================
+Field            Mandatory  Validation
+===============  =========  ========================================================
+choices          No         Must be a list of strings.
+randomize        No         Must be a boolean.
+answer           No         Must be a string.
+answers          No         Must be a list of strings.
+enumeration      No         Must be a string.
+enumerations     No         Must be a list of strings.
+requiredanswers  No         Must be an integer of at least zero.
+misses           No         Must be a dictionary with string keys and string values.
+guesses          No         Must be a list of strings.
+===============  =========  ========================================================
+
+Validation for Block puzzles
+----------------------------
+
+The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/block``:
+
+==========  =========  ======================================================================================================
+Field       Mandatory  Validation
+==========  =========  ======================================================================================================
+dimensions  Yes        Must be a dictionary containing ``"width"`` and ``"height"`` keys with integer values of at least one.
+slide       No         Must be a boolean.
+move        No         Must be a boolean.
+rotatable   No         Must be a boolean.
+flippable   No         Must be a boolean.
+field       No         Must be a list of lists containing StyledCell values.
+enter       No         Must be a dictionary with string keys and GroupSpec values.
+start       No         Must be a dictionary with string keys and GroupSpec values.
+saved       No         Must be a dictionary with string keys and GroupSpec values.
+end         No         Must be a dictionary with string keys and GroupSpec values.
+exit        No         Must be a dictionary with string keys and GroupSpec values.
+==========  =========  ======================================================================================================
+
 Validation for Crossword puzzles
 --------------------------------
 
@@ -85,6 +130,11 @@ enumerations      No         Must be a list of strings.
 misses            No         Must be a dictionary with string keys and string values.
 ================  =========  ======================================================================================================
 
+Validation for Fill puzzles
+---------------------------
+
+None yet.
+
 Validation for Sudoku puzzles
 -----------------------------
 
@@ -104,46 +154,6 @@ solution         No         Must be a list of lists containing SudokuValue value
 zones            No         Must be a list of GroupSpec values.
 cages            No         Must be a list of CalcSpec values.
 ==============   =========  ======================================================
-
-Validation for Block puzzles
-----------------------------
-
-The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/block``:
-
-==========  =========  ======================================================================================================
-Field       Mandatory  Validation
-==========  =========  ======================================================================================================
-dimensions  Yes        Must be a dictionary containing ``"width"`` and ``"height"`` keys with integer values of at least one.
-slide       No         Must be a boolean.
-move        No         Must be a boolean.
-rotatable   No         Must be a boolean.
-flippable   No         Must be a boolean.
-field       No         Must be a list of lists containing StyledCell values.
-enter       No         Must be a dictionary with string keys and GroupSpec values.
-start       No         Must be a dictionary with string keys and GroupSpec values.
-saved       No         Must be a dictionary with string keys and GroupSpec values.
-end         No         Must be a dictionary with string keys and GroupSpec values.
-exit        No         Must be a dictionary with string keys and GroupSpec values.
-==========  =========  ======================================================================================================
-
-Validation for Answer puzzles
------------------------------
-
-The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/answer``:
-
-===============  =========  ========================================================
-Field            Mandatory  Validation
-===============  =========  ========================================================
-choices          No         Must be a list of strings.
-randomize        No         Must be a boolean.
-answer           No         Must be a string.
-answers          No         Must be a list of strings.
-enumeration      No         Must be a string.
-enumerations     No         Must be a list of strings.
-requiredanswers  No         Must be an integer of at least zero.
-misses           No         Must be a dictionary with string keys and string values.
-guesses          No         Must be a list of strings.
-===============  =========  ========================================================
 
 Validation for WordSearch puzzles
 ---------------------------------
