@@ -30,3 +30,12 @@ def validate_crosswordvalue(field_data):
             elif not validate_crosswordvalue(value):
                 return False
     return True
+
+
+def validate_crosswordvalues(field_name, field_data):
+    if type(field_data) is not list or any(type(e) is not list for e in field_data):
+        raise IPUZException("Invalid {} value found".format(field_name))
+    for line in field_data:
+        for element in line:
+            if not validate_crosswordvalue(element):
+                raise IPUZException("Invalid CrosswordValue in {} element found".format(field_name))

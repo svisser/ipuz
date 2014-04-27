@@ -9,7 +9,6 @@ from ipuz.puzzlekinds.fill import IPUZ_FILL_VALIDATORS
 from ipuz.puzzlekinds.sudoku import IPUZ_SUDOKU_VALIDATORS
 from ipuz.puzzlekinds.wordsearch import IPUZ_WORDSEARCH_VALIDATORS
 from ipuz.structures import (
-    validate_crosswordvalue,
     validate_groupspec,
     validate_stylespec,
 )

@@ -1,7 +1,7 @@
 from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_clue,
-    validate_crosswordvalue,
+    validate_crosswordvalues,
     validate_dimensions,
     validate_direction,
     validate_enumeration,
@@ -24,15 +24,6 @@ def validate_puzzle(field_name, field_data):
         for element in line:
             if not validate_labeledcell(element):
                 raise IPUZException("Invalid LabeledCell in {} element found".format(field_name))
-
-
-def validate_crosswordvalues(field_name, field_data):
-    if type(field_data) is not list or any(type(e) is not list for e in field_data):
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for line in field_data:
-        for element in line:
-            if not validate_crosswordvalue(element):
-                raise IPUZException("Invalid CrosswordValue in {} element found".format(field_name))
 
 
 def validate_zones(field_name, field_data):

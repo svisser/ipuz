@@ -1,7 +1,7 @@
 from .calcspec import validate_calcspec
 from .clue import validate_clue
 from .common import validate_dimensions
-from .crosswordvalue import validate_crosswordvalue
+from .crosswordvalue import validate_crosswordvalues
 from .direction import validate_direction
 from .enumeration import (
     validate_enumeration,

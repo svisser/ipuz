@@ -1,5 +1,8 @@
 from ipuz.exceptions import IPUZException
-from ipuz.structures import validate_dimensions
+from ipuz.structures import (
+    validate_crosswordvalues,
+    validate_dimensions,
+)
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
@@ -24,6 +27,7 @@ def validate_points(field_name, field_data):
 
 IPUZ_WORDSEARCH_VALIDATORS = {
     "dimensions": validate_dimensions,
+    "puzzle": validate_crosswordvalues,
     "dictionary": validate_dictionary,
     "showanswers": validate_showanswers,
     "time": validate_non_negative_int,
