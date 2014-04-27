@@ -12,6 +12,7 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
+    validate_string,
 )
 
 
@@ -47,7 +48,8 @@ def validate_clueplacement(field_name, field_data):
 
 
 def validate_answer(field_name, field_data):
-    if type(field_data) not in [str, unicode] or field_data == "":
+    validate_string(field_name, field_data)
+    if not field_data:
         raise IPUZException("Invalid {} value found".format(field_name))
 
 

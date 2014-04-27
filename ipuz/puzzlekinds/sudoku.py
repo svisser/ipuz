@@ -6,11 +6,15 @@ from ipuz.structures import (
     validate_sudokuguess,
     validate_sudokuvalue,
 )
-from ipuz.validators import validate_bool
+from ipuz.validators import (
+    validate_bool,
+    validate_string,
+)
 
 
 def validate_charset(field_name, field_data):
-    if type(field_data) not in [str, unicode] or (len(field_data) != 9):
+    validate_string(field_name, field_data)
+    if len(field_data) != 9:
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
