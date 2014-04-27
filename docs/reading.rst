@@ -123,8 +123,8 @@ zones             No         Must be a list of GroupSpec values.
 clues             No         Must be a dictionary with Direction keys and non-empty lists of Clue values.
 showenumerations  No         Must be a boolean.
 clueplacement     No         Must be an element from ``["before", "after", "blocks", null]``.
-answer            No         Must be a non-empty string.
-answers           No         Must be a non-empty list of non-empty strings.
+answer            No         Must be a string.
+answers           No         Must be a list of strings.
 enumeration       No         Must be a string.
 enumerations      No         Must be a list of strings.
 misses            No         Must be a dictionary with string keys and string values.

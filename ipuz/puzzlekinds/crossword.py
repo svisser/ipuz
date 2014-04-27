@@ -12,6 +12,7 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
+    validate_list_of_strings,
     validate_string,
 )
 
@@ -47,22 +48,6 @@ def validate_clueplacement(field_name, field_data):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
-def validate_answer(field_name, field_data):
-    validate_string(field_name, field_data)
-    if not field_data:
-        raise IPUZException("Invalid {} value found".format(field_name))
-
-
-def validate_answers(field_name, field_data):
-    if type(field_data) is not list or not field_data:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for element in field_data:
-        try:
-            validate_answer(field_name, element)
-        except IPUZException:
-            raise IPUZException("Invalid {} value found".format(field_name))
-
-
 def validate_clues(field_name, field_data):
     if type(field_data) is not dict:
         raise IPUZException("Invalid {} value found".format(field_name))
@@ -91,8 +76,8 @@ IPUZ_CROSSWORD_VALIDATORS = {
     "clues": validate_clues,
     "showenumerations": validate_bool,
     "clueplacement": validate_clueplacement,
-    "answer": validate_answer,
-    "answers": validate_answers,
+    "answer": validate_string,
+    "answers": validate_list_of_strings,
     "enumeration": validate_enumeration_field,
     "enumerations": validate_enumerations,
     "misses": validate_dict_of_strings,
