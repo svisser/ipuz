@@ -27,7 +27,7 @@ def validate_points(field_name, field_data):
 
 
 def validate_solution(field_name, field_data):
-    if type(field_data) not in [str, unicode, dict]:
+    if type(field_data) not in [str, unicode, dict, list]:
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
