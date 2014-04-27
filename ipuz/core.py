@@ -1,13 +1,7 @@
 import json
 
 from ipuz.exceptions import IPUZException
-from ipuz.puzzlekinds.acrostic import IPUZ_ACROSTIC_VALIDATORS
-from ipuz.puzzlekinds.answer import IPUZ_ANSWER_VALIDATORS
-from ipuz.puzzlekinds.block import IPUZ_BLOCK_VALIDATORS
-from ipuz.puzzlekinds.crossword import IPUZ_CROSSWORD_VALIDATORS
-from ipuz.puzzlekinds.fill import IPUZ_FILL_VALIDATORS
-from ipuz.puzzlekinds.sudoku import IPUZ_SUDOKU_VALIDATORS
-from ipuz.puzzlekinds.wordsearch import IPUZ_WORDSEARCH_VALIDATORS
+from ipuz.puzzlekinds import IPUZ_PUZZLEKINDS
 from ipuz.structures import (
     validate_groupspec,
     validate_stylespec,
@@ -39,45 +33,6 @@ IPUZ_OPTIONAL_FIELDS = (
     "empty",
     "styles",
 )
-IPUZ_PUZZLEKINDS = {
-    "http://ipuz.org/acrostic": {
-        "mandatory": (),
-        "validators": IPUZ_ACROSTIC_VALIDATORS,
-    },
-    "http://ipuz.org/answer": {
-        "mandatory": (),
-        "validators": IPUZ_ANSWER_VALIDATORS,
-    },
-    "http://ipuz.org/block": {
-        "mandatory": (
-            "dimensions",
-        ),
-        "validators": IPUZ_BLOCK_VALIDATORS,
-    },
-    "http://ipuz.org/crossword": {
-        "mandatory": (
-            "dimensions",
-            "puzzle",
-        ),
-        "validators": IPUZ_CROSSWORD_VALIDATORS,
-    },
-    "http://ipuz.org/fill": {
-        "mandatory": (),
-        "validators": IPUZ_FILL_VALIDATORS,
-    },
-    "http://ipuz.org/sudoku": {
-        "mandatory": (
-            "puzzle",
-        ),
-        "validators": IPUZ_SUDOKU_VALIDATORS,
-    },
-    "http://ipuz.org/wordsearch": {
-        "mandatory": (
-            "dimensions",
-        ),
-        "validators": IPUZ_WORDSEARCH_VALIDATORS,
-    },
-}
 
 
 def read(data, puzzlekinds=None):
