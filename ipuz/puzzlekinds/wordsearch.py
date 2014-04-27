@@ -25,9 +25,15 @@ def validate_points(field_name, field_data):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
+def validate_solution(field_name, field_data):
+    if type(field_data) not in [str, unicode, dict]:
+        raise IPUZException("Invalid {} value found".format(field_name))
+
+
 IPUZ_WORDSEARCH_VALIDATORS = {
     "dimensions": validate_dimensions,
     "puzzle": validate_crosswordvalues,
+    "solution": validate_solution,
     "dictionary": validate_dictionary,
     "showanswers": validate_showanswers,
     "time": validate_non_negative_int,

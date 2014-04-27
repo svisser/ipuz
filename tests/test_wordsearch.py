@@ -68,6 +68,10 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
         self.puzzle["puzzle"] = [[{}]]
         self.validate("Invalid CrosswordValue in puzzle element found")
 
+    def test_solution_is_string_or_dict(self):
+        self.puzzle["solution"] = 3
+        self.validate("Invalid solution value found")
+
 
 class IPUZWordSearchKindTestCase(IPUZBaseTestCase):
 
