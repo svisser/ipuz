@@ -7,7 +7,10 @@ from .enumeration import (
     validate_enumeration,
     validate_enumeration_field,
 )
-from .groupspec import validate_groupspec
+from .groupspec import (
+    validate_groupspec,
+    validate_groupspec_dict,
+)
 from .labeledcell import validate_labeledcell
 from .styledcell import validate_styledcell
 from .stylespec import validate_stylespec

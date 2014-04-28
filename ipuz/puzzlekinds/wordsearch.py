@@ -2,6 +2,7 @@ from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_crosswordvalues,
     validate_dimensions,
+    validate_groupspec_dict,
 )
 from ipuz.validators import (
     validate_bool,
@@ -29,6 +30,10 @@ def validate_points(field_name, field_data):
 def validate_solution(field_name, field_data):
     if type(field_data) not in [str, unicode, dict, list]:
         raise IPUZException("Invalid {} value found".format(field_name))
+    if type(field_data) is list and not all(type(e) in [str, unicode] for e in field_data):
+        raise IPUZException("Invalid {} value found".format(field_name))
+    if type(field_data) is dict:
+        validate_groupspec_dict(field_name, field_data)
 
 
 IPUZ_WORDSEARCH_VALIDATORS = {

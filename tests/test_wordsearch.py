@@ -72,6 +72,18 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
         self.puzzle["solution"] = 3
         self.validate("Invalid solution value found")
 
+    def test_solution_can_only_be_list_of_strings(self):
+        self.puzzle["solution"] = [3]
+        self.validate("Invalid solution value found")
+
+    def test_solution_has_invalid_groupspec(self):
+        self.puzzle["solution"] = {"name": 3}
+        self.validate("Invalid solution value found")
+
+    def test_solution_has_invalid_groupspec_key(self):
+        self.puzzle["solution"] = {"": {"cells": [1, 2]}}
+        self.validate("Invalid solution value found")
+
     def test_saved_is_list_of_strings(self):
         self.puzzle["saved"] = 3
         self.validate("Invalid saved value found")

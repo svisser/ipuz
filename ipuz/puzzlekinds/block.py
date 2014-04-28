@@ -1,24 +1,13 @@
 from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_dimensions,
-    validate_groupspec,
+    validate_groupspec_dict,
     validate_styledcell,
 )
 from ipuz.validators import (
     validate_bool,
     validate_string,
 )
-
-
-def validate_groupspec_dict(field_name, field_data):
-    if type(field_data) is not dict:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for key, value in field_data.items():
-        validate_string(field_name, key)
-        if not key:
-            raise IPUZException("Invalid {} value found".format(field_name))
-        if not validate_groupspec(value):
-            raise IPUZException("Invalid {} value found".format(field_name))
 
 
 def validate_field(field_name, field_data):
