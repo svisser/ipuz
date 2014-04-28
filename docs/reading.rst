@@ -190,6 +190,6 @@ configure what puzzles can be loaded:
       By default ``ipuz.read`` accepts all official PuzzleKinds in the
       ipuz specification.
 
-      Note that this is a list of exact strings so if your application supports both version one and two
-      of the Crossword PuzzleKind then you must specify
+      Note that this is a list of exact strings so if your application supports
+      both version one and two of the Crossword PuzzleKind then you must specify
       ``puzzlekinds=["http://ipuz.org/crossword#1", "http://ipuz.org/crossword#2"]``.
