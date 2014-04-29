@@ -59,9 +59,9 @@ def read(data, puzzlekinds=None):
             for field, value in json_data.items():
                 if field in kind_details["validators"]:
                     validator = kind_details["validators"][field]
-                    if callable(validator):
+                    try:
                         validator(field, value)
-                    else:
+                    except TypeError:
                         validator[0](field, value, *validator[1:])
     return json_data
 
