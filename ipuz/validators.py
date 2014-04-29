@@ -18,7 +18,8 @@ def validate_int(field_name, field_data):
 
 
 def validate_non_negative_int(field_name, field_data):
-    if type(field_data) is not int or field_data < 0:
+    validate_int(field_name, field_data)
+    if field_data < 0:
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
