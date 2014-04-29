@@ -15,6 +15,8 @@ to ensure that the JSON satisfies the constraints of the PuzzleKind prior to
 writing the puzzle. This library provides validation and additional
 functionality that you might want to use.
 
+The library supports Python 2.7, Python 3.3 and Python 3.4.
+
 ipuz is a trademark of Puzzazz, Inc., used with permission.
 
 Contents
