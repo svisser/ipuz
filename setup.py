@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 
 setup(
@@ -7,4 +7,7 @@ setup(
     description="Python library for reading and writing ipuz puzzle files",
     author="Simeon Visser",
     url="https://github.com/svisser/ipuz",
+    install_requires=[
+        'six==1.6.1'
+    ]
 )
