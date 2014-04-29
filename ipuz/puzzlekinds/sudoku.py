@@ -1,4 +1,3 @@
-from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_calcspec,
     validate_groupspec,

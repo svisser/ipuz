@@ -2,10 +2,6 @@ import json
 
 from ipuz.exceptions import IPUZException
 from ipuz.puzzlekinds import IPUZ_PUZZLEKINDS
-from ipuz.structures import (
-    validate_groupspec,
-    validate_stylespec,
-)
 from ipuz.validators import IPUZ_FIELD_VALIDATORS
 
 

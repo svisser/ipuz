@@ -1,4 +1,3 @@
-from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_dimensions,
     validate_groupspec_dict,
@@ -7,7 +6,6 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_list_of_lists,
-    validate_string,
 )
 
 
