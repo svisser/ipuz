@@ -6,6 +6,7 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
+    validate_list,
     validate_list_of_strings,
     validate_non_negative_int,
     validate_string,
@@ -13,11 +14,7 @@ from ipuz.validators import (
 
 
 def validate_enumerations(field_name, field_data):
-    if not isinstance(field_data, list):
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for element in field_data:
-        if not validate_enumeration(element):
-            raise IPUZException("Invalid Enumeration in {} element found".format(field_name))
+    validate_list(field_name, field_data, "Enumeration", validate_enumeration)
 
 
 IPUZ_ANSWER_VALIDATORS = {
