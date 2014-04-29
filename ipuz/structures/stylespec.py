@@ -25,11 +25,14 @@ def validate_stylespec_divided(field_data):
 
 
 def validate_stylespec_mark(field_data):
-    return type(field_data) is dict and all(key in ["TL", "TR", "BL", "BR"] for key in field_data.keys())
+    return (type(field_data) is dict and
+            all(key in ["TL", "TR", "BL", "BR"] for key in field_data.keys()))
 
 
 def validate_stylespec_slice(field_data):
-    return type(field_data) is list and len(field_data) == 4 and all(type(c) is int for c in field_data)
+    return (type(field_data) is list and
+            len(field_data) == 4 and
+            all(type(c) is int for c in field_data))
 
 
 def validate_stylespec_side(field_data):
@@ -39,7 +42,9 @@ def validate_stylespec_side(field_data):
 def validate_stylespec_color(field_data):
     if type(field_data) is int:
         return True
-    if type(field_data) in [str, unicode] and len(field_data) == 6 and all(c in string.hexdigits for c in field_data):
+    if (type(field_data) in [str, unicode] and
+        len(field_data) == 6 and
+        all(c in string.hexdigits for c in field_data)):
         return True
     return False
 
