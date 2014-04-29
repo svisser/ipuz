@@ -8,6 +8,8 @@ from ipuz.structures import (
 )
 from ipuz.validators import (
     validate_bool,
+    validate_list,
+    validate_list_of_lists,
     validate_string,
 )
 
@@ -18,55 +20,23 @@ def validate_cageborder(field_name, field_data):
 
 
 def validate_cages(field_name, field_data):
-    if type(field_data) is not list:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for element in field_data:
-        if not validate_calcspec(element):
-            raise IPUZException("Invalid CalcSpec in {} element found".format(field_name))
+    validate_list(field_name, field_data, "CalcSpec", validate_calcspec)
 
 
 def validate_puzzle(field_name, field_data):
-    if type(field_data) is not list:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for line in field_data:
-        if type(line) is not list:
-            raise IPUZException("Invalid {} value found".format(field_name))
-        for element in line:
-            if not validate_sudokugiven(element):
-                raise IPUZException("Invalid SudokuGiven in {} element found".format(field_name))
-    return True
+    validate_list_of_lists(field_name, field_data, "SudokuGiven", validate_sudokugiven)
 
 
 def validate_saved(field_name, field_data):
-    if type(field_data) is not list:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for line in field_data:
-        if type(line) is not list:
-            raise IPUZException("Invalid {} value found".format(field_name))
-        for element in line:
-            if not validate_sudokuguess(element):
-                raise IPUZException("Invalid SudokuGuess in {} element found".format(field_name))
-    return True
+    validate_list_of_lists(field_name, field_data, "SudokuGuess", validate_sudokuguess)
 
 
 def validate_solution(field_name, field_data):
-    if type(field_data) is not list:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for line in field_data:
-        if type(line) is not list:
-            raise IPUZException("Invalid {} value found".format(field_name))
-        for element in line:
-            if not validate_sudokuvalue(element):
-                raise IPUZException("Invalid SudokuValue in {} element found".format(field_name))
-    return True
+    validate_list_of_lists(field_name, field_data, "SudokuValue", validate_sudokuvalue)
 
 
 def validate_zones(field_name, field_data):
-    if type(field_data) is not list:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for element in field_data:
-        if not validate_groupspec(element):
-            raise IPUZException("Invalid GroupSpec in {} element found".format(field_name))
+    validate_list(field_name, field_data, "GroupSpec", validate_groupspec)
 
 
 IPUZ_SUDOKU_VALIDATORS = {

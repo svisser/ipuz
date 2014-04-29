@@ -12,6 +12,7 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
+    validate_list,
     validate_list_of_lists,
     validate_list_of_strings,
     validate_string,
@@ -23,11 +24,7 @@ def validate_puzzle(field_name, field_data):
 
 
 def validate_zones(field_name, field_data):
-    if type(field_data) is not list:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for element in field_data:
-        if not validate_groupspec(element):
-            raise IPUZException("Invalid GroupSpec in {} element found".format(field_name))
+    validate_list(field_name, field_data, "GroupSpec", validate_groupspec)
 
 
 def validate_clueplacement(field_name, field_data):
@@ -47,11 +44,7 @@ def validate_clues(field_name, field_data):
 
 
 def validate_enumerations(field_name, field_data):
-    if type(field_data) is not list:
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for element in field_data:
-        if not validate_enumeration(element):
-            raise IPUZException("Invalid Enumeration in {} element found".format(field_name))
+    validate_list(field_name, field_data, "Enumeration", validate_enumeration)
 
 
 IPUZ_CROSSWORD_VALIDATORS = {

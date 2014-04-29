@@ -52,6 +52,14 @@ def validate_list_of_lists(field_name, field_data, element_name, validate_elemen
                 raise IPUZException("Invalid {} in {} element found".format(element_name, field_name))
 
 
+def validate_list(field_name, field_data, element_name, validate_element):
+    if not isinstance(field_data, list):
+        raise IPUZException("Invalid {} value found".format(field_name))
+    for element in field_data:
+        if not validate_element(element):
+            raise IPUZException("Invalid {} in {} element found".format(element_name, field_name))
+
+
 def validate_version(field_name, field_data):
     groups = re.match("http://ipuz.org/v([1-9]\d*)", field_data)
     if not groups:
