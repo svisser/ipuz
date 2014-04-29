@@ -47,6 +47,13 @@ You can run this library's tests by running:
 
     python -m unittest discover
 
+You can run the tests in all supported Python version by running:
+
+::
+
+    tox
+
+
 Note that all tests run the public interface (``ipuz.read`` and ``ipuz.write``) to
 ensure we test both of the following:
 
