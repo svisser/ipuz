@@ -7,7 +7,7 @@ from ipuz.exceptions import IPUZException
 
 
 def validate_bool(field_name, field_data):
-    if type(field_data) is not bool:
+    if not isinstance(field_data, bool):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
@@ -29,7 +29,7 @@ def validate_string(field_name, field_data):
 
 
 def validate_dict_of_strings(field_name, field_data):
-    if type(field_data) is not dict:
+    if not isinstance(field_data, dict):
         raise IPUZException("Invalid {} value found".format(field_name))
     for key, value in field_data.items():
         validate_string(field_name, key)
@@ -37,7 +37,7 @@ def validate_dict_of_strings(field_name, field_data):
 
 
 def validate_list_of_strings(field_name, field_data):
-    if type(field_data) is not list:
+    if not isinstance(field_data, list):
         raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
         validate_string(field_name, field_data)
@@ -53,7 +53,7 @@ def validate_version(field_name, field_data):
 
 
 def validate_kind(field_name, field_data):
-    if type(field_data) is not list or not field_data:
+    if not isinstance(field_data, list) or not field_data:
         raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
         if not isinstance(element, six.string_types) or not element:
@@ -74,7 +74,7 @@ def validate_empty(field_name, field_data):
 
 def validate_styles(field_name, field_data):
     from ipuz.structures import validate_stylespec
-    if type(field_data) is not dict:
+    if not isinstance(field_data, dict):
         raise IPUZException("Invalid {} value found".format(field_name))
     for _, stylespec in field_data.items():
         validate_stylespec(stylespec)

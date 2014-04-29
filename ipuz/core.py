@@ -40,7 +40,7 @@ def read(data, puzzlekinds=None):
         if data.endswith(')'):
             data = data[data.index('(') + 1:-1]
         json_data = json.loads(data)
-        if type(json_data) is not dict:
+        if not isinstance(json_data, dict):
             raise ValueError
     except (AttributeError, ValueError):
         raise IPUZException("No valid JSON could be found")

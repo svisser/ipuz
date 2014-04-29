@@ -13,7 +13,7 @@ from ipuz.validators import (
 
 
 def validate_enumerations(field_name, field_data):
-    if type(field_data) is not list:
+    if not isinstance(field_data, list):
         raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
         if not validate_enumeration(element):
