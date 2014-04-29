@@ -7,7 +7,7 @@ Welcome to ipuz's documentation!
 ================================
 
 Python library for reading and writing ipuz puzzle files. The specification
-for the ipuz file format can be found at: http://www.ipuz.org/ . This library
+for the ipuz file format can be found at: http://www.ipuz.org/. This library
 provides validation and wrapping around the puzzle data.
 
 As the puzzle is inherently JSON data it is the application's responsibility

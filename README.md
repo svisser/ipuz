@@ -2,7 +2,7 @@ ipuz
 ====
 
 Python library for reading and writing ipuz puzzle files. The specification
-for the ipuz file format can be found at: http://www.ipuz.org/ . This library
+for the ipuz file format can be found at: http://www.ipuz.org/. This library
 provides validation and wrapping around the puzzle data.
 
 As the puzzle is inherently JSON data it is the application's responsibility
@@ -17,4 +17,4 @@ ipuz is a trademark of Puzzazz, Inc., used with permission.
 Documentation
 =============
 
-Documentation can be found at http://ipuz.readthedocs.org/en/latest/ .
+Documentation can be found at http://ipuz.readthedocs.org/en/latest/.
