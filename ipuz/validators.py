@@ -99,4 +99,5 @@ IPUZ_FIELD_VALIDATORS = {
     "date": validate_date,
     "styles": validate_styles,
     "checksum": validate_list_of_strings,
+    "volatile": validate_dict_of_strings,
 }

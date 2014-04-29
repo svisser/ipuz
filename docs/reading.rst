@@ -194,3 +194,14 @@ configure what puzzles can be loaded:
       Note that this is a list of exact strings so if your application supports
       both version one and two of the Crossword PuzzleKind then you must specify
       ``puzzlekinds=["http://ipuz.org/crossword#1", "http://ipuz.org/crossword#2"]``.
+
+Extensions
+----------
+
+For extensions to the ipuz specification the following validation is performed:
+
+========  =========  ========================================================
+Field     Mandatory  Validation
+========  =========  ========================================================
+volatile  No         Must be a dictionary with string keys and string values.
+========  =========  ========================================================

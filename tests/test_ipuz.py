@@ -213,6 +213,14 @@ class IPUZFieldValidatorTestCase(IPUZBaseTestCase):
         self.puzzle["checksum"] = [3]
         self.validate("Invalid checksum value found")
 
+    def test_volatile_is_a_dict(self):
+        self.puzzle["volatile"] = 3
+        self.validate("Invalid volatile value found")
+
+    def test_volatile_is_a_dict_with_strings(self):
+        self.puzzle["volatile"] = {"A": 3}
+        self.validate("Invalid volatile value found")
+
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
