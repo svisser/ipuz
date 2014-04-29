@@ -15,7 +15,7 @@ The string ``data`` contains the puzzle in JSON or JSONP format:
 This function provides:
 
 * Validation of puzzle structure in JSON or JSONP format.
-* Validation of mandatory missing fields.
+* Validation of missing mandatory fields.
 * Sanity checks for fields where possible.
 
 The error messages are not intended as API but only for informative purposes.
