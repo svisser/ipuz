@@ -1,4 +1,4 @@
-import types
+import six
 
 from ipuz.exceptions import IPUZException
 from .direction import validate_direction
@@ -6,7 +6,7 @@ from .stylespec import validate_stylespec
 
 
 def validate_crosswordvalue(field_data):
-    if type(field_data) not in [types.NoneType, str, unicode, int, list, dict]:
+    if field_data is not None and type(field_data) not in [int, list, dict] and not isinstance(field_data, six.string_types):
         return False
     if type(field_data) is int and field_data != 0:
         return False

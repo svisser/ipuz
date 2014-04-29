@@ -1,8 +1,10 @@
+import six
+
 from ipuz.exceptions import IPUZException
 
 
 def validate_enumeration(field_data):
-    if type(field_data) not in [str, unicode]:
+    if not isinstance(field_data, six.string_types):
         return False
     return True
 

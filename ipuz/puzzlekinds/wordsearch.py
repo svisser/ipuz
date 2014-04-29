@@ -1,3 +1,5 @@
+import six
+
 from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_crosswordvalues,
@@ -13,7 +15,7 @@ from ipuz.validators import (
 
 
 def validate_dictionary(field_name, field_data):
-    if field_data is True or type(field_data) not in [str, unicode]:
+    if field_data is True or not isinstance(field_data, six.string_types):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
@@ -28,7 +30,7 @@ def validate_points(field_name, field_data):
 
 
 def validate_solution(field_name, field_data):
-    if type(field_data) not in [str, unicode, dict, list]:
+    if type(field_data) not in [dict, list] and not isinstance(field_data, six.string_types):
         raise IPUZException("Invalid {} value found".format(field_name))
     if type(field_data) is list:
         validate_list_of_strings(field_name, field_data)

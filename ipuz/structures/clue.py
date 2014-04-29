@@ -1,16 +1,18 @@
+import six
+
 from .cluenum import validate_cluenum
 from .enumeration import validate_enumeration
 
 
 def validate_clue(field_data):
-    if type(field_data) not in [str, unicode, list, dict]:
+    if type(field_data) not in [list, dict] and not isinstance(field_data, six.string_types):
         return False
     if type(field_data) is list:
         if len(field_data) != 2:
             return False
         if not validate_cluenum(field_data[0]):
             return False
-        if type(field_data[1]) not in [str, unicode]:
+        if not isinstance(field_data[1], six.string_types):
             return False
     if type(field_data) is dict:
         for key, value in field_data.items():
@@ -36,17 +38,17 @@ def validate_clue(field_data):
                 for element in value:
                     if not validate_cluenum(element):
                         return False
-            elif key == "clue" and type(value) not in [str, unicode]:
+            elif key == "clue" and not isinstance(value, six.string_types):
                 return False
             elif key == "hints":
                 if type(value) is not list:
                     return False
                 for element in value:
-                    if type(element) not in [str, unicode]:
+                    if not isinstance(element, six.string_types):
                         return False
-            elif key == "image" and type(value) not in [str, unicode]:
+            elif key == "image" and not isinstance(value, six.string_types):
                 return False
-            elif key == "answer" and type(value) not in [str, unicode]:
+            elif key == "answer" and not isinstance(value, six.string_types):
                 return False
             elif key == "enumeration" and not validate_enumeration(value):
                 return False
