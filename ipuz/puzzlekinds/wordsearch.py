@@ -20,14 +20,6 @@ def validate_dictionary(field_name, field_data):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
-def validate_showanswers(field_name, field_data):
-    validate_elements(field_name, field_data, ["during", "after", None])
-
-
-def validate_points(field_name, field_data):
-    validate_elements(field_name, field_data, ["linear", "log", None])
-
-
 def validate_solution(field_name, field_data):
     if type(field_data) not in [dict, list] and not isinstance(field_data, six.string_types):
         raise IPUZException("Invalid {} value found".format(field_name))
@@ -43,9 +35,9 @@ IPUZ_WORDSEARCH_VALIDATORS = {
     "solution": validate_solution,
     "dictionary": validate_dictionary,
     "saved": validate_list_of_strings,
-    "showanswers": validate_showanswers,
+    "showanswers": (validate_elements, ["during", "after", None]),
     "time": validate_non_negative_int,
-    "points": validate_points,
+    "points": (validate_elements, ["linear", "log", None]),
     "zigzag": validate_bool,
     "retrace": validate_bool,
     "useall": validate_bool,

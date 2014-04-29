@@ -20,18 +20,6 @@ from ipuz.validators import (
 )
 
 
-def validate_puzzle(field_name, field_data):
-    validate_list_of_lists(field_name, field_data, "LabeledCell", validate_labeledcell)
-
-
-def validate_zones(field_name, field_data):
-    validate_list(field_name, field_data, "GroupSpec", validate_groupspec)
-
-
-def validate_clueplacement(field_name, field_data):
-    validate_elements(field_name, field_data, [None, "before", "after", "blocks"])
-
-
 def validate_clues(field_name, field_data):
     if type(field_data) is not dict:
         raise IPUZException("Invalid {} value found".format(field_name))
@@ -43,22 +31,18 @@ def validate_clues(field_name, field_data):
                 raise IPUZException("Invalid Clue in {} element found".format(field_name))
 
 
-def validate_enumerations(field_name, field_data):
-    validate_list(field_name, field_data, "Enumeration", validate_enumeration)
-
-
 IPUZ_CROSSWORD_VALIDATORS = {
     "dimensions": validate_dimensions,
-    "puzzle": validate_puzzle,
+    "puzzle": (validate_list_of_lists, "LabeledCell", validate_labeledcell),
     "saved": validate_crosswordvalues,
     "solution": validate_crosswordvalues,
-    "zones": validate_zones,
+    "zones": (validate_list, "GroupSpec", validate_groupspec),
     "clues": validate_clues,
     "showenumerations": validate_bool,
-    "clueplacement": validate_clueplacement,
+    "clueplacement": (validate_elements, [None, "before", "after", "blocks"]),
     "answer": validate_string,
     "answers": validate_list_of_strings,
     "enumeration": validate_enumeration_field,
-    "enumerations": validate_enumerations,
+    "enumerations": (validate_list, "Enumeration", validate_enumeration),
     "misses": validate_dict_of_strings,
 }
