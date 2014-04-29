@@ -12,6 +12,7 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
+    validate_elements,
     validate_list,
     validate_list_of_lists,
     validate_list_of_strings,
@@ -28,8 +29,7 @@ def validate_zones(field_name, field_data):
 
 
 def validate_clueplacement(field_name, field_data):
-    if field_data not in [None, "before", "after", "blocks"]:
-        raise IPUZException("Invalid {} value found".format(field_name))
+    validate_elements(field_name, field_data, [None, "before", "after", "blocks"])
 
 
 def validate_clues(field_name, field_data):

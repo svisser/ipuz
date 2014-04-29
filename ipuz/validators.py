@@ -60,6 +60,11 @@ def validate_list(field_name, field_data, element_name, validate_element):
             raise IPUZException("Invalid {} in {} element found".format(element_name, field_name))
 
 
+def validate_elements(field_name, field_data, elements):
+    if field_data not in elements:
+        raise IPUZException("Invalid {} value found".format(field_name))
+
+
 def validate_version(field_name, field_data):
     groups = re.match("http://ipuz.org/v([1-9]\d*)", field_data)
     if not groups:

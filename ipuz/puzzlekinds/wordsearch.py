@@ -9,6 +9,7 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
+    validate_elements,
     validate_list_of_strings,
     validate_non_negative_int,
 )
@@ -20,13 +21,11 @@ def validate_dictionary(field_name, field_data):
 
 
 def validate_showanswers(field_name, field_data):
-    if field_data not in ["during", "after", None]:
-        raise IPUZException("Invalid {} value found".format(field_name))
+    validate_elements(field_name, field_data, ["during", "after", None])
 
 
 def validate_points(field_name, field_data):
-    if field_data not in ["linear", "log", None]:
-        raise IPUZException("Invalid {} value found".format(field_name))
+    validate_elements(field_name, field_data, ["linear", "log", None])
 
 
 def validate_solution(field_name, field_data):

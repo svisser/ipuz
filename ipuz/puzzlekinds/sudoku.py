@@ -8,6 +8,7 @@ from ipuz.structures import (
 )
 from ipuz.validators import (
     validate_bool,
+    validate_elements,
     validate_list,
     validate_list_of_lists,
     validate_string,
@@ -15,8 +16,7 @@ from ipuz.validators import (
 
 
 def validate_cageborder(field_name, field_data):
-    if field_data not in ["thick", "dashed"]:
-        raise IPUZException("Invalid {} value found".format(field_name))
+    validate_elements(field_name, field_data, ["thick", "dashed"])
 
 
 def validate_cages(field_name, field_data):
