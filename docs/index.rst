@@ -6,7 +6,7 @@
 Welcome to ipuz's documentation!
 ================================
 
-Python 2 library for reading and writing ipuz puzzle files. The specification
+Python library for reading and writing ipuz puzzle files. The specification
 for the ipuz file format can be found at: http://www.ipuz.org/ . This library
 provides validation and wrapping around the puzzle data.
 
