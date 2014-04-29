@@ -20,10 +20,6 @@ class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
         self.puzzle["charset"] = 3
         self.validate("Invalid charset value found")
 
-    def test_charset_must_have_length_nine(self):
-        self.puzzle["charset"] = "12345"
-        self.validate("Invalid charset value found")
-
     def test_displaycharset_is_bool(self):
         self.puzzle["displaycharset"] = 3
         self.validate("Invalid displaycharset value found")

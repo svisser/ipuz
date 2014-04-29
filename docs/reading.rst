@@ -143,7 +143,7 @@ The following checks are performed for PuzzleKinds belonging to ``http://ipuz.or
 ==============   =========  ======================================================
 Field            Mandatory  Validation
 ==============   =========  ======================================================
-charset          No         Must be a string with 9 characters.
+charset          No         Must be a string.
 displaycharset   No         Must be a boolean.
 boxes            No         Must be a boolean.
 showoperators    No         Must be a boolean.

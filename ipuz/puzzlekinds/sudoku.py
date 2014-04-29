@@ -12,12 +12,6 @@ from ipuz.validators import (
 )
 
 
-def validate_charset(field_name, field_data):
-    validate_string(field_name, field_data)
-    if len(field_data) != 9:
-        raise IPUZException("Invalid {} value found".format(field_name))
-
-
 def validate_cageborder(field_name, field_data):
     if field_data not in ["thick", "dashed"]:
         raise IPUZException("Invalid {} value found".format(field_name))
@@ -76,7 +70,7 @@ def validate_zones(field_name, field_data):
 
 
 IPUZ_SUDOKU_VALIDATORS = {
-    "charset": validate_charset,
+    "charset": validate_string,
     "displaycharset": validate_bool,
     "boxes": validate_bool,
     "showoperators": validate_bool,
