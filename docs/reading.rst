@@ -205,3 +205,6 @@ Field     Mandatory  Validation
 ========  =========  ========================================================
 volatile  No         Must be a dictionary with string keys and string values.
 ========  =========  ========================================================
+
+It is the application's responsibility to ensure that the volatility of the
+fields is handled properly.
