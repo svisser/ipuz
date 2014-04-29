@@ -3,6 +3,7 @@ import six
 from ipuz.exceptions import IPUZException
 from .direction import validate_direction
 from .stylespec import validate_stylespec
+from ipuz.validators import validate_list_of_lists
 
 
 def validate_crosswordvalue(field_data):
@@ -33,9 +34,4 @@ def validate_crosswordvalue(field_data):
 
 
 def validate_crosswordvalues(field_name, field_data):
-    if type(field_data) is not list or any(type(e) is not list for e in field_data):
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for line in field_data:
-        for element in line:
-            if not validate_crosswordvalue(element):
-                raise IPUZException("Invalid CrosswordValue in {} element found".format(field_name))
+    validate_list_of_lists(field_name, field_data, "CrosswordValue", validate_crosswordvalue)

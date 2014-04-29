@@ -12,18 +12,14 @@ from ipuz.structures import (
 from ipuz.validators import (
     validate_bool,
     validate_dict_of_strings,
+    validate_list_of_lists,
     validate_list_of_strings,
     validate_string,
 )
 
 
 def validate_puzzle(field_name, field_data):
-    if type(field_data) is not list or any(type(e) is not list for e in field_data):
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for line in field_data:
-        for element in line:
-            if not validate_labeledcell(element):
-                raise IPUZException("Invalid LabeledCell in {} element found".format(field_name))
+    validate_list_of_lists(field_name, field_data, "LabeledCell", validate_labeledcell)
 
 
 def validate_zones(field_name, field_data):
