@@ -53,6 +53,7 @@ You can run the tests in all supported Python version by running:
 
     tox
 
+You can use `coverage`_ to check whether the tests adequately test the code.
 
 Note that all tests run the public interface (``ipuz.read`` and ``ipuz.write``) to
 ensure we test both of the following:
@@ -62,3 +63,4 @@ ensure we test both of the following:
 
 .. _issue tracker: https://github.com/svisser/ipuz/issues
 .. _PEP 8: http://legacy.python.org/dev/peps/pep-0008/
+.. _coverage: http://nedbatchelder.com/code/coverage/
