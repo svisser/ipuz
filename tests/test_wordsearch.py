@@ -44,6 +44,10 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
         self.puzzle["time"] = "time"
         self.validate("Invalid time value found")
 
+    def test_time_is_integer_and_not_bool(self):
+        self.puzzle["time"] = True
+        self.validate("Invalid time value found")
+
     def test_time_is_non_negative_integer(self):
         self.puzzle["time"] = -1
         self.validate("Invalid time value found")

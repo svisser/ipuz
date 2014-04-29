@@ -12,6 +12,7 @@ def validate_bool(field_name, field_data):
 
 
 def validate_int(field_name, field_data):
+    # type instead of isinstance as bool inherits from int
     if type(field_data) is not int:
         raise IPUZException("Invalid {} value found".format(field_name))
 
