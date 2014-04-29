@@ -13,7 +13,7 @@ from ipuz.validators import (
 
 
 def validate_dictionary(field_name, field_data):
-    if field_data in [True, ""] or type(field_data) not in [str, unicode]:
+    if field_data is True or type(field_data) not in [str, unicode]:
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
