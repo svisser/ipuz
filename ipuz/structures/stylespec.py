@@ -38,7 +38,9 @@ def validate_stylespec_slice(field_data):
 
 
 def validate_stylespec_side(field_data):
-    return field_data and all(c in "TRBL" for c in field_data) and len(field_data) <= 4
+    return (isinstance(field_data, six.string_types) and
+            all(c in "TRBL" for c in field_data) and
+            0 <= len(field_data) <= 4)
 
 
 def validate_stylespec_color(field_data):
