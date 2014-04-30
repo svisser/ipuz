@@ -91,6 +91,10 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
         self.puzzle["styles"]["highlight"] = {"barred": "TRSBL"}
         self.validate("StyleSpec has an invalid barred value")
 
+    def test_validate_invalid_stylespec_barred_length_of_string(self):
+        self.puzzle["styles"]["highlight"] = {"barred": "TRBLTTTRBL"}
+        self.validate("StyleSpec has an invalid barred value")
+
     def test_validate_invalid_stylespec_dotted(self):
         self.puzzle["styles"]["highlight"] = {"dotted": "TRSBL"}
         self.validate("StyleSpec has an invalid dotted value")
