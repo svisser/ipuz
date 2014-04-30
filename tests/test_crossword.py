@@ -79,6 +79,14 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
         self.puzzle["styles"]["highlight"] = {"border": -20}
         self.validate("StyleSpec has an invalid border value")
 
+    def test_validate_invalid_stylespec_imagebg(self):
+        self.puzzle["styles"]["highlight"] = {"imagebg": 3}
+        self.validate("StyleSpec has an invalid imagebg value")
+
+    def test_validate_invalid_stylespec_image(self):
+        self.puzzle["styles"]["highlight"] = {"image": 3}
+        self.validate("StyleSpec has an invalid image value")
+
     def test_validate_invalid_stylespec_barred(self):
         self.puzzle["styles"]["highlight"] = {"barred": "TRSBL"}
         self.validate("StyleSpec has an invalid barred value")
@@ -128,6 +136,10 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
         self.validate("StyleSpec has an invalid mark value")
         self.puzzle["styles"]["highlight"] = {"mark": {"key": "text"}}
         self.validate("StyleSpec has an invalid mark value")
+
+    def test_validate_invalid_stylespec_label(self):
+        self.puzzle["styles"]["highlight"] = {"label": 3}
+        self.validate("StyleSpec has an invalid label value")
 
     def test_validate_invalid_stylespec_slice(self):
         self.puzzle["styles"]["highlight"] = {"slice": None}

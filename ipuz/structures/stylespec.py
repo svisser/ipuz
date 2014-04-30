@@ -3,6 +3,7 @@ import string
 import six
 
 from ipuz.exceptions import IPUZException
+from ipuz.validators import validate_string
 
 
 def validate_stylespec_shapebg(field_data):
@@ -50,7 +51,11 @@ def validate_stylespec_color(field_data):
     return False
 
 
-def validate_stylespec_noop(field_data):
+def validate_stylespec_string(field_data):
+    try:
+        validate_string("", field_data)
+    except IPUZException:
+        return False
     return True
 
 
@@ -60,10 +65,10 @@ IPUZ_STYLESPEC_VALIDATORS = {
     "named": validate_stylespec_named,
     "border": validate_stylespec_border,
     "divided": validate_stylespec_divided,
-    "label": validate_stylespec_noop,
+    "label": validate_stylespec_string,
     "mark": validate_stylespec_mark,
-    "imagebg": validate_stylespec_noop,
-    "image": validate_stylespec_noop,
+    "imagebg": validate_stylespec_string,
+    "image": validate_stylespec_string,
     "slice": validate_stylespec_slice,
     "barred": validate_stylespec_side,
     "dotted": validate_stylespec_side,
