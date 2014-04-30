@@ -385,6 +385,14 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
         self.puzzle["clues"] = {"Across": [{"enumeration": 3}]}
         self.validate("Invalid Clue in clues element found")
 
+    def test_clues_element_not_a_valid_clue_dict_invalid_references_list(self):
+        self.puzzle["clues"] = {"Across": [{"references": 3}]}
+        self.validate("Invalid Clue in clues element found")
+
+    def test_clues_element_not_a_valid_clue_dict_invalid_references(self):
+        self.puzzle["clues"] = {"Across": [{"references": [True]}]}
+        self.validate("Invalid Clue in clues element found")
+
     def test_clues_element_not_a_valid_clue_dict_invalid_see(self):
         self.puzzle["clues"] = {"Across": [{"see": None}]}
         self.validate("Invalid Clue in clues element found")

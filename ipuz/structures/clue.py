@@ -52,6 +52,12 @@ def validate_clue(field_data):
                 return False
             elif key == "enumeration" and not validate_enumeration(value):
                 return False
+            elif key == "references":
+                if type(value) is not list:
+                    return False
+                for element in value:
+                    if not validate_cluenum(element):
+                        return False
             elif key == "see" and not validate_cluenum(value):
                 return False
             elif key == "highlight" and type(value) is not bool:
