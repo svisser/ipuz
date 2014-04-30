@@ -10,12 +10,6 @@ class IPUZSampleSudokuTestCase(IPUZBaseTestCase):
             "puzzle": [],
         }
 
-    def validate(self, expected_exception):
-        self.validate_puzzle(self.puzzle, expected_exception)
-
-
-class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
-
     def test_charset_must_be_text(self):
         self.puzzle["charset"] = 3
         self.validate("Invalid charset value found")
@@ -143,16 +137,6 @@ class IPUZSudokuValueTestCase(IPUZSampleSudokuTestCase):
     def test_validate_groupsec_with_invalid_rect(self):
         self.puzzle["zones"] = [{"rect": 3}]
         self.validate("Invalid GroupSpec in zones element found")
-
-
-class IPUZSudokuKindTestCase(IPUZBaseTestCase):
-
-    def setUp(self):
-        self.puzzle = {
-            "version": "http://ipuz.org/v1",
-            "kind": ["http://ipuz.org/sudoku"],
-            "puzzle": [],
-        }
 
     def test_validate_sudoku_mandatory_puzzle_field(self):
         del self.puzzle["puzzle"]

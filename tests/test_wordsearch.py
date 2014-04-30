@@ -10,12 +10,6 @@ class IPUZSampleWordSearchTestCase(IPUZBaseTestCase):
             "dimensions": {"width": 3, "height": 3},
         }
 
-    def validate(self, expected_exception):
-        self.validate_puzzle(self.puzzle, expected_exception)
-
-
-class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
-
     def test_useall_is_bool(self):
         self.puzzle["useall"] = 3
         self.validate("Invalid useall value found")
@@ -87,16 +81,6 @@ class IPUZWordSearchValueTestCase(IPUZSampleWordSearchTestCase):
     def test_saved_is_list_of_strings(self):
         self.puzzle["saved"] = 3
         self.validate("Invalid saved value found")
-
-
-class IPUZWordSearchKindTestCase(IPUZBaseTestCase):
-
-    def setUp(self):
-        self.puzzle = {
-            "version": "http://ipuz.org/v1",
-            "kind": ["http://ipuz.org/wordsearch"],
-            "dimensions": {"width": 3, "height": 3},
-        }
 
     def test_validate_wordsearch_mandatory_dimensions_field(self):
         del self.puzzle["dimensions"]

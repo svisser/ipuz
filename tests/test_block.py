@@ -10,12 +10,6 @@ class IPUZSampleBlockTestCase(IPUZBaseTestCase):
             "dimensions": {"width": 3, "height": 3},
         }
 
-    def validate(self, expected_exception):
-        self.validate_puzzle(self.puzzle, expected_exception)
-
-
-class IPUZBlockValueTestCase(IPUZSampleBlockTestCase):
-
     def test_slide_is_bool(self):
         self.puzzle["slide"] = 3
         self.validate("Invalid slide value found")
@@ -119,16 +113,6 @@ class IPUZBlockValueTestCase(IPUZSampleBlockTestCase):
     def test_field_contains_invalid_styledcell_invalid_style(self):
         self.puzzle["field"] = [[{"style": {"shapebg": "not-a-circle"}}]]
         self.validate("Invalid StyledCell in field element found")
-
-
-class IPUZBlockKindTestCase(IPUZBaseTestCase):
-
-    def setUp(self):
-        self.puzzle = {
-            "version": "http://ipuz.org/v1",
-            "kind": ["http://ipuz.org/block"],
-            "dimensions": {"width": 3, "height": 3},
-        }
 
     def test_invalid_dimensions_field_type(self):
         self.puzzle["dimensions"] = ["width", "height"]

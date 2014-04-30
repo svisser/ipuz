@@ -11,6 +11,9 @@ class IPUZBaseTestCase(unittest.TestCase):
             ipuz.read(json.dumps(json_data), **kwargs)
         self.assertEqual(str(cm.exception), expected_exception)
 
+    def validate(self, expected_exception):
+        self.validate_puzzle(self.puzzle, expected_exception)
+
 
 class IPUZReadTestCase(IPUZBaseTestCase):
 
