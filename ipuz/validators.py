@@ -44,7 +44,7 @@ def validate_list_of_strings(field_name, field_data):
 
 
 def validate_list_of_lists(field_name, field_data, element_name, validate_element):
-    if type(field_data) is not list or any(type(e) is not list for e in field_data):
+    if not isinstance(field_data, list) or any(not isinstance(e, list) for e in field_data):
         raise IPUZException("Invalid {} value found".format(field_name))
     for line in field_data:
         for element in line:
