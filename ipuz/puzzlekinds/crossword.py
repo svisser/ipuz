@@ -21,10 +21,10 @@ from ipuz.validators import (
 
 
 def validate_clues(field_name, field_data):
-    if type(field_data) is not dict:
+    if not isinstance(field_data, dict):
         raise IPUZException("Invalid {} value found".format(field_name))
     for direction, clues in field_data.items():
-        if not validate_direction(direction) or type(clues) is not list or not clues:
+        if not validate_direction(direction) or not isinstance(clues, list) or not clues:
             raise IPUZException("Invalid {} value found".format(field_name))
         for clue in clues:
             if not validate_clue(clue):
