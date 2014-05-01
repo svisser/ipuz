@@ -7,7 +7,7 @@ from .stylespec import validate_stylespec
 def validate_styledcell(field_data):
     if field_data is not None and type(field_data) not in [int, dict] and not isinstance(field_data, six.string_types):
         return False
-    if type(field_data) is dict:
+    if isinstance(field_data, dict):
         if not field_data:
             return False
         if not all(key in ("cell", "style") for key in field_data):

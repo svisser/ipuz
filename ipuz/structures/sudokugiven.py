@@ -11,7 +11,7 @@ def validate_sudokugiven(field_data):
         return True
     if field_data is not None and type(field_data) is not int and not isinstance(field_data, six.string_types):
         return False
-    if type(field_data) is dict:
+    if isinstance(field_data, dict):
         if not field_data:
             return False
         if not all(key in ("given", "style") for key in field_data):

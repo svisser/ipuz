@@ -2,7 +2,7 @@ from ipuz.exceptions import IPUZException
 
 
 def validate_dimensions(field_name, field_data):
-    if type(field_data) is not dict:
+    if not isinstance(field_data, dict):
         raise IPUZException("Invalid {} value found".format(field_name))
     for key in ["width", "height"]:
         if key not in field_data:
@@ -18,7 +18,7 @@ def validate_dimensions(field_name, field_data):
 
 
 def validate_cells(field_data):
-    if type(field_data) is not list or not field_data:
+    if not isinstance(field_data, list) or not field_data:
         return False
     for element in field_data:
         if type(element) is not list or len(element) != 2 or not all(type(e) is int for e in element):
@@ -27,7 +27,7 @@ def validate_cells(field_data):
 
 
 def validate_rect(field_data):
-    if type(field_data) is not list:
+    if not isinstance(field_data, list):
         return False
     if len(field_data) != 4 or not all(type(c) is int for c in field_data):
         return False

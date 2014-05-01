@@ -13,7 +13,7 @@ def validate_labeledcell(field_data):
         return True
     if not validate_cell(field_data):
         return False
-    if type(field_data) is dict:
+    if isinstance(field_data, dict):
         if not all(key in ("cell", "style", "value") for key in field_data):
             return False
         if "cell" in field_data and not validate_cell(field_data["cell"]):

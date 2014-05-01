@@ -11,7 +11,7 @@ def validate_stylespec_shapebg(field_data):
 
 
 def validate_stylespec_highlight(field_data):
-    return type(field_data) is bool
+    return isinstance(field_data, bool)
 
 
 def validate_stylespec_named(field_data):
@@ -27,12 +27,12 @@ def validate_stylespec_divided(field_data):
 
 
 def validate_stylespec_mark(field_data):
-    return (type(field_data) is dict and
+    return (isinstance(field_data, dict) and
             all(key in ["TL", "TR", "BL", "BR"] for key in field_data.keys()))
 
 
 def validate_stylespec_slice(field_data):
-    return (type(field_data) is list and
+    return (isinstance(field_data, list) and
             len(field_data) == 4 and
             all(type(c) is int for c in field_data))
 

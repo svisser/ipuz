@@ -15,7 +15,7 @@ def validate_crosswordvalue(field_data):
         for element in field_data:
             if not validate_crosswordvalue(element):
                 return False
-    if type(field_data) is dict:
+    if isinstance(field_data, dict):
         if not field_data:
             return False
         for key, value in field_data.items():

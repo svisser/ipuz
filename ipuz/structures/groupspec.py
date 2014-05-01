@@ -8,7 +8,7 @@ from ipuz.validators import validate_string
 
 
 def validate_groupspec(field_data):
-    if type(field_data) is not dict or not field_data:
+    if not isinstance(field_data, dict) or not field_data:
         return False
     if not all(key in ("rect", "cells", "style") for key in field_data):
         return False

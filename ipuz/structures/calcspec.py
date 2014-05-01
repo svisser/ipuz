@@ -4,7 +4,7 @@ from .stylespec import validate_stylespec
 
 
 def validate_calcspec(field_data):
-    if type(field_data) is not dict or not field_data:
+    if not isinstance(field_data, dict) or not field_data:
         return False
     valid_keys = ("rect", "cells", "value", "operator", "style")
     if any(key not in valid_keys for key in field_data):

@@ -15,14 +15,14 @@ def validate_clue(field_data):
 
     if type(field_data) not in [list, dict] and not isinstance(field_data, six.string_types):
         return False
-    if type(field_data) is list:
+    if isinstance(field_data, list):
         if len(field_data) != 2:
             return False
         if not validate_cluenum(field_data[0]):
             return False
         if not isinstance(field_data[1], six.string_types):
             return False
-    if type(field_data) is dict:
+    if isinstance(field_data, dict):
         for key, value in field_data.items():
             if key not in (
                 "number",
