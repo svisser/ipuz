@@ -21,7 +21,7 @@ def validate_cells(field_data):
     if not isinstance(field_data, list) or not field_data:
         return False
     for element in field_data:
-        if type(element) is not list or len(element) != 2 or not all(type(e) is int for e in element):
+        if not isinstance(element, list) or len(element) != 2 or not all(type(e) is int for e in element):
             return False
     return True
 

@@ -8,7 +8,7 @@ def validate_labeledcell(field_data):
     def validate_cell(cell):
         if cell is not None and type(cell) not in [int, dict] and not isinstance(cell, six.string_types):
             return False
-        if type(cell) is dict and not cell:
+        if isinstance(cell, dict) and not cell:
             return False
         return True
     if not validate_cell(field_data):

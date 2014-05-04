@@ -21,7 +21,7 @@ def validate_dictionary(field_name, field_data):
 
 
 def validate_solution(field_name, field_data):
-    if type(field_data) not in [dict, list] and not isinstance(field_data, six.string_types):
+    if not isinstance(field_data, (dict, list)) and not isinstance(field_data, six.string_types):
         raise IPUZException("Invalid {} value found".format(field_name))
     if isinstance(field_data, list):
         validate_list_of_strings(field_name, field_data)

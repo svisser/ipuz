@@ -6,14 +6,14 @@ from .enumeration import validate_enumeration
 
 def validate_clue(field_data):
     def validate_list_of_cluenum(value):
-        if type(value) is not list:
+        if not isinstance(value, list):
             return False
         for element in value:
             if not validate_cluenum(element):
                 return False
         return True
 
-    if type(field_data) not in [list, dict] and not isinstance(field_data, six.string_types):
+    if not isinstance(field_data, (list, dict)) and not isinstance(field_data, six.string_types):
         return False
     if isinstance(field_data, list):
         if len(field_data) != 2:
@@ -45,7 +45,7 @@ def validate_clue(field_data):
             elif key == "clue" and not isinstance(value, six.string_types):
                 return False
             elif key == "hints":
-                if type(value) is not list:
+                if not isinstance(value, list):
                     return False
                 for element in value:
                     if not isinstance(element, six.string_types):
@@ -63,7 +63,7 @@ def validate_clue(field_data):
             elif key == "highlight" and type(value) is not bool:
                 return False
             elif key == "location":
-                if (type(value) is not list or
+                if (not isinstance(value, list) or
                     len(value) != 2 or
                     any(type(e) is not int for e in value)):
                     return False

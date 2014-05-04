@@ -11,7 +11,7 @@ def validate_crosswordvalue(field_data):
         return False
     if type(field_data) is int and field_data != 0:
         return False
-    if type(field_data) is list:
+    if isinstance(field_data, list):
         for element in field_data:
             if not validate_crosswordvalue(element):
                 return False
