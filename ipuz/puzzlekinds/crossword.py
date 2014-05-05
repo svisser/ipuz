@@ -1,9 +1,9 @@
 from ipuz.exceptions import IPUZException
 from ipuz.structures import (
     validate_clue,
+    validate_clues,
     validate_crosswordvalues,
     validate_dimensions,
-    validate_direction,
     validate_enumeration,
     validate_enumeration_field,
     validate_groupspec,
@@ -18,17 +18,6 @@ from ipuz.validators import (
     validate_list_of_strings,
     validate_string,
 )
-
-
-def validate_clues(field_name, field_data):
-    if not isinstance(field_data, dict):
-        raise IPUZException("Invalid {} value found".format(field_name))
-    for direction, clues in field_data.items():
-        if not validate_direction(direction) or not isinstance(clues, list) or not clues:
-            raise IPUZException("Invalid {} value found".format(field_name))
-        for clue in clues:
-            if not validate_clue(clue):
-                raise IPUZException("Invalid Clue in {} element found".format(field_name))
 
 
 IPUZ_CROSSWORD_VALIDATORS = {
