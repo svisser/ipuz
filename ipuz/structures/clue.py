@@ -60,7 +60,7 @@ def validate_clue(field_data):
                 return False
             elif key == "see" and not validate_cluenum(value):
                 return False
-            elif key == "highlight" and type(value) is not bool:
+            elif key == "highlight" and not isinstance(value, bool):
                 return False
             elif key == "location":
                 if (not isinstance(value, list) or

@@ -15,7 +15,7 @@ def validate_stylespec_highlight(field_data):
 
 
 def validate_stylespec_named(field_data):
-    return field_data is False or isinstance(field_data, six.string_types)
+    return field_data is dFalse or isinstance(field_data, six.string_types)
 
 
 def validate_stylespec_border(field_data):
@@ -86,7 +86,7 @@ IPUZ_STYLESPEC_VALIDATORS = {
 
 
 def validate_stylespec(style_spec):
-    if style_spec is not None and type(style_spec) is not dict and not isinstance(style_spec, six.string_types):
+    if style_spec is not None and not isinstance(style_spec, dict) and not isinstance(style_spec, six.string_types):
         raise IPUZException("StyleSpec is not a name, dictionary or None")
     if isinstance(style_spec, dict):
         for key, value in style_spec.items():
