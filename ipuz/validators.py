@@ -44,6 +44,7 @@ def validate_dict(field_data, validators):
             return False
         if not validators[key](value):
             return False
+    return True
 
 
 def validate_list_of_strings(field_name, field_data):
