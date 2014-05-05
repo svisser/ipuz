@@ -328,6 +328,10 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
     def test_puzzle_with_labeledcell_with_invalid_cell(self):
         self.puzzle["puzzle"] = [[{"cell": {}}]]
         self.validate("Invalid LabeledCell in puzzle element found")
+    
+    def test_puzzle_with_labeledcell_with_recursive_cell(self):
+        self.puzzle["puzzle"] = [[{"cell": {"cell": "A"}}]]
+        self.validate("Invalid LabeledCell in puzzle element found")
 
     def test_puzzle_with_labeledcell_with_invalid_value(self):
         self.puzzle["puzzle"] = [[{"value": 3}]]

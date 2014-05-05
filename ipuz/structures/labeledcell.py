@@ -16,7 +16,7 @@ def validate_labeledcell(field_data):
     if isinstance(field_data, dict):
         if not all(key in ("cell", "style", "value") for key in field_data):
             return False
-        if "cell" in field_data and not validate_cell(field_data["cell"]):
+        if "cell" in field_data and (isinstance(field_data["cell"], dict) or not validate_cell(field_data["cell"])):
             return False
         if "value" in field_data and not isinstance(field_data["value"], six.string_types):
             return False
