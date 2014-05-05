@@ -268,6 +268,10 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
     def test_validate_crosswordvalue_with_dict_and_invalid_value(self):
         self.puzzle["saved"] = [[{"value": 3}]]
         self.validate("Invalid CrosswordValue in saved element found")
+    
+    def test_validate_crosswordvalue_with_dict_and_recursive_dict(self):
+        self.puzzle["saved"] = [[{"value": {"value": "A"}}]]
+        self.validate("Invalid CrosswordValue in saved element found")
 
     def test_validate_crosswordvalue_with_dict_and_invalid_style(self):
         self.puzzle["saved"] = [[{"style": {"shapebg": "not-a-circle"}}]]
