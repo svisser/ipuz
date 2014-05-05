@@ -31,6 +31,10 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
             "Field width of dimensions is less than one"
         )
 
+    def test_validate_crossword_unknown_dimensions_field(self):
+        self.puzzle["dimensions"]["unknown_field"] = 10
+        self.validate("Invalid dimensions value found")
+
     def test_validate_crossword_mandatory_dimensions_field(self):
         del self.puzzle["dimensions"]
         self.validate("Mandatory field dimensions is missing")

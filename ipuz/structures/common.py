@@ -4,6 +4,9 @@ from ipuz.exceptions import IPUZException
 def validate_dimensions(field_name, field_data):
     if not isinstance(field_data, dict):
         raise IPUZException("Invalid {} value found".format(field_name))
+    for key, value in field_data.items():
+        if key not in ("width", "height"):
+            raise IPUZException("Invalid {} value found".format(field_name))
     for key in ["width", "height"]:
         if key not in field_data:
             raise IPUZException(
