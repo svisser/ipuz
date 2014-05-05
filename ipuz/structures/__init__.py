@@ -13,7 +13,10 @@ from .groupspec import (
 )
 from .labeledcell import validate_labeledcell
 from .styledcell import validate_styledcell
-from .stylespec import validate_stylespec
+from .stylespec import (
+    validate_stylespec,
+     validate_stylespec_value,
+)
 from .sudokugiven import validate_sudokugiven
 from .sudokuguess import validate_sudokuguess
 from .sudokuvalue import validate_sudokuvalue

@@ -94,3 +94,10 @@ def validate_stylespec(style_spec):
                 raise IPUZException("StyleSpec contains invalid specifier: {}".format(key))
             if not IPUZ_STYLESPEC_VALIDATORS[key](value):
                 raise IPUZException("StyleSpec has an invalid {} value".format(key))
+
+def validate_stylespec_value(value):
+    try:
+        validate_stylespec(value)
+    except IPUZException:
+        return False
+    return True

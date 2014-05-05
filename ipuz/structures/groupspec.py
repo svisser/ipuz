@@ -3,22 +3,15 @@ from .common import (
     validate_cells,
     validate_rect,
 )
-from .stylespec import validate_stylespec
+from .stylespec import validate_stylespec_value
 from ipuz.validators import validate_dict, validate_string
 
 
 def validate_groupspec(field_data):
-    def validate_style_key(value):
-        try:
-            validate_stylespec(field_data["style"])
-        except IPUZException:
-            return False
-        return True
-
     return validate_dict(field_data, {
         "rect": validate_rect,
         "cells": validate_cells,
-        "style": validate_style_key,
+        "style": validate_stylespec_value,
     })
 
 

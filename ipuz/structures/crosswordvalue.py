@@ -2,7 +2,7 @@ import six
 
 from ipuz.exceptions import IPUZException
 from .direction import validate_direction
-from .stylespec import validate_stylespec
+from .stylespec import validate_stylespec_value
 from ipuz.validators import validate_list_of_lists
 
 
@@ -25,11 +25,8 @@ def validate_crosswordvalue(field_data):
                 isinstance(value, dict) or 
                 not validate_crosswordvalue(value)):
                 return False
-            elif key == "style":
-                try:
-                    validate_stylespec(value)
-                except IPUZException:
-                    return False
+            elif key == "style" and not validate_stylespec_value(value):
+                return False
             elif not validate_crosswordvalue(value):
                 return False
     return True
