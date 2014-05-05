@@ -4,24 +4,22 @@ from .common import (
     validate_rect,
 )
 from .stylespec import validate_stylespec
-from ipuz.validators import validate_string
+from ipuz.validators import validate_dict, validate_string
 
 
 def validate_groupspec(field_data):
-    if not isinstance(field_data, dict) or not field_data:
-        return False
-    if not all(key in ("rect", "cells", "style") for key in field_data):
-        return False
-    if "style" in field_data:
+    def validate_style_key(value):
         try:
             validate_stylespec(field_data["style"])
         except IPUZException:
             return False
-    if "cells" in field_data and not validate_cells(field_data["cells"]):
-        return False
-    if "rect" in field_data and not validate_rect(field_data["rect"]):
-        return False
-    return True
+        return True
+
+    return validate_dict(field_data, {
+        "rect": validate_rect,
+        "cells": validate_cells,
+        "style": validate_style_key,
+    })
 
 
 def validate_groupspec_dict(field_name, field_data):
