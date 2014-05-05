@@ -36,6 +36,16 @@ def validate_dict_of_strings(field_name, field_data):
         validate_string(field_name, value)
 
 
+def validate_dict(field_data, validators):
+    if not isinstance(field_data, dict) or not field_data:
+        return False
+    for key, value in field_data.items():
+        if key not in validators:
+            return False
+        if not validators[key](value):
+            return False
+
+
 def validate_list_of_strings(field_name, field_data):
     if not isinstance(field_data, list):
         raise IPUZException("Invalid {} value found".format(field_name))
