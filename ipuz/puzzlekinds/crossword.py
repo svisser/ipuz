@@ -1,6 +1,4 @@
-from ipuz.exceptions import IPUZException
 from ipuz.structures import (
-    validate_clue,
     validate_clues,
     validate_crosswordvalues,
     validate_dimensions,
