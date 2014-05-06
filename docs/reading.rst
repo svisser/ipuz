@@ -65,7 +65,15 @@ styles       No         Must be a dictionary with StyleSpec values.
 Validation for Acrostic puzzles
 -------------------------------
 
-None yet.
+The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/acrostic``:
+
+===============  =========  ============================================================================
+Field            Mandatory  Validation
+===============  =========  ============================================================================
+puzzle           Yes        Must be a list of lists containing LabeledCell values.
+solution         No         Must be a list of lists containing CrosswordValue values.
+clues            No         Must be a dictionary with Direction keys and non-empty lists of Clue values.
+===============  =========  ============================================================================
 
 Validation for Answer puzzles
 -----------------------------
