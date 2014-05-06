@@ -227,30 +227,29 @@ class IPUZFieldValidatorTestCase(IPUZBaseTestCase):
 
 class IPUZWriteTestCase(IPUZBaseTestCase):
 
-    def test_write_produces_jsonp_string_by_default(self):
+    def test_write_produces_json_string_by_default(self):
         json_data = {}
         result = ipuz.write(json_data)
-        expected = ''.join(['ipuz(', json.dumps(json_data), ')'])
+        expected = json.dumps(json_data)
         self.assertEqual(result, expected)
 
     def test_write_supports_different_callback_name(self):
         json_data = {}
-        result = ipuz.write(json_data, callback_name="ipuz_function")
+        result = ipuz.write(json_data, jsonp=True, callback_name="ipuz_function")
         expected = ''.join(['ipuz_function(', json.dumps(json_data), ')'])
         self.assertEqual(result, expected)
 
-    def test_write_produces_json_with_json_only_flag(self):
+    def test_write_produces_jsonp_with_jsonp_flag(self):
         json_data = {}
-        result = ipuz.write(json_data, json_only=True)
-        expected = json.dumps(json_data)
+        result = ipuz.write(json_data, jsonp=True)
+        expected = ''.join(['ipuz(', json.dumps(json_data), ')'])
         self.assertEqual(result, expected)
 
     def test_ignores_callback_name_when_json_only(self):
         json_data = {}
         result = ipuz.write(
             json_data,
-            callback_name="ipuz_function",
-            json_only=True
+            callback_name="ipuz_function"
         )
         expected = json.dumps(json_data)
         self.assertEqual(result, expected)
@@ -263,7 +262,7 @@ class IPUZRoundTripTestCase(IPUZBaseTestCase):
             data = f.read()
 
         output = ipuz.read(data)
-        output_string = ipuz.write(output, json_only=True)
+        output_string = ipuz.write(output)
         second_output = ipuz.read(output_string)
         self.assertEqual(output, second_output)
 
@@ -272,7 +271,7 @@ class IPUZRoundTripTestCase(IPUZBaseTestCase):
             data = f.read()
 
         output = ipuz.read(data)
-        output_string = ipuz.write(output)
+        output_string = ipuz.write(output, jsonp=True)
         second_output = ipuz.read(output_string)
         self.assertEqual(output, second_output)
 
@@ -281,7 +280,7 @@ class IPUZRoundTripTestCase(IPUZBaseTestCase):
             data = f.read()
 
         output = ipuz.read(data)
-        output_string = ipuz.write(output, json_only=True)
+        output_string = ipuz.write(output)
         second_output = ipuz.read(output_string)
         self.assertEqual(output, second_output)
 
@@ -290,6 +289,6 @@ class IPUZRoundTripTestCase(IPUZBaseTestCase):
             data = f.read()
 
         output = ipuz.read(data)
-        output_string = ipuz.write(output)
+        output_string = ipuz.write(output, jsonp=True)
         second_output = ipuz.read(output_string)
         self.assertEqual(output, second_output)

@@ -66,9 +66,9 @@ def read(data, puzzlekinds=None):
     return json_data
 
 
-def write(data, callback_name=None, json_only=False):
+def write(data, jsonp=False, callback_name=None):
     json_string = json.dumps(data)
-    if json_only:
+    if not jsonp:
         return json_string
     if callback_name is None:
         callback_name = "ipuz"

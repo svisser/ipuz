@@ -14,13 +14,13 @@ The following writes a Python dictionary ``puzzle`` to a string ``data``:
     import ipuz
     data = ipuz.write(puzzle)
 
-As the specification recommends JSONP the above produces a JSONP string.
-You can create a JSON string by using ``json_only=True``:
+For security reasons the above produces a JSON string by default.
+You can create a JSONP string by using ``jsonp=True``:
 
 ::
 
     import ipuz
-    data = ipuz.write(puzzle, json_only=True)
+    data = ipuz.write(puzzle, jsonp=True)
 
 By default the callback function ``ipuz`` is used in the JSONP format. You
 can specify a different callback function name by using
@@ -29,4 +29,4 @@ the ``callback_name`` parameter:
 ::
 
     import ipuz
-    data = ipuz.write(puzzle, callback_name="ipuz_function")
+    data = ipuz.write(puzzle, jsonp=True, callback_name="ipuz_function")
