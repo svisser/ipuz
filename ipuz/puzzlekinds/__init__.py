@@ -9,7 +9,9 @@ from .wordsearch import IPUZ_WORDSEARCH_VALIDATORS
 
 IPUZ_PUZZLEKINDS = {
     "http://ipuz.org/acrostic": {
-        "mandatory": (),
+        "mandatory": (
+            "puzzle",
+        ),
         "validators": IPUZ_ACROSTIC_VALIDATORS,
     },
     "http://ipuz.org/answer": {
