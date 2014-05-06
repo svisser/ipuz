@@ -14,8 +14,9 @@ The following writes a Python dictionary ``puzzle`` to a string ``data``:
     import ipuz
     data = ipuz.write(puzzle)
 
-For security reasons the above produces a JSON string by default.
-You can create a JSONP string by using ``jsonp=True``:
+For security reasons this function encourages the use of JSON and it therefore
+produces a JSON string by default. You can create a JSONP string by
+using ``jsonp=True``:
 
 ::
 
