@@ -357,10 +357,6 @@ class IPUZSampleCrosswordTestCase(IPUZBaseTestCase):
         self.puzzle["clues"] = {"Across": 3}
         self.validate("Invalid clues value found")
 
-    def test_clues_value_not_an_empty_list(self):
-        self.puzzle["clues"] = {"Across": []}
-        self.validate("Invalid clues value found")
-
     def test_clues_element_not_a_valid_clue(self):
         self.puzzle["clues"] = {"Across": [3]}
         self.validate("Invalid Clue in clues element found")

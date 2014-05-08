@@ -72,7 +72,7 @@ Field            Mandatory  Validation
 ===============  =========  ============================================================================
 puzzle           Yes        Must be a list of lists containing LabeledCell values.
 solution         No         Must be a list of lists containing CrosswordValue values.
-clues            No         Must be a dictionary with Direction keys and non-empty lists of Clue values.
+clues            No         Must be a dictionary with Direction keys and lists of Clue values.
 ===============  =========  ============================================================================
 
 Validation for Answer puzzles
@@ -128,7 +128,7 @@ puzzle            Yes        Must be a list of lists containing LabeledCell valu
 saved             No         Must be a list of lists containing CrosswordValue values.
 solution          No         Must be a list of lists containing CrosswordValue values.
 zones             No         Must be a list of GroupSpec values.
-clues             No         Must be a dictionary with Direction keys and non-empty lists of Clue values.
+clues             No         Must be a dictionary with Direction keys and lists of Clue values.
 showenumerations  No         Must be a boolean.
 clueplacement     No         Must be an element from ``["before", "after", "blocks", null]``.
 answer            No         Must be a string.
