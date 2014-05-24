@@ -1,5 +1,6 @@
 include README.md
-recursive-include docs *
+include docs/*
+recursive-exclude docs/_build *
 recursive-include ipuz *
 recursive-exclude tests *
 recursive-exclude * *.py[co]
