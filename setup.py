@@ -11,6 +11,7 @@ setup(
     description="Python library for reading and writing ipuz puzzle files",
     long_description=long_description,
     author="Simeon Visser",
+    author_email="simeonvisser@gmail.com",
     url="https://github.com/svisser/ipuz",
     install_requires=[
         'six==1.6.1'
