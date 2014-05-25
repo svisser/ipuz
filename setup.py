@@ -8,6 +8,7 @@ with open('README.md') as readme_file:
 setup(
     name="ipuz",
     version="0.1",
+    license="MIT",
     description="Python library for reading and writing ipuz puzzle files",
     long_description=long_description,
     author="Simeon Visser",
