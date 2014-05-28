@@ -141,7 +141,17 @@ misses            No         Must be a dictionary with string keys and string va
 Validation for Fill puzzles
 ---------------------------
 
-None yet.
+The following checks are performed for PuzzleKinds belonging to ``http://ipuz.org/fill``:
+
+==============   =========  =========================================================
+Field            Mandatory  Validation
+==============   =========  =========================================================
+start            No         Must be a list of lists containing CrosswordValue values.
+solution         No         Must be a list of lists containing CrosswordValue values.
+answer           No         Must be a string.
+answers          No         Must be a list of strings.
+misses           No         Must be a dictionary with string keys and string values.
+==============   =========  =========================================================
 
 Validation for Sudoku puzzles
 -----------------------------
