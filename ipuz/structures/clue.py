@@ -81,4 +81,3 @@ def validate_clues(field_name, field_data):
         for clue in clues:
             if not validate_clue(clue):
                 raise IPUZException("Invalid Clue in {} element found".format(field_name))
-
