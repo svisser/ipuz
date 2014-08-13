@@ -13,7 +13,9 @@ def validate_dimensions(field_name, field_data):
                 "Mandatory field {} of dimensions is missing".format(key)
             )
         if type(field_data[key]) is not int:
-            raise IPUZException("Invalid {} value in dimensions field found".format(key))
+            raise IPUZException(
+                "Invalid {} value in dimensions field found".format(key)
+            )
         if field_data[key] < 1:
             raise IPUZException(
                 "Field {} of dimensions is less than one".format(key)
@@ -24,7 +26,9 @@ def validate_cells(field_data):
     if not isinstance(field_data, list) or not field_data:
         return False
     for element in field_data:
-        if not isinstance(element, list) or len(element) != 2 or not all(type(e) is int for e in element):
+        if (not isinstance(element, list) or
+                len(element) != 2 or
+                not all(type(e) is int for e in element)):
             return False
     return True
 

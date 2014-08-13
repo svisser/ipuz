@@ -6,7 +6,9 @@ from ipuz.validators import validate_list_of_lists
 
 
 def validate_crosswordvalue(field_data):
-    if field_data is not None and type(field_data) not in [int, list, dict] and not isinstance(field_data, six.string_types):
+    if (field_data is not None and
+            type(field_data) not in [int, list, dict] and
+            not isinstance(field_data, six.string_types)):
         return False
     if type(field_data) is int and field_data != 0:
         return False
@@ -32,4 +34,6 @@ def validate_crosswordvalue(field_data):
 
 
 def validate_crosswordvalues(field_name, field_data):
-    validate_list_of_lists(field_name, field_data, "CrosswordValue", validate_crosswordvalue)
+    validate_list_of_lists(
+        field_name, field_data, "CrosswordValue", validate_crosswordvalue
+    )

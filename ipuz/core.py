@@ -55,7 +55,9 @@ def read(data, puzzlekinds=None):
                 continue
             for field in kind_details["mandatory"]:
                 if field not in json_data:
-                    raise IPUZException("Mandatory field {} is missing".format(field))
+                    raise IPUZException(
+                        "Mandatory field {} is missing".format(field)
+                    )
             for field, value in json_data.items():
                 if field in kind_details["validators"]:
                     validator = kind_details["validators"][field]

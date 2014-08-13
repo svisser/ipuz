@@ -54,13 +54,19 @@ def validate_list_of_strings(field_name, field_data):
         validate_string(field_name, field_data)
 
 
-def validate_list_of_lists(field_name, field_data, element_name, validate_element):
-    if not isinstance(field_data, list) or any(not isinstance(e, list) for e in field_data):
+def validate_list_of_lists(
+    field_name, field_data, element_name, validate_element
+):
+    if (not isinstance(field_data, list) or
+            any(not isinstance(e, list) for e in field_data)):
         raise IPUZException("Invalid {} value found".format(field_name))
     for line in field_data:
         for element in line:
             if not validate_element(element):
-                raise IPUZException("Invalid {} in {} element found".format(element_name, field_name))
+                message = "Invalid {} in {} element found".format(
+                    element_name, field_name
+                )
+                raise IPUZException(message)
 
 
 def validate_list(field_name, field_data, element_name, validate_element):
@@ -68,7 +74,10 @@ def validate_list(field_name, field_data, element_name, validate_element):
         raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
         if not validate_element(element):
-            raise IPUZException("Invalid {} in {} element found".format(element_name, field_name))
+            message = "Invalid {} in {} element found".format(
+                element_name, field_name
+            )
+            raise IPUZException(message)
 
 
 def validate_elements(field_name, field_data, elements):
@@ -101,7 +110,8 @@ def validate_date(field_name, field_data):
 
 
 def validate_empty(field_name, field_data):
-    if type(field_data) is not int and not isinstance(field_data, six.string_types):
+    if (type(field_data) is not int and
+            not isinstance(field_data, six.string_types)):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 

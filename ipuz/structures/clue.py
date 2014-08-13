@@ -15,7 +15,8 @@ def validate_clue(field_data):
                 return False
         return True
 
-    if not isinstance(field_data, (list, dict)) and not isinstance(field_data, six.string_types):
+    if (not isinstance(field_data, (list, dict)) and
+            not isinstance(field_data, six.string_types)):
         return False
     if isinstance(field_data, list):
         if len(field_data) != 2:
@@ -80,4 +81,6 @@ def validate_clues(field_name, field_data):
             raise IPUZException("Invalid {} value found".format(field_name))
         for clue in clues:
             if not validate_clue(clue):
-                raise IPUZException("Invalid Clue in {} element found".format(field_name))
+                raise IPUZException(
+                    "Invalid Clue in {} element found".format(field_name)
+                )
