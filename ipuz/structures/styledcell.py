@@ -13,9 +13,9 @@ def validate_styledcell(field_data):
         if not all(key in ("cell", "style") for key in field_data):
             return False
         if ("cell" in field_data and
-            field_data["cell"] is not None and
-            type(field_data["cell"]) is not int and
-            not isinstance(field_data["cell"], six.string_types)):
+                field_data["cell"] is not None and
+                type(field_data["cell"]) is not int and
+                not isinstance(field_data["cell"], six.string_types)):
             return False
         if "style" in field_data:
             try:

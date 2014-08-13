@@ -21,8 +21,8 @@ def validate_crosswordvalue(field_data):
             if key not in ("style", "value") and not validate_direction(key):
                 return False
             if key == "value" and (
-                isinstance(value, dict) or
-                not validate_crosswordvalue(value)):
+                    isinstance(value, dict) or
+                    not validate_crosswordvalue(value)):
                 return False
             elif key == "style" and not validate_stylespec_value(value):
                 return False

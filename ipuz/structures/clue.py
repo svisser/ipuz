@@ -66,8 +66,8 @@ def validate_clue(field_data):
                 return False
             elif key == "location":
                 if (not isinstance(value, list) or
-                    len(value) != 2 or
-                    any(type(e) is not int for e in value)):
+                        len(value) != 2 or
+                        any(type(e) is not int for e in value)):
                     return False
     return True
 

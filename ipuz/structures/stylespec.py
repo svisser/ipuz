@@ -47,8 +47,8 @@ def validate_stylespec_color(field_data):
     if type(field_data) is int:
         return True
     if (isinstance(field_data, six.string_types) and
-        len(field_data) == 6 and
-        all(c in string.hexdigits for c in field_data)):
+            len(field_data) == 6 and
+            all(c in string.hexdigits for c in field_data)):
         return True
     return False
 
