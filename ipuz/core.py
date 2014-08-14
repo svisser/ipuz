@@ -2,7 +2,11 @@ import json
 
 from ipuz.exceptions import IPUZException
 from ipuz.puzzlekinds import IPUZ_PUZZLEKINDS
-from ipuz.validators import IPUZ_FIELD_VALIDATORS
+from ipuz.validators import (
+    IPUZ_FIELD_VALIDATORS,
+    validate_version,
+    get_version_number,
+)
 
 
 IPUZ_MANDATORY_FIELDS = (
@@ -43,12 +47,18 @@ def read(data, puzzlekinds=None):
     for field in IPUZ_MANDATORY_FIELDS:
         if field not in json_data:
             raise IPUZException("Mandatory field {} is missing".format(field))
+
+    validate_version("version", json_data["version"])
+    version = get_version_number(json_data["version"])
+
     for field, value in json_data.items():
-        if field in IPUZ_FIELD_VALIDATORS:
-            IPUZ_FIELD_VALIDATORS[field](field, value)
+        if field in IPUZ_FIELD_VALIDATORS[version]:
+            IPUZ_FIELD_VALIDATORS[version][field](field, value)
+
     for kind in json_data["kind"]:
         if puzzlekinds is not None and kind not in puzzlekinds:
             raise IPUZException("Unsupported kind value found")
+
     for kind in json_data["kind"]:
         for official_kind, kind_details in IPUZ_PUZZLEKINDS.items():
             if not kind.startswith(official_kind):
@@ -59,8 +69,8 @@ def read(data, puzzlekinds=None):
                         "Mandatory field {} is missing".format(field)
                     )
             for field, value in json_data.items():
-                if field in kind_details["validators"]:
-                    validator = kind_details["validators"][field]
+                if field in kind_details["validators"][version]:
+                    validator = kind_details["validators"][version][field]
                     try:
                         validator(field, value)
                     except TypeError:

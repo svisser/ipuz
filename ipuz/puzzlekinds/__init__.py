@@ -12,39 +12,53 @@ IPUZ_PUZZLEKINDS = {
         "mandatory": (
             "puzzle",
         ),
-        "validators": IPUZ_ACROSTIC_VALIDATORS,
+        "validators": {
+            1: IPUZ_ACROSTIC_VALIDATORS,
+        },
     },
     "http://ipuz.org/answer": {
         "mandatory": (),
-        "validators": IPUZ_ANSWER_VALIDATORS,
+        "validators": {
+            1: IPUZ_ANSWER_VALIDATORS,
+        },
     },
     "http://ipuz.org/block": {
         "mandatory": (
             "dimensions",
         ),
-        "validators": IPUZ_BLOCK_VALIDATORS,
+        "validators": {
+            1: IPUZ_BLOCK_VALIDATORS,
+        },
     },
     "http://ipuz.org/crossword": {
         "mandatory": (
             "dimensions",
             "puzzle",
         ),
-        "validators": IPUZ_CROSSWORD_VALIDATORS,
+        "validators": {
+            1: IPUZ_CROSSWORD_VALIDATORS,
+        },
     },
     "http://ipuz.org/fill": {
         "mandatory": (),
-        "validators": IPUZ_FILL_VALIDATORS,
+        "validators": {
+            1: IPUZ_FILL_VALIDATORS,
+        },
     },
     "http://ipuz.org/sudoku": {
         "mandatory": (
             "puzzle",
         ),
-        "validators": IPUZ_SUDOKU_VALIDATORS,
+        "validators": {
+            1: IPUZ_SUDOKU_VALIDATORS,
+        },
     },
     "http://ipuz.org/wordsearch": {
         "mandatory": (
             "dimensions",
         ),
-        "validators": IPUZ_WORDSEARCH_VALIDATORS,
+        "validators": {
+            1: IPUZ_WORDSEARCH_VALIDATORS,
+        },
     },
 }

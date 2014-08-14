@@ -6,6 +6,13 @@ import six
 from ipuz.exceptions import IPUZException
 
 
+def get_version_number(field_data):
+    groups = re.match("http://ipuz.org/v([1-9]\d*)", field_data)
+    if not groups:
+        return None
+    return int(groups.group(1))
+
+
 def validate_bool(field_name, field_data):
     if not isinstance(field_data, bool):
         raise IPUZException("Invalid {} value found".format(field_name))
@@ -86,11 +93,10 @@ def validate_elements(field_name, field_data, elements):
 
 
 def validate_version(field_name, field_data):
-    groups = re.match("http://ipuz.org/v([1-9]\d*)", field_data)
-    if not groups:
+    version_number = get_version_number(field_data)
+    if version_number is None:
         raise IPUZException("Invalid version value found")
-    version_number = int(groups.group(1))
-    if version_number > 1:
+    if version_number not in [1]:
         raise IPUZException("Unsupported version value found")
 
 
@@ -124,27 +130,28 @@ def validate_styles(field_name, field_data):
 
 
 IPUZ_FIELD_VALIDATORS = {
-    "version": validate_version,
-    "kind": validate_kind,
-    "copyright": validate_string,
-    "publisher": validate_string,
-    "publication": validate_string,
-    "url": validate_string,
-    "uniqueid": validate_string,
-    "title": validate_string,
-    "intro": validate_string,
-    "explanation": validate_string,
-    "annotation": validate_string,
-    "author": validate_string,
-    "editor": validate_string,
-    "date": validate_string,
-    "notes": validate_string,
-    "difficulty": validate_string,
-    "origin": validate_string,
-    "block": validate_string,
-    "empty": validate_empty,
-    "date": validate_date,
-    "styles": validate_styles,
-    "checksum": validate_list_of_strings,
-    "volatile": validate_dict_of_strings,
+    1: {
+        "kind": validate_kind,
+        "copyright": validate_string,
+        "publisher": validate_string,
+        "publication": validate_string,
+        "url": validate_string,
+        "uniqueid": validate_string,
+        "title": validate_string,
+        "intro": validate_string,
+        "explanation": validate_string,
+        "annotation": validate_string,
+        "author": validate_string,
+        "editor": validate_string,
+        "date": validate_string,
+        "notes": validate_string,
+        "difficulty": validate_string,
+        "origin": validate_string,
+        "block": validate_string,
+        "empty": validate_empty,
+        "date": validate_date,
+        "styles": validate_styles,
+        "checksum": validate_list_of_strings,
+        "volatile": validate_dict_of_strings,
+    }
 }
