@@ -8,7 +8,9 @@ from ipuz.validators import (
     get_version_number,
 )
 
-
+IPUZ_VERSIONS = [
+    1,
+]
 IPUZ_MANDATORY_FIELDS = (
     "version",
     "kind",
@@ -48,7 +50,7 @@ def read(data, puzzlekinds=None):
         if field not in json_data:
             raise IPUZException("Mandatory field {} is missing".format(field))
 
-    validate_version("version", json_data["version"])
+    validate_version("version", json_data["version"], IPUZ_VERSIONS)
     version = get_version_number(json_data["version"])
 
     for field, value in json_data.items():

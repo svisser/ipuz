@@ -92,11 +92,11 @@ def validate_elements(field_name, field_data, elements):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
-def validate_version(field_name, field_data):
+def validate_version(field_name, field_data, valid_versions):
     version_number = get_version_number(field_data)
     if version_number is None:
         raise IPUZException("Invalid version value found")
-    if version_number not in [1]:
+    if version_number not in valid_versions:
         raise IPUZException("Unsupported version value found")
 
 
