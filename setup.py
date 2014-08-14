@@ -17,6 +17,7 @@ setup(
     install_requires=[
         'six==1.6.1'
     ],
+    packages=['ipuz', 'ipuz.puzzlekinds', 'ipuz.structures'],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
