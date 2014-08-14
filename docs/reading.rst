@@ -24,6 +24,19 @@ should not need to perform validation to see whether the puzzle is well-formed.
 This library will check types of values and perform various sanity checks to
 see whether the JSON conforms to the ipuz specification.
 
+ipuz.IPUZ_VERSIONS
+------------------
+
+You can use the constant ``ipuz.IPUZ_VERSIONS`` to see versions of the ipuz standard
+that the ``ipuz`` library can validate. This is a list containing the accepted integer
+values ``X`` for ``"http://ipuz.org/vX"``.
+
+Puzzles with an ipuz version that is not in this list won't be read by ``ipuz.read``
+and this will result in an ``ipuz.IPUZException`` exception. The reason is that a
+future version of the standard may have introduced new features and attempting
+incomplete validation on such puzzles could lead to invalid puzzles being
+accepted by ``ipuz.read``.
+
 Validation for all puzzles
 --------------------------
 
