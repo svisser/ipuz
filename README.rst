@@ -1,6 +1,22 @@
 ipuz
 ====
 
+.. image:: https://pypip.in/version/ipuz/badge.svg
+    :target: https://pypi.python.org/pypi/ipuz/
+    :alt: Latest Version
+
+.. image:: https://pypip.in/download/ipuz/badge.svg
+    :target: https://pypi.python.org/pypi/ipuz/
+    :alt: Downloads
+
+.. image:: https://pypip.in/py_versions/ipuz/badge.svg
+    :target: https://pypi.python.org/pypi/ipuz/
+    :alt: Supported Python versions
+
+.. image:: https://pypip.in/license/ipuz/badge.svg
+    :target: https://pypi.python.org/pypi/ipuz/
+    :alt: License
+
 Python library for reading and writing ipuz puzzle files. The specification
 for the ipuz file format can be found at: http://www.ipuz.org/. The ipuz file
 format supports representing various types of puzzles, including crossword,

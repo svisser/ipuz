@@ -1,4 +1,4 @@
-include README.md
+include README.rst
 include docs/*
 recursive-exclude docs/_build *
 recursive-include ipuz *
