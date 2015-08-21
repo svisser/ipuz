@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1.2 (2015-08-21)
+------------------
+
+* Dropped version number for six to allow more flexibility in what six version is used.
+
 0.1.1 (2014-08-15)
 ------------------
 
