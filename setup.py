@@ -7,7 +7,7 @@ with open('README.rst') as readme_file:
 
 setup(
     name="ipuz",
-    version="0.1.2",
+    version="0.1.3",
     license="MIT",
     description="Python library for reading and writing ipuz puzzle files",
     long_description=long_description,
