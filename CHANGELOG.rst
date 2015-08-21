@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1.4 (2015-08-21)
+------------------
+
+* New version number needed thanks to PyPI.
+
 0.1.3 (2015-08-21)
 ------------------
 
