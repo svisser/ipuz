@@ -6,35 +6,15 @@ from ipuz.validators import (
     IPUZ_FIELD_VALIDATORS,
     validate_version,
     get_version_number,
+    get_kind_version_number,
 )
 
-IPUZ_VERSIONS = [
-    1,
-]
-IPUZ_MANDATORY_FIELDS = (
+# NOTE(maiamcc): currently mandatory fields are the same across all versions;
+#   in future, this might need to be broken down into "mandatory fields by version"
+IPUZ_MANDATORY_FIELDS = [
     "version",
     "kind",
-)
-IPUZ_OPTIONAL_FIELDS = (
-    "copyright",
-    "publisher",
-    "publication",
-    "url",
-    "uniqueid",
-    "title",
-    "intro",
-    "explanation",
-    "annotation",
-    "author",
-    "editor",
-    "date",
-    "notes",
-    "difficulty",
-    "origin",
-    "block",
-    "empty",
-    "styles",
-)
+]
 
 
 def read(data, puzzlekinds=None):
@@ -50,7 +30,7 @@ def read(data, puzzlekinds=None):
         if field not in json_data:
             raise IPUZException("Mandatory field {} is missing".format(field))
 
-    validate_version("version", json_data["version"], IPUZ_VERSIONS)
+    validate_version("version", json_data["version"], IPUZ_FIELD_VALIDATORS.keys())
     version = get_version_number(json_data["version"])
 
     for field, value in json_data.items():
@@ -70,9 +50,15 @@ def read(data, puzzlekinds=None):
                     raise IPUZException(
                         "Mandatory field {} is missing".format(field)
                     )
+
+            kind_version = get_kind_version_number(kind)
+            kind_details_for_version = kind_details["validators"].get(kind_version)
+            if not kind_details_for_version:
+                raise IPUZException("Unsupported version %s for kind %s found" % (version, kind))
+
             for field, value in json_data.items():
-                if field in kind_details["validators"][version]:
-                    validator = kind_details["validators"][version][field]
+                if field in kind_details_for_version:
+                    validator = kind_details_for_version[field]
                     try:
                         validator(field, value)
                     except TypeError:

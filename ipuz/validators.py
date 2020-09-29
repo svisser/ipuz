@@ -13,6 +13,13 @@ def get_version_number(field_data):
     return int(groups.group(1))
 
 
+def get_kind_version_number(field_data):
+    groups = re.match("http://ipuz.org/[a-z]*#([1-9]*)", field_data)
+    if not groups:
+        return None
+    return int(groups.group(1))
+
+
 def validate_bool(field_name, field_data):
     if not isinstance(field_data, bool):
         raise IPUZException("Invalid {} value found".format(field_name))
@@ -153,5 +160,30 @@ IPUZ_FIELD_VALIDATORS = {
         "styles": validate_styles,
         "checksum": validate_list_of_strings,
         "volatile": validate_dict_of_strings,
-    }
+    },
+    2: {
+        "kind": validate_kind,
+        "copyright": validate_string,
+        "publisher": validate_string,
+        "publication": validate_string,
+        "url": validate_string,
+        "uniqueid": validate_string,
+        "title": validate_string,
+        "intro": validate_string,
+        "explanation": validate_string,
+        "annotation": validate_string,
+        "author": validate_string,
+        "editor": validate_string,
+        "date": validate_string,
+        "notes": validate_string,
+        "difficulty": validate_string,
+        "charset": validate_string,
+        "origin": validate_string,
+        "block": validate_string,
+        "empty": validate_empty,
+        "date": validate_date,
+        "styles": validate_styles,
+        "checksum": validate_list_of_strings,
+        "volatile": validate_dict_of_strings,
+    },
 }
