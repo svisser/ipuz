@@ -258,7 +258,7 @@ class IPUZWriteTestCase(IPUZBaseTestCase):
 class IPUZRoundTripTestCase(IPUZBaseTestCase):
 
     def test_first_ipuz_file_with_json(self):
-        with open("../fixtures/first.ipuz") as f:
+        with open("fixtures/first.ipuz") as f:
             data = f.read()
 
         output = ipuz.read(data)
@@ -267,7 +267,7 @@ class IPUZRoundTripTestCase(IPUZBaseTestCase):
         self.assertEqual(output, second_output)
 
     def test_first_ipuz_file_with_jsonp(self):
-        with open("../fixtures/first.ipuz") as f:
+        with open("fixtures/first.ipuz") as f:
             data = f.read()
 
         output = ipuz.read(data)
@@ -276,7 +276,7 @@ class IPUZRoundTripTestCase(IPUZBaseTestCase):
         self.assertEqual(output, second_output)
 
     def test_example_ipuz_file_with_json(self):
-        with open("../fixtures/example.ipuz") as f:
+        with open("fixtures/example.ipuz") as f:
             data = f.read()
 
         output = ipuz.read(data)
@@ -285,7 +285,7 @@ class IPUZRoundTripTestCase(IPUZBaseTestCase):
         self.assertEqual(output, second_output)
 
     def test_example_ipuz_file_with_jsonp(self):
-        with open("../fixtures/example.ipuz") as f:
+        with open("fixtures/example.ipuz") as f:
             data = f.read()
 
         output = ipuz.read(data)
@@ -294,7 +294,7 @@ class IPUZRoundTripTestCase(IPUZBaseTestCase):
         self.assertEqual(output, second_output)
 
     def test_v2_ipuz_file_with_json(self):
-        with open("../fixtures/example_v2.ipuz") as f:
+        with open("fixtures/example_v2.ipuz") as f:
             data = f.read()
 
         output = ipuz.read(data)
@@ -303,7 +303,7 @@ class IPUZRoundTripTestCase(IPUZBaseTestCase):
         self.assertEqual(output, second_output)
 
     def test_v2_ipuz_file_with_jsonp(self):
-        with open("../fixtures/example_v2.ipuz") as f:
+        with open("fixtures/example_v2.ipuz") as f:
             data = f.read()
 
         output = ipuz.read(data)
