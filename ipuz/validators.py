@@ -16,7 +16,7 @@ def get_version_number(field_data):
 def get_kind_version_number(field_data):
     groups = re.match("http://ipuz.org/[a-z]*#([1-9]*)", field_data)
     if not groups:
-        return None
+        return 1  # default value
     return int(groups.group(1))
 
 
