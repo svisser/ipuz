@@ -1,7 +1,5 @@
 import string
 
-import six
-
 from ipuz.exceptions import IPUZException
 from ipuz.validators import validate_string
 
@@ -15,7 +13,7 @@ def validate_stylespec_highlight(field_data):
 
 
 def validate_stylespec_named(field_data):
-    return field_data is False or isinstance(field_data, six.string_types)
+    return field_data is False or isinstance(field_data, str)
 
 
 def validate_stylespec_border(field_data):
@@ -38,7 +36,7 @@ def validate_stylespec_slice(field_data):
 
 
 def validate_stylespec_side(field_data):
-    return (isinstance(field_data, six.string_types) and
+    return (isinstance(field_data, str) and
             all(c in "TRBL" for c in field_data) and
             0 <= len(field_data) <= 4)
 
@@ -46,7 +44,7 @@ def validate_stylespec_side(field_data):
 def validate_stylespec_color(field_data):
     if type(field_data) is int:
         return True
-    if (isinstance(field_data, six.string_types) and
+    if (isinstance(field_data, str) and
             len(field_data) == 6 and
             all(c in string.hexdigits for c in field_data)):
         return True
@@ -87,7 +85,7 @@ IPUZ_STYLESPEC_VALIDATORS = {
 
 def validate_stylespec(style_spec):
     if (style_spec is not None and
-            not isinstance(style_spec, (dict, six.string_types))):
+            not isinstance(style_spec, (dict, str))):
         raise IPUZException("StyleSpec is not a name, dictionary or None")
     if isinstance(style_spec, dict):
         for key, value in style_spec.items():

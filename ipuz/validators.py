@@ -1,8 +1,6 @@
 from datetime import datetime
 import re
 
-import six
-
 from ipuz.exceptions import IPUZException
 
 
@@ -38,7 +36,7 @@ def validate_non_negative_int(field_name, field_data):
 
 
 def validate_string(field_name, field_data):
-    if not isinstance(field_data, six.string_types):
+    if not isinstance(field_data, str):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 
@@ -111,7 +109,7 @@ def validate_kind(field_name, field_data):
     if not isinstance(field_data, list) or not field_data:
         raise IPUZException("Invalid {} value found".format(field_name))
     for element in field_data:
-        if not isinstance(element, six.string_types) or not element:
+        if not isinstance(element, str) or not element:
             raise IPUZException("Invalid {} value found".format(field_name))
 
 
@@ -124,7 +122,7 @@ def validate_date(field_name, field_data):
 
 def validate_empty(field_name, field_data):
     if (type(field_data) is not int and
-            not isinstance(field_data, six.string_types)):
+            not isinstance(field_data, str)):
         raise IPUZException("Invalid {} value found".format(field_name))
 
 

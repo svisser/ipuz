@@ -1,5 +1,3 @@
-import six
-
 from ipuz.exceptions import IPUZException
 from .stylespec import validate_stylespec
 
@@ -8,7 +6,7 @@ def validate_labeledcell(field_data):
     def validate_cell(cell):
         if (cell is not None and
                 type(cell) not in [int, dict] and
-                not isinstance(cell, six.string_types)):
+                not isinstance(cell, str)):
             return False
         if isinstance(cell, dict) and not cell:
             return False
@@ -23,7 +21,7 @@ def validate_labeledcell(field_data):
                  not validate_cell(field_data["cell"]))):
             return False
         if ("value" in field_data and
-                not isinstance(field_data["value"], six.string_types)):
+                not isinstance(field_data["value"], str)):
             return False
         if "style" in field_data:
             try:

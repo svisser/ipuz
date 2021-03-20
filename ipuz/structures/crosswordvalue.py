@@ -1,5 +1,3 @@
-import six
-
 from .direction import validate_direction
 from .stylespec import validate_stylespec_value
 from ipuz.validators import validate_list_of_lists
@@ -8,7 +6,7 @@ from ipuz.validators import validate_list_of_lists
 def validate_crosswordvalue(field_data):
     if (field_data is not None and
             type(field_data) not in [int, list, dict] and
-            not isinstance(field_data, six.string_types)):
+            not isinstance(field_data, str)):
         return False
     if type(field_data) is int and field_data != 0:
         return False

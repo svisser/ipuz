@@ -1,5 +1,3 @@
-import six
-
 from ipuz.exceptions import IPUZException
 from .cluenum import validate_cluenum
 from .direction import validate_direction
@@ -16,14 +14,14 @@ def validate_clue(field_data):
         return True
 
     if (not isinstance(field_data, (list, dict)) and
-            not isinstance(field_data, six.string_types)):
+            not isinstance(field_data, str)):
         return False
     if isinstance(field_data, list):
         if len(field_data) != 2:
             return False
         if not validate_cluenum(field_data[0]):
             return False
-        if not isinstance(field_data[1], six.string_types):
+        if not isinstance(field_data[1], str):
             return False
     if isinstance(field_data, dict):
         for key, value in field_data.items():
@@ -45,17 +43,17 @@ def validate_clue(field_data):
                 return False
             elif key == "numbers" and not validate_list_of_cluenum(value):
                 return False
-            elif key == "clue" and not isinstance(value, six.string_types):
+            elif key == "clue" and not isinstance(value, str):
                 return False
             elif key == "hints":
                 if not isinstance(value, list):
                     return False
                 for element in value:
-                    if not isinstance(element, six.string_types):
+                    if not isinstance(element, str):
                         return False
-            elif key == "image" and not isinstance(value, six.string_types):
+            elif key == "image" and not isinstance(value, str):
                 return False
-            elif key == "answer" and not isinstance(value, six.string_types):
+            elif key == "answer" and not isinstance(value, str):
                 return False
             elif key == "enumeration" and not validate_enumeration(value):
                 return False

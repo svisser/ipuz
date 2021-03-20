@@ -14,9 +14,7 @@ setup(
     author="Simeon Visser",
     author_email="simeonvisser@gmail.com",
     url="https://github.com/svisser/ipuz",
-    install_requires=[
-        'six'
-    ],
+    install_requires=[],
     packages=['ipuz', 'ipuz.puzzlekinds', 'ipuz.structures'],
     classifiers=[
         "Development Status :: 4 - Beta",
