@@ -14,7 +14,7 @@ IPUZ_VERSIONS = list(sorted(IPUZ_FIELD_VALIDATORS.keys()))
 
 # NOTE(maiamcc): currently mandatory fields are the same across all versions;
 #   in future, this might need to be broken down into "mandatory fields by version"
-IPUZ_MANDATORY_FIELDS = [
+_IPUZ_MANDATORY_FIELDS = [
     "version",
     "kind",
 ]
@@ -29,7 +29,7 @@ def read(data, puzzlekinds=None):
             raise ValueError
     except (AttributeError, ValueError):
         raise IPUZException("No valid JSON could be found")
-    for field in IPUZ_MANDATORY_FIELDS:
+    for field in _IPUZ_MANDATORY_FIELDS:
         if field not in json_data:
             raise IPUZException("Mandatory field {} is missing".format(field))
 
