@@ -57,7 +57,7 @@ def read(data, puzzlekinds=None):
             kind_version = get_kind_version_number(kind)
             kind_details_for_version = kind_details["validators"].get(kind_version)
             if not kind_details_for_version:
-                raise IPUZException("Unsupported version %s for kind %s found" % (version, kind))
+                raise IPUZException("Unsupported version {} for kind {} found".format(version, kind))
 
             for field, value in json_data.items():
                 if field in kind_details_for_version:
