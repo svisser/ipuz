@@ -1,10 +1,18 @@
 Changelog
 =========
 
-0.1.5 (upcoming)
+1.0 (2021-03-20)
 ----------------
 
-* Added support for Python 3.5.
+* Added support for ipuz v2 (by @maiamcc)
+* Add support for Python 3.6, 3.7, 3.8 and 3.9.
+* Drop support for Python 3.5 and below. These versions of Python are
+  no longer officially supported.
+* Removed `six` dependency as we no longer need it.
+* Removed `IPUZ_MANDATORY_FIELDS` and `IPUZ_OPTIONAL_FIELDS` as constants
+  available from `ipuz.core`. These constants should not be relied upon for
+  validation as in the future we may need to support different sets of
+  mandatory / optional fields depending on the ipuz version).
 
 0.1.4 (2015-08-21)
 ------------------
